@@ -7,6 +7,7 @@ set -euo pipefail
 PREFIX="${CLAWDBOT_PREFIX:-${HOME}/.clawdbot}"
 CLAWDBOT_VERSION="${CLAWDBOT_VERSION:-latest}"
 NODE_VERSION="${CLAWDBOT_NODE_VERSION:-22.12.0}"
+SHARP_IGNORE_GLOBAL_LIBVIPS="${SHARP_IGNORE_GLOBAL_LIBVIPS:-1}"
 JSON=0
 RUN_ONBOARD=0
 SET_NPM_PREFIX=0
@@ -21,6 +22,9 @@ Usage: install-cli.sh [options]
   --onboard              Run "clawdbot onboard" after install
   --no-onboard           Skip onboarding (default)
   --set-npm-prefix       Force npm prefix to ~/.npm-global if current prefix is not writable (Linux)
+
+Environment variables:
+  SHARP_IGNORE_GLOBAL_LIBVIPS=0|1    Default: 1 (avoid sharp building against global libvips)
 EOF
 }
 
@@ -202,7 +206,7 @@ install_clawdbot() {
   if [[ "$SET_NPM_PREFIX" -eq 1 ]]; then
     fix_npm_prefix_if_needed
   fi
-  "$(npm_bin)" install -g --prefix "$PREFIX" "clawdbot@${CLAWDBOT_VERSION}"
+  SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" "$(npm_bin)" install -g --prefix "$PREFIX" "clawdbot@${CLAWDBOT_VERSION}"
   rm -f "${PREFIX}/bin/clawdbot"
   cat > "${PREFIX}/bin/clawdbot" <<EOF
 #!/usr/bin/env bash

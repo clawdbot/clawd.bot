@@ -146,6 +146,7 @@ INSTALL_METHOD=${CLAWDBOT_INSTALL_METHOD:-}
 GIT_DIR_DEFAULT="${HOME}/clawdbot"
 GIT_DIR=${CLAWDBOT_GIT_DIR:-$GIT_DIR_DEFAULT}
 GIT_UPDATE=${CLAWDBOT_GIT_UPDATE:-1}
+SHARP_IGNORE_GLOBAL_LIBVIPS="${SHARP_IGNORE_GLOBAL_LIBVIPS:-1}"
 HELP=0
 
 print_usage() {
@@ -173,6 +174,7 @@ Environment variables:
   CLAWDBOT_NO_PROMPT=1
   CLAWDBOT_DRY_RUN=1
   CLAWDBOT_NO_ONBOARD=1
+  SHARP_IGNORE_GLOBAL_LIBVIPS=0|1    Default: 1 (avoid sharp building against global libvips)
 
 Examples:
   curl -fsSL https://clawd.bot/install.sh | bash
@@ -484,7 +486,7 @@ install_clawdbot_from_git() {
         fi
     fi
 
-    pnpm -C "$repo_dir" install
+    SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" pnpm -C "$repo_dir" install
 
     if ! pnpm -C "$repo_dir" ui:build; then
         echo -e "${WARN}→${NC} UI build failed; continuing (CLI may still work)"
@@ -505,7 +507,10 @@ EOF
 # Install Clawdbot
 install_clawdbot() {
     echo -e "${WARN}→${NC} Installing Clawdbot..."
-    npm install -g clawdbot@latest
+    if [[ "$SHARP_IGNORE_GLOBAL_LIBVIPS" == "1" ]]; then
+        echo -e "${INFO}i${NC} Using SHARP_IGNORE_GLOBAL_LIBVIPS=1 (avoids sharp source builds against global libvips)"
+    fi
+    SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm install -g clawdbot@latest
     echo -e "${SUCCESS}✓${NC} Clawdbot installed"
 }
 
