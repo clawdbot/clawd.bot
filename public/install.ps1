@@ -104,11 +104,20 @@ function Install-Clawdbot {
     }
     Write-Host "[*] Installing Clawdbot@$Tag..." -ForegroundColor Yellow
     $prevLogLevel = $env:NPM_CONFIG_LOGLEVEL
+    $prevUpdateNotifier = $env:NPM_CONFIG_UPDATE_NOTIFIER
+    $prevFund = $env:NPM_CONFIG_FUND
+    $prevAudit = $env:NPM_CONFIG_AUDIT
     $env:NPM_CONFIG_LOGLEVEL = "error"
+    $env:NPM_CONFIG_UPDATE_NOTIFIER = "false"
+    $env:NPM_CONFIG_FUND = "false"
+    $env:NPM_CONFIG_AUDIT = "false"
     try {
         npm install -g "clawdbot@$Tag"
     } finally {
         $env:NPM_CONFIG_LOGLEVEL = $prevLogLevel
+        $env:NPM_CONFIG_UPDATE_NOTIFIER = $prevUpdateNotifier
+        $env:NPM_CONFIG_FUND = $prevFund
+        $env:NPM_CONFIG_AUDIT = $prevAudit
     }
     Write-Host "[OK] Clawdbot installed" -ForegroundColor Green
 }
@@ -155,6 +164,16 @@ function Main {
         $installedVersion = (clawdbot --version 2>$null).Trim()
     } catch {
         $installedVersion = $null
+    }
+    if (-not $installedVersion) {
+        try {
+            $npmList = npm list -g --depth 0 --json 2>$null | ConvertFrom-Json
+            if ($npmList -and $npmList.dependencies -and $npmList.dependencies.clawdbot -and $npmList.dependencies.clawdbot.version) {
+                $installedVersion = $npmList.dependencies.clawdbot.version
+            }
+        } catch {
+            $installedVersion = $null
+        }
     }
 
     Write-Host ""
