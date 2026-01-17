@@ -179,6 +179,7 @@ GIT_DIR_DEFAULT="${HOME}/clawdbot"
 GIT_DIR=${CLAWDBOT_GIT_DIR:-$GIT_DIR_DEFAULT}
 GIT_UPDATE=${CLAWDBOT_GIT_UPDATE:-1}
 SHARP_IGNORE_GLOBAL_LIBVIPS="${SHARP_IGNORE_GLOBAL_LIBVIPS:-1}"
+NPM_LOGLEVEL="${CLAWDBOT_NPM_LOGLEVEL:-error}"
 CLAWDBOT_BIN=""
 HELP=0
 
@@ -211,6 +212,7 @@ Environment variables:
   CLAWDBOT_NO_PROMPT=1
   CLAWDBOT_DRY_RUN=1
   CLAWDBOT_NO_ONBOARD=1
+  CLAWDBOT_NPM_LOGLEVEL=error|warn|notice  Default: error (hide npm deprecation noise)
   SHARP_IGNORE_GLOBAL_LIBVIPS=0|1    Default: 1 (avoid sharp building against global libvips)
 
 Examples:
@@ -516,18 +518,21 @@ ensure_user_local_bin_on_path() {
 }
 
 npm_global_bin_dir() {
-    local bin=""
-    bin="$(npm bin -g 2>/dev/null || true)"
-    if [[ -n "$bin" ]]; then
-        echo "$bin"
-        return 0
-    fi
-
     local prefix=""
     prefix="$(npm prefix -g 2>/dev/null || true)"
     if [[ -n "$prefix" ]]; then
-        echo "${prefix}/bin"
-        return 0
+        if [[ "$prefix" == /* ]]; then
+            echo "${prefix%/}/bin"
+            return 0
+        fi
+    fi
+
+    prefix="$(npm config get prefix 2>/dev/null || true)"
+    if [[ -n "$prefix" && "$prefix" != "undefined" && "$prefix" != "null" ]]; then
+        if [[ "$prefix" == /* ]]; then
+            echo "${prefix%/}/bin"
+            return 0
+        fi
     fi
 
     echo ""
@@ -725,12 +730,12 @@ install_clawdbot() {
     fi
 
     if [[ "${CLAWDBOT_VERSION}" == "latest" ]]; then
-        if ! SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm install -g "clawdbot@latest"; then
+        if ! SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm --loglevel "$NPM_LOGLEVEL" install -g "clawdbot@latest"; then
             echo -e "${WARN}→${NC} npm install clawdbot@latest failed; retrying clawdbot@next"
-            SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm install -g "clawdbot@next"
+            SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm --loglevel "$NPM_LOGLEVEL" install -g "clawdbot@next"
         fi
     else
-        SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm install -g "clawdbot@${CLAWDBOT_VERSION}"
+        SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm --loglevel "$NPM_LOGLEVEL" install -g "clawdbot@${CLAWDBOT_VERSION}"
     fi
 
     echo -e "${SUCCESS}✓${NC} Clawdbot installed"
