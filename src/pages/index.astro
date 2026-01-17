@@ -1589,16 +1589,14 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
       order: 0;
     }
 
-    /* Contextual switches appear first (after dots) */
+    /* Contextual switches appear first (after dots), right-aligned */
     .os-indicator,
     .os-switch,
     .pm-switch,
     .hackable-switch,
     .beta-switch {
       order: 1;
-      width: auto;
-      justify-content: center;
-      margin-left: 0;
+      margin-left: auto;
     }
 
     /* Mode tabs appear last */
