@@ -35,8 +35,8 @@ if (-not $PSBoundParameters.ContainsKey("GitDir")) {
 }
 
 if ([string]::IsNullOrWhiteSpace($GitDir)) {
-    $home = [Environment]::GetFolderPath("UserProfile")
-    $GitDir = (Join-Path $home "clawdbot")
+    $userHome = [Environment]::GetFolderPath("UserProfile")
+    $GitDir = (Join-Path $userHome "clawdbot")
 }
 
 # Check for Node.js
@@ -244,8 +244,8 @@ function Get-LegacyRepoDir {
     if (-not [string]::IsNullOrWhiteSpace($env:CLAWDBOT_GIT_DIR)) {
         return $env:CLAWDBOT_GIT_DIR
     }
-    $home = [Environment]::GetFolderPath("UserProfile")
-    return (Join-Path $home "clawdbot")
+    $userHome = [Environment]::GetFolderPath("UserProfile")
+    return (Join-Path $userHome "clawdbot")
 }
 
 function Remove-LegacySubmodule {
