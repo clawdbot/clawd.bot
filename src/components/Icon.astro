@@ -1,7 +1,22 @@
 ---
 // Icon component that renders either a Simple Icons SVG path or a Lucide icon name
+type IconPath = {
+  d: string;
+  fill?: string;
+  stroke?: string;
+  strokeWidth?: number;
+  strokeLinejoin?: string;
+  strokeLinecap?: string;
+  strokeDasharray?: string;
+};
+
+type CustomIcon = {
+  viewBox: string;
+  paths: IconPath[];
+};
+
 interface Props {
-  icon: string;
+  icon: string | CustomIcon;
   color?: string;
   size?: number;
   class?: string;
@@ -50,12 +65,35 @@ const lucideIcons: Record<string, any> = {
   'lucide:zap': Zap,
 };
 
-const isLucide = icon.startsWith('lucide:');
+const isStringIcon = typeof icon === 'string';
+const isLucide = isStringIcon && icon.startsWith('lucide:');
 const LucideComponent = isLucide ? lucideIcons[icon] : null;
+const customIcon = !isStringIcon ? icon : null;
 ---
 
 {isLucide && LucideComponent ? (
   <LucideComponent size={size} color={color} class={className} />
+) : customIcon ? (
+  <svg
+    viewBox={customIcon.viewBox}
+    width={size}
+    height={size}
+    class={className}
+    style={`color: ${color}`}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {customIcon.paths.map((path) => (
+      <path
+        d={path.d}
+        fill={path.fill ?? color}
+        stroke={path.stroke}
+        stroke-width={path.strokeWidth}
+        stroke-linejoin={path.strokeLinejoin}
+        stroke-linecap={path.strokeLinecap}
+        stroke-dasharray={path.strokeDasharray}
+      />
+    ))}
+  </svg>
 ) : (
   <svg
     viewBox="0 0 24 24"

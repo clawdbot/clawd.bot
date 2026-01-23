@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import {
-  siWhatsapp, siTelegram, siDiscord, siSignal, siApple,
+  siWhatsapp, siTelegram, siDiscord, siSignal, siApple, siMatrix, siNextcloud, siZalo,
   siAnthropic, siGoogle, siOllama, siMistralai, siPerplexity, siHuggingface,
   siNotion, siObsidian, siTrello, siGithub,
   siSpotify, siSonos, siShazam,
@@ -15,14 +15,45 @@ import {
 // Helper to create SVG from simple-icons
 const siIcon = (icon: any) => icon.path;
 
+const bluebubblesIcon = {
+  viewBox: '0 0 1365.3333 1365.3333',
+  paths: [
+    {
+      d: 'm 282.22721,1212.3333 c -0.32825,-0.55 5.69752,-7.9 13.39061,-16.3334 33.18551,-36.3787 58.29388,-71.8345 75.23815,-106.2446 3.73304,-7.581 6.49275,-14.9172 6.24837,-16.6103 -0.33979,-2.3541 -4.59263,-5.3585 -19.01354,-13.432 -35.70283,-19.988 -61.53807,-37.8784 -94.09756,-65.16095 C 171.16156,916.76576 112.27757,812.10599 97.896372,699.33329 94.781572,674.90803 95.839037,616.72973 99.883646,589.99996 118.62238,466.16054 192.89128,353.15325 307.52801,274.04905 c 57.51358,-39.6868 119.86684,-68.77221 189.80529,-88.5369 92.27163,-26.07607 195.5171,-32.19794 293.28166,-17.38993 105.07046,15.91459 206.27664,57.29422 286.05164,116.95639 75.1003,56.16607 128.5993,122.56089 162.9707,202.25469 14.9183,34.58952 25.5556,73.82394 31.2695,115.33333 2.6514,19.262 2.2488,79.05098 -0.6734,99.99999 -7.1973,51.59646 -20.2747,93.78278 -43.0198,138.77775 -22.0789,43.67702 -49.2989,81.42109 -85.8471,119.03834 -86.2635,88.78679 -206.62891,149.79589 -339.60566,172.13449 -90.53541,15.2089 -180.99947,12.7908 -270.90069,-7.2411 -7.2654,-1.6189 -12.28279,-2.1026 -14.20992,-1.3699 -1.63845,0.6229 -11.60503,6.331 -22.14796,12.6847 -36.3239,21.8903 -86.62516,44.5647 -128.50229,57.925 -38.8873,12.4065 -81.55656,21.4307 -83.77277,17.7174 z',
+      fill: 'none',
+      stroke: 'currentColor',
+      strokeWidth: 96,
+      strokeLinejoin: 'miter',
+    },
+    {
+      d: 'M 548.89728 654.54889 A 80 80 0 1 0 388.89728 654.54889 A 80 80 0 1 0 548.89728 654.54889 Z',
+      fill: 'currentColor',
+    },
+    {
+      d: 'M 762.66663 654.54889 A 80 80 0 1 0 602.66663 654.54889 A 80 80 0 1 0 762.66663 654.54889 Z',
+      fill: 'currentColor',
+    },
+    {
+      d: 'M 976.43597 654.54889 A 80 80 0 1 0 816.43597 654.54889 A 80 80 0 1 0 976.43597 654.54889 Z',
+      fill: 'currentColor',
+    },
+  ],
+};
+
 const chatProviders = [
   { name: 'WhatsApp', icon: siIcon(siWhatsapp), color: '#25D366', desc: 'QR pairing via Baileys', docs: 'https://clawdhub.com/skills/wacli' },
   { name: 'Telegram', icon: siIcon(siTelegram), color: '#26A5E4', desc: 'Bot API via grammY', docs: 'https://docs.clawd.bot/telegram' },
   { name: 'Discord', icon: siIcon(siDiscord), color: '#5865F2', desc: 'Servers, channels & DMs', docs: 'https://clawdhub.com/skills/discord' },
   { name: 'Slack', icon: 'lucide:hash', color: '#E01E5A', desc: 'Workspace apps via Bolt', docs: 'https://clawdhub.com/skills/slack' },
   { name: 'Signal', icon: siIcon(siSignal), color: '#3A76F0', desc: 'Privacy-focused via signal-cli', docs: 'https://clawdhub.com/skills/sag' },
-  { name: 'iMessage', icon: siIcon(siApple), color: '#007AFF', desc: 'macOS native integration', docs: 'https://clawdhub.com/skills/imsg' },
+  { name: 'iMessage', icon: siIcon(siApple), color: '#007AFF', desc: 'iMessage via imsg (AppleScript bridge)', docs: 'https://github.com/steipete/imsg' },
+  { name: 'iMessage', icon: bluebubblesIcon, color: '#3B82F6', desc: 'iMessage via BlueBubbles server', docs: 'https://docs.clawd.bot/channels/bluebubbles' },
   { name: 'Microsoft Teams', icon: 'lucide:users', color: '#6264A7', desc: 'Enterprise support', docs: 'https://docs.clawd.bot/msteams' },
+  { name: 'Nextcloud Talk', icon: siIcon(siNextcloud), color: '#0082C9', desc: 'Self-hosted Nextcloud chat', docs: 'https://docs.clawd.bot/channels/nextcloud-talk' },
+  { name: 'Matrix', icon: siIcon(siMatrix), color: '#000000', desc: 'Matrix protocol', docs: 'https://docs.clawd.bot/channels/matrix' },
+  { name: 'Nostr', icon: 'lucide:message-circle', color: '#8F2CFF', desc: 'Decentralized DMs via NIP-04', docs: 'https://docs.clawd.bot/channels/nostr' },
+  { name: 'Zalo', icon: siIcon(siZalo), color: '#0068FF', desc: 'Zalo Bot API', docs: 'https://docs.clawd.bot/channels/zalo' },
+  { name: 'Zalo Personal', icon: siIcon(siZalo), color: '#0068FF', desc: 'Personal account via QR login', docs: 'https://docs.clawd.bot/channels/zalouser' },
   { name: 'WebChat', icon: 'lucide:globe', color: '#00E5CC', desc: 'Browser-based UI', docs: 'https://docs.clawd.bot/webchat' },
 ];
 
