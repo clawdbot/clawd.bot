@@ -15,7 +15,7 @@ importers:
         specifier: ^1.3.1
         version: 1.3.1
       astro:
-        specifier: ^5.16.11
+        specifier: ^5.16.13
         version: 5.16.15(rollup@4.56.0)(typescript@5.9.3)
       lucide-astro:
         specifier: ^0.556.0
