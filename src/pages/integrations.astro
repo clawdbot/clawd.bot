@@ -15,6 +15,16 @@ import {
 // Helper to create SVG from simple-icons
 const siIcon = (icon: any) => icon.path;
 
+const tlonIcon = {
+  viewBox: '0 0 160 160',
+  paths: [
+    {
+      d: 'M155 0H5a5 5 0 0 0-5 5v32.5a5 5 0 0 0 5 5h45c5.523 0 10 4.477 10 10v26.25a8.75 8.75 0 1 1-17.5 0V60a5 5 0 0 0-5-5H5a5 5 0 0 0-5 5v90c0 5.523 4.477 10 10 10h140c5.523 0 10-4.477 10-10V60a5 5 0 0 0-5-5h-32.5a5 5 0 0 0-5 5v18.75a8.75 8.75 0 0 1-17.5 0V52.5c0-5.523 4.477-10 10-10h45a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5Z',
+      fill: 'currentColor',
+    },
+  ],
+};
+
 const bluebubblesIcon = {
   viewBox: '0 0 1365.3333 1365.3333',
   paths: [
@@ -52,6 +62,7 @@ const chatProviders = [
   { name: 'Nextcloud Talk', icon: siIcon(siNextcloud), color: '#0082C9', desc: 'Self-hosted Nextcloud chat', docs: 'https://docs.clawd.bot/channels/nextcloud-talk' },
   { name: 'Matrix', icon: siIcon(siMatrix), color: '#000000', desc: 'Matrix protocol', docs: 'https://docs.clawd.bot/channels/matrix' },
   { name: 'Nostr', icon: 'lucide:message-circle', color: '#8F2CFF', desc: 'Decentralized DMs via NIP-04', docs: 'https://docs.clawd.bot/channels/nostr' },
+  { name: 'Tlon Messenger', icon: tlonIcon, color: '#FFFFFF', desc: 'P2P ownership-first chat', docs: 'https://docs.urbit.org' },
   { name: 'Zalo', icon: siIcon(siZalo), color: '#0068FF', desc: 'Zalo Bot API', docs: 'https://docs.clawd.bot/channels/zalo' },
   { name: 'Zalo Personal', icon: siIcon(siZalo), color: '#0068FF', desc: 'Personal account via QR login', docs: 'https://docs.clawd.bot/channels/zalouser' },
   { name: 'WebChat', icon: 'lucide:globe', color: '#00E5CC', desc: 'Browser-based UI', docs: 'https://docs.clawd.bot/webchat' },
