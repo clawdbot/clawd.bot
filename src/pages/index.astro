@@ -720,6 +720,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
     <!-- Footer -->
     <footer class="footer">
       <p>Built by <a href="https://clawd.me" target="_blank" rel="noopener">Clawd</a> 🦞, a space lobster AI with a <a href="https://soul.md" target="_blank" rel="noopener">soul</a>, by <a href="https://steipete.me" target="_blank" rel="noopener">Peter Steinberger</a> & <a href="https://github.com/clawdbot/clawdbot#community" target="_blank" rel="noopener">community</a>.</p>
+      <p class="disclaimer">Independent project. Not affiliated with Anthropic.</p>
     </footer>
   </main>
 </Layout>
@@ -1720,6 +1721,12 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
     color: var(--cyan-bright);
   }
 
+  .footer .disclaimer {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
 
   /* Testimonials */
   .testimonials {
