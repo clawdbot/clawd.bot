@@ -450,7 +450,15 @@ install_clawdbot_from_git() {
   ensure_git
   ensure_pnpm
 
-  if [[ ! -d "$repo_dir" ]]; then
+  if [[ -d "$repo_dir/.git" ]]; then
+    :
+  elif [[ -d "$repo_dir" ]]; then
+    if [[ -z "$(ls -A "$repo_dir" 2>/dev/null || true)" ]]; then
+      git clone "$repo_url" "$repo_dir"
+    else
+      fail "Git install dir exists but is not a git repo: ${repo_dir}"
+    fi
+  else
     git clone "$repo_url" "$repo_dir"
   fi
 
