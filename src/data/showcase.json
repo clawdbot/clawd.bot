@@ -2,21 +2,21 @@
   {
     "id": "2012535486401671588",
     "author": "dreetje",
-    "quote": "What I'm currently doing with @moltbot:\n• Check my incoming mail, and remove spam\n• Check my incoming messages (through Beeper)\n• Order things for me\n• Send my reminders to Tana\n• Create issues on GitHub\n• Sync my Google Places\n• Reads my X bookmarks and discusses them with me\n• Generate a nice pdf summary of car conversations\n• Keep track of costs and split them after trips\n• Impersonate me in a group chat with friends (Hilarious)\n• It can call me and we can chat\n• Has its own 1Password vault it can read and write to\n\nAnd the beauty is, IT built all of this, just by chatting to it on the phone.",
+    "quote": "What I'm currently doing with @openclaw:\n• Check my incoming mail, and remove spam\n• Check my incoming messages (through Beeper)\n• Order things for me\n• Send my reminders to Tana\n• Create issues on GitHub\n• Sync my Google Places\n• Reads my X bookmarks and discusses them with me\n• Generate a nice pdf summary of car conversations\n• Keep track of costs and split them after trips\n• Impersonate me in a group chat with friends (Hilarious)\n• It can call me and we can chat\n• Has its own 1Password vault it can read and write to\n\nAnd the beauty is, IT built all of this, just by chatting to it on the phone.",
     "category": "automation",
     "likes": 271
   },
   {
     "id": "2012565160586625345",
     "author": "danpeguine",
-    "quote": "Things my @moltbot does for me:\n• Timeblocks tasks in my calendar based on importance\n• Scores tasks importance and urgency based on an algorithm we're developing together\n• Leads me through a weekly review based on meeting transcriptions & notes\n• Gives a morning daily brief: weather, weekly objectives, health stats, meetings agenda, key reminders, trending topics, stuff I should read based on current objectives, a relevant quote from my books\n• Notifies my wife and I about our son's upcoming school tests\n• Researches big projects and breaks them down to tasks\n• Researches people before meetings and creates briefing docs\n• Spawns background sub-agents to research business ideas\n• Manages the calendar for any conflicts autonomously\n• Creates invoices and summarizes work beautifully",
+    "quote": "Things my @openclaw does for me:\n• Timeblocks tasks in my calendar based on importance\n• Scores tasks importance and urgency based on an algorithm we're developing together\n• Leads me through a weekly review based on meeting transcriptions & notes\n• Gives a morning daily brief: weather, weekly objectives, health stats, meetings agenda, key reminders, trending topics, stuff I should read based on current objectives, a relevant quote from my books\n• Notifies my wife and I about our son's upcoming school tests\n• Researches big projects and breaks them down to tasks\n• Researches people before meetings and creates briefing docs\n• Spawns background sub-agents to research business ideas\n• Manages the calendar for any conflicts autonomously\n• Creates invoices and summarizes work beautifully",
     "category": "productivity",
     "likes": 257
   },
   {
     "id": "2009487467817336895",
     "author": "davis7",
-    "quote": "This is the \"blue text bubbles\" moment of the ai race\n\nAll the cool shit u've been seeing about building crazy custom agents on top of a coding agent?\n\nmoltbot, btca, and the thousands more that will get built this year now HAVE to be built using anthropic's \"agent sdk\" package or else they'll be 100x more expensive\n\nand if they're built on anthropic's sdk guess what they can't do? switch to a better model from another provider when it releases",
+    "quote": "This is the \"blue text bubbles\" moment of the ai race\n\nAll the cool shit u've been seeing about building crazy custom agents on top of a coding agent?\n\nOpenClaw, btca, and the thousands more that will get built this year now HAVE to be built using anthropic's \"agent sdk\" package or else they'll be 100x more expensive\n\nand if they're built on anthropic's sdk guess what they can't do? switch to a better model from another provider when it releases",
     "category": "developer",
     "likes": 229,
     "images": [
@@ -26,7 +26,7 @@
   {
     "id": "2012173452061360130",
     "author": "iannuttall",
-    "quote": "I bought @moltbot his first home 😍",
+    "quote": "I bought @openclaw his first home 😍",
     "category": "smart-home",
     "likes": 318,
     "images": [
@@ -36,7 +36,7 @@
   {
     "id": "2009684853827281070",
     "author": "swiftlysingh",
-    "quote": "excalidraw files are just JSON\n\nso I built a way for agents to create them programmatically\n\nwas working with @moltbot and kept wishing I could say \"draw this flow\" and get a diagram\n\nnow I can",
+    "quote": "excalidraw files are just JSON\n\nso I built a way for agents to create them programmatically\n\nwas working with @openclaw and kept wishing I could say \"draw this flow\" and get a diagram\n\nnow I can",
     "category": "developer",
     "likes": 301
   },
@@ -50,7 +50,7 @@
   {
     "id": "2008531076487246176",
     "author": "KrauseFx",
-    "quote": "What @steipete has built with @moltbot is out of this world. The discord went from 0 to thousands of devs on Discord hacking together, new messages every minute, impossible to keep up.\n\nAlso, just shipped support for Beeper (messenger), Homey (Smart Home) and Fastmail",
+    "quote": "What @steipete has built with @openclaw is out of this world. The discord went from 0 to thousands of devs on Discord hacking together, new messages every minute, impossible to keep up.\n\nAlso, just shipped support for Beeper (messenger), Homey (Smart Home) and Fastmail",
     "category": "integration",
     "likes": 218,
     "images": [
@@ -61,7 +61,7 @@
   {
     "id": "2012507246874255661",
     "author": "chrisbanes",
-    "quote": "Finally got around to fully configuring my @moltbot instance, and it's so so good.\n\nEven at the most basic level, being able to spin up agents to implement a bunch of features from my phone is 🤯\n\nThis is all hooked up to a Telegram group.",
+    "quote": "Finally got around to fully configuring my @openclaw instance, and it's so so good.\n\nEven at the most basic level, being able to spin up agents to implement a bunch of features from my phone is 🤯\n\nThis is all hooked up to a Telegram group.",
     "category": "developer",
     "likes": 160,
     "images": [
@@ -85,7 +85,7 @@
   {
     "id": "2011965312824942772",
     "author": "jlehman_",
-    "quote": "me: hey moltbot, can you check this voice model that I just found out about, install it, and use it to talk to me?\n\nmoltbot: yes",
+    "quote": "me: hey OpenClaw, can you check this voice model that I just found out about, install it, and use it to talk to me?\n\nOpenClaw: yes",
     "category": "integration",
     "likes": 100,
     "images": [
@@ -95,14 +95,14 @@
   {
     "id": "2012313149576302746",
     "author": "chrisrodz35",
-    "quote": "@moltbot short story;\n\nWeek 1 - Set it up for my family\nWeek 2 - Set it up for some non-techie friends\nWeek 3 - We're building clawd for work",
+    "quote": "@openclaw short story;\n\nWeek 1 - Set it up for my family\nWeek 2 - Set it up for some non-techie friends\nWeek 3 - We're building claw for work",
     "category": "personal",
     "likes": 82
   },
   {
     "id": "2012028725710192741",
     "author": "jdrhyne",
-    "quote": "Just built a GA4 skill for @moltbot in ~20 minutes.\n\nSolved my own problem → packaged it → published to ClawdHub.\n\nNow anyone can `clawdhub install ga4` and start querying their analytics.\n\nThe best part of agent skills: pay it forward so the next person doesn't have to figure it out.",
+    "quote": "Just built a GA4 skill for @openclaw in ~20 minutes.\n\nSolved my own problem → packaged it → published to ClawHub.\n\nNow anyone can `clawhub install ga4` and start querying their analytics.\n\nThe best part of agent skills: pay it forward so the next person doesn't have to figure it out.",
     "category": "developer",
     "likes": 42,
     "images": [
@@ -112,7 +112,7 @@
   {
     "id": "2010288787885064227",
     "author": "AlbertMoral",
-    "quote": "I just finished setting up @moltbot by @steipete on my Raspberry Pi with Cloudflare, and it feels magical ✨\n\nBuilt a website from my phone in minutes and connected WHOOP to quickly check my metrics and daily habits 🔥",
+    "quote": "I just finished setting up @openclaw by @steipete on my Raspberry Pi with Cloudflare, and it feels magical ✨\n\nBuilt a website from my phone in minutes and connected WHOOP to quickly check my metrics and daily habits 🔥",
     "category": "smart-home",
     "likes": 35,
     "images": [
@@ -122,7 +122,7 @@
   {
     "id": "2012081542567280964",
     "author": "LLMJunky",
-    "quote": "If you're using gog for Gmail and Calendar in @moltbot, I created a simple skill that provides you a rollup in the morning so you can get an overview of any calendar events or emails you received overnight.\n\nYou can add as many accounts as you like, and you can set how often it runs.\n\nYou can configure how many events or emails it shows as well.",
+    "quote": "If you're using gog for Gmail and Calendar in @openclaw, I created a simple skill that provides you a rollup in the morning so you can get an overview of any calendar events or emails you received overnight.\n\nYou can add as many accounts as you like, and you can set how often it runs.\n\nYou can configure how many events or emails it shows as well.",
     "category": "automation",
     "likes": 30,
     "images": [
@@ -132,14 +132,14 @@
   {
     "id": "2012119327147798753",
     "author": "georgedagg_",
-    "quote": "I had a holy shit, the world is not the same anymore moment last night.\n\nPut BigC, my @moltbot on a hetzner server and my mind is just blown.\n\nWe all know that AI is transformative but I don't think you really feel it until you step outside the prompt/response loop and step into the prompt/take real actions on my behalf/response loop.\n\n- I got BigC to check on the deployment of a new railway project\n- Builds for each of the services in the project failed\n- BigC reviewed the logs\n- Then reviewed the project on the server\n- Identified the root cause (incorrect build commands on each service)\n- Updated the configs of each in railway\n- Redeployed\n- Confirmed everything worked\n- I then tested it\n- Identified a design issue\n- Got BigC to review, fix and submit a PR\n- job done\n\noh and all this was done over voice when walking the fucking dog...",
+    "quote": "I had a holy shit, the world is not the same anymore moment last night.\n\nPut BigC, my @openclaw on a hetzner server and my mind is just blown.\n\nWe all know that AI is transformative but I don't think you really feel it until you step outside the prompt/response loop and step into the prompt/take real actions on my behalf/response loop.\n\n- I got BigC to check on the deployment of a new railway project\n- Builds for each of the services in the project failed\n- BigC reviewed the logs\n- Then reviewed the project on the server\n- Identified the root cause (incorrect build commands on each service)\n- Updated the configs of each in railway\n- Redeployed\n- Confirmed everything worked\n- I then tested it\n- Identified a design issue\n- Got BigC to review, fix and submit a PR\n- job done\n\noh and all this was done over voice when walking the fucking dog...",
     "category": "developer",
     "likes": 143
   },
   {
     "id": "2007616854689280196",
     "author": "stevecaldwell",
-    "quote": "Update on Crawdad 🦞 (my AI Assistant running on @moltbot by @steipete)\n\nTonight we built a full weekly meal planning system in Notion.\n\nMy wife and I take turns cooking, so we had Crawdad set up:\n\n- Master meal plan template for all of 2026 (365 days)\n- Shopping lists sorted by store and aisle (Kroger/Costco/Lowes)\n- Weather forecast auto-updating on the meal plan list (helps me plan good nights for grilling, soup, etc)\n- Our go-to recipes catalogued by chef\n\n- It'll remind me in morning/evening digests if I need to plan dinner or grab groceries.\n\nI imagine that this will save us at least an hour a week.",
+    "quote": "Update on Crawdad 🦞 (my AI Assistant running on @openclaw by @steipete)\n\nTonight we built a full weekly meal planning system in Notion.\n\nMy wife and I take turns cooking, so we had Crawdad set up:\n\n- Master meal plan template for all of 2026 (365 days)\n- Shopping lists sorted by store and aisle (Kroger/Costco/Lowes)\n- Weather forecast auto-updating on the meal plan list (helps me plan good nights for grilling, soup, etc)\n- Our go-to recipes catalogued by chef\n\n- It'll remind me in morning/evening digests if I need to plan dinner or grab groceries.\n\nI imagine that this will save us at least an hour a week.",
     "category": "family",
     "likes": 133,
     "images": [
@@ -149,14 +149,14 @@
   {
     "id": "2012778049406742632",
     "author": "jdrhyne",
-    "quote": "What my @moltbot army does:\n• Cleared 10,000 emails from my inbox (Day 1)\n• Reviewed and summarize 122 google slides for town hall\n• Built CLI tools, published to npm\n• Refactored PRs from code review\n• Works on complete visual refresh of SDK docs\n• Reviews, analyzes and optimized Google Ads\n• Built Jira, GA4, & GSC skills on the fly\n• Reads my X bookmarks and discusses them with me\n• Drafts LinkedIn/X posts in my voice\n• Orchestrates Codex agents for coding\n• Building a trading analyst research and UI\n• Daily roll call across 10+ agents\n• Updates itself\n\n15+ agents. 3 machines. 1 Discord server.\n\nAnd yes — IT built most of this, just by chatting.",
+    "quote": "What my @openclaw army does:\n• Cleared 10,000 emails from my inbox (Day 1)\n• Reviewed and summarize 122 google slides for town hall\n• Built CLI tools, published to npm\n• Refactored PRs from code review\n• Works on complete visual refresh of SDK docs\n• Reviews, analyzes and optimized Google Ads\n• Built Jira, GA4, & GSC skills on the fly\n• Reads my X bookmarks and discusses them with me\n• Drafts LinkedIn/X posts in my voice\n• Orchestrates Codex agents for coding\n• Building a trading analyst research and UI\n• Daily roll call across 10+ agents\n• Updates itself\n\n15+ agents. 3 machines. 1 Discord server.\n\nAnd yes — IT built most of this, just by chatting.",
     "category": "power-user",
     "likes": 119
   },
   {
     "id": "2008336434827002232",
     "author": "jdrhyne",
-    "quote": "Honestly, @moltbot is super powerful because of its ease of use. It literally just connected to JIRA and built a skill since it wasn't on @clawdhub yet. Look how simple it was",
+    "quote": "Honestly, @openclaw is super powerful because of its ease of use. It literally just connected to JIRA and built a skill since it wasn't on @clawhub yet. Look how simple it was",
     "category": "developer",
     "likes": 46,
     "images": [
@@ -166,7 +166,7 @@
   {
     "id": "2008970037013381165",
     "author": "tonylongname",
-    "quote": "Now my home's PM. Wife and I drop topics anytime, Clawd researches, Sunday 9am sends the roundup.",
+    "quote": "Now my home's PM. Wife and I drop topics anytime, Claw researches, Sunday 9am sends the roundup.",
     "category": "family",
     "likes": 27
   },
@@ -180,7 +180,7 @@
   {
     "id": "2008577043978768433",
     "author": "cupcake_trader",
-    "quote": "Two days ago I stumbled on @moltbot it's mind blowing what it can do. @steipete has created a monster. All via my personal discord server links into projects I've built and runs them. It's the tip of the ice berg. You have to check it out.",
+    "quote": "Two days ago I stumbled on @openclaw it's mind blowing what it can do. @steipete has created a monster. All via my personal discord server links into projects I've built and runs them. It's the tip of the ice berg. You have to check it out.",
     "category": "integration",
     "likes": 25,
     "images": [
@@ -191,7 +191,7 @@
   {
     "id": "2009424267801485362",
     "author": "MagiMetal",
-    "quote": "Just built a Swift macOS menu bar app with @moltbot to manage ClawdBot! 🤖⚡\n\nShows gateway status, Discord connection, lets me start/stop/restart, view logs, and has notifications for status changes.\n\nBuilt it together in about an hour.",
+    "quote": "Just built a Swift macOS menu bar app with @openclaw to manage OpenClaw! 🤖⚡\n\nShows gateway status, Discord connection, lets me start/stop/restart, view logs, and has notifications for status changes.\n\nBuilt it together in about an hour.",
     "category": "developer",
     "likes": 23,
     "images": [
@@ -201,14 +201,14 @@
   {
     "id": "2012820689179312278",
     "author": "manuelmaly",
-    "quote": "My current workflow:\n1. Prototype TUI w/ @moltbot + codex, purely vibed spaghetti\n2. Pi appends summaries of each code file in a huge md file (Haiku scout sub agents)\n3. GPT Pro (web) optimizes architecture w/ that md file\n4. Codex implements the result\n5. Repeat",
+    "quote": "My current workflow:\n1. Prototype TUI w/ @openclaw + codex, purely vibed spaghetti\n2. Pi appends summaries of each code file in a huge md file (Haiku scout sub agents)\n3. GPT Pro (web) optimizes architecture w/ that md file\n4. Codex implements the result\n5. Repeat",
     "category": "developer",
     "likes": 19
   },
   {
     "id": "2011260468975771862",
     "author": "iamtrebuh",
-    "quote": "My AI setup as a solo founder\n\nbuilt it with @moltbot, here's how it works:\n\n4 agents, each with their own job:\n\n- main one: strategy, planning, big picture. coordinates the others\n- dev agent: coding, technical problems, architecture decisions\n- marketing agent: research, content ideas, competitor analysis\n- business agent: pricing, metrics, growth strategy\n\nwhat makes it actually useful:\n\n- shared memory for the big stuff (project docs, goals, key decisions)\n- but each agent also has their own context (past messages)\n- different models for different jobs (codex for coding, Gemini for marketing etc)\n- scheduled daily tasks without me asking (content prompts, reddit monitoring, reminders)\n- agents can work in parallel\n- connected to my notes so nothing gets lost\n\nIt all runs on my VPS and I control them all through Telegram, so it basically works as a real small team available 24/7. I even gave them names and different characters:\n- Milo (leader - confident and charismatic),\n- Josh (business guy - pragmatic and straight to the point, numbers-driven),\n- Angela (marketing - extroverted, funny and full of ideas),\n- Bob (coding - introverted analytical genius).\n\nI'm still setting up all the skills, but so far it really works great and it's a first use case that's so beneficial to me and can help me in my daily work.",
+    "quote": "My AI setup as a solo founder\n\nbuilt it with @openclaw, here's how it works:\n\n4 agents, each with their own job:\n\n- main one: strategy, planning, big picture. coordinates the others\n- dev agent: coding, technical problems, architecture decisions\n- marketing agent: research, content ideas, competitor analysis\n- business agent: pricing, metrics, growth strategy\n\nwhat makes it actually useful:\n\n- shared memory for the big stuff (project docs, goals, key decisions)\n- but each agent also has their own context (past messages)\n- different models for different jobs (codex for coding, Gemini for marketing etc)\n- scheduled daily tasks without me asking (content prompts, reddit monitoring, reminders)\n- agents can work in parallel\n- connected to my notes so nothing gets lost\n\nIt all runs on my VPS and I control them all through Telegram, so it basically works as a real small team available 24/7. I even gave them names and different characters:\n- Milo (leader - confident and charismatic),\n- Josh (business guy - pragmatic and straight to the point, numbers-driven),\n- Angela (marketing - extroverted, funny and full of ideas),\n- Bob (coding - introverted analytical genius).\n\nI'm still setting up all the skills, but so far it really works great and it's a first use case that's so beneficial to me and can help me in my daily work.",
     "category": "developer",
     "likes": 11,
     "images": [
@@ -218,7 +218,7 @@
   {
     "id": "2012397507754770587",
     "author": "antonplex",
-    "quote": "I've been experimenting with a new system to keep my @moltbot busy:\n> I created a \"log\" skill that captures my thoughts as they move through the idea-to-decision pipeline.\n\n> Throughout the day, I send any interesting ideas, and it records each as a TASK.\n\n> Overnight, a cron job picks up a task and spawns experiments (exploration, research via scientist subagents, writing code, etc.).\n\n> The next morning, I review the results and either assign follow-up tasks or make a decision.\n\n> Each decision is captured as a decision record, similar to an ADR in software, including problem context, considered alternatives, pros and cons, and the final proposed solution.\n\n> All these artifacts live in a log directory with templates and file naming conventions, enabling the agent to write complex search expressions.",
+    "quote": "I've been experimenting with a new system to keep my @openclaw busy:\n> I created a \"log\" skill that captures my thoughts as they move through the idea-to-decision pipeline.\n\n> Throughout the day, I send any interesting ideas, and it records each as a TASK.\n\n> Overnight, a cron job picks up a task and spawns experiments (exploration, research via scientist subagents, writing code, etc.).\n\n> The next morning, I review the results and either assign follow-up tasks or make a decision.\n\n> Each decision is captured as a decision record, similar to an ADR in software, including problem context, considered alternatives, pros and cons, and the final proposed solution.\n\n> All these artifacts live in a log directory with templates and file naming conventions, enabling the agent to write complex search expressions.",
     "category": "productivity",
     "likes": 4,
     "images": [
@@ -228,21 +228,21 @@
   {
     "id": "2013024865393975718",
     "author": "bangkokbuild",
-    "quote": "Gave Clawd access to:\n• Garmin Watch\n• Obsidian Vault\n• GitHub repos\n• VPS\n• Telegram + Whatsapp\n• X\n\nNow it:\n• Logs my sleep/health/exercise data and tells me when I stay up too late\n• Writes code and deploys it\n• Updates Obsidian daily notes\n• Tracks who visits MenuCapture and where they came from\n• Monitors earthquakes in Tokyo\n• Researches stuff online and saves files to my desktop\n• Remembers my projects, patterns and preferences\n• Reminds me of my schedule, including holidays/accommodation\n• Checks on me (on Telegram!) if I'm quiet too long",
+    "quote": "Gave Claw access to:\n• Garmin Watch\n• Obsidian Vault\n• GitHub repos\n• VPS\n• Telegram + Whatsapp\n• X\n\nNow it:\n• Logs my sleep/health/exercise data and tells me when I stay up too late\n• Writes code and deploys it\n• Updates Obsidian daily notes\n• Tracks who visits MenuCapture and where they came from\n• Monitors earthquakes in Tokyo\n• Researches stuff online and saves files to my desktop\n• Remembers my projects, patterns and preferences\n• Reminds me of my schedule, including holidays/accommodation\n• Checks on me (on Telegram!) if I'm quiet too long",
     "category": "integration",
     "likes": 3
   },
   {
     "id": "2011922739846898098",
     "author": "IamAdiG",
-    "quote": "@moltbot BUILT and runs @learnfromlenny\n\nBuilt using WhatsApp messages to my bot 🦞\n\nAgentic future is here.",
+    "quote": "@openclaw BUILT and runs @learnfromlenny\n\nBuilt using WhatsApp messages to my bot 🦞\n\nAgentic future is here.",
     "category": "developer",
     "likes": 20
   },
   {
     "id": "2009577664018018425",
     "author": "DhruvalGolakiya",
-    "quote": "so i built this ui completely from whatsApp using @moltbot and cc.\n\ngenerated, and sent the final output back to me as a screenshot and I can now add new skills + integrations the same way.",
+    "quote": "so i built this ui completely from whatsApp using @openclaw and cc.\n\ngenerated, and sent the final output back to me as a screenshot and I can now add new skills + integrations the same way.",
     "category": "developer",
     "likes": 16,
     "images": [
@@ -261,7 +261,7 @@
   {
     "id": "2011204271786672526",
     "author": "Philo01",
-    "quote": "My @moltbot a.k.a. I.R.I.S. (Integrated Reasoning & Insight System - it came up with this 😂) is now fully set up to develop apps for me on the go!\n\nIt even made this nice little status page 💅\n\nSecure private network via Tailscale with any preferred domain 👌",
+    "quote": "My @openclaw a.k.a. I.R.I.S. (Integrated Reasoning & Insight System - it came up with this 😂) is now fully set up to develop apps for me on the go!\n\nIt even made this nice little status page 💅\n\nSecure private network via Tailscale with any preferred domain 👌",
     "category": "developer",
     "likes": 17,
     "images": [
@@ -272,7 +272,7 @@
   {
     "id": "2012646568219029586",
     "author": "kylezantos",
-    "quote": "This little resource was sent to me on Thursday night. Figured I'd just run through it this weekend.\n\nBUT, I have grown rather tired of this pattern for reading on a 27\" 5k monitor.\n\nSo I had @moltbot repackage it into a tiny HTML/CSS file for me, w adjustable sizing and speed-read mode.\n\nNow I can happily and quickly consume.\n\nThe internet is easily customizable once you learn the spells 🧙",
+    "quote": "This little resource was sent to me on Thursday night. Figured I'd just run through it this weekend.\n\nBUT, I have grown rather tired of this pattern for reading on a 27\" 5k monitor.\n\nSo I had @openclaw repackage it into a tiny HTML/CSS file for me, w adjustable sizing and speed-read mode.\n\nNow I can happily and quickly consume.\n\nThe internet is easily customizable once you learn the spells 🧙",
     "category": "developer",
     "likes": 16,
     "images": [
@@ -282,21 +282,21 @@
   {
     "id": "2012212865206272266",
     "author": "pepicrft",
-    "quote": "I finally shipped a Moltbot plugin for Ralph projects. It scaffolds the Ralph files, compiles the prompt with an explicit RALPH_STATUS block, and only exits when the exit signal and indicators agree. I built it to run Claude Code or Codex through a simple runner config.",
+    "quote": "I finally shipped a OpenClaw plugin for Ralph projects. It scaffolds the Ralph files, compiles the prompt with an explicit RALPH_STATUS block, and only exits when the exit signal and indicators agree. I built it to run Claude Code or Codex through a simple runner config.",
     "category": "developer",
     "likes": 16
   },
   {
     "id": "2011586646458708138",
     "author": "5katkov",
-    "quote": "ClawdBot is fully operational.\n\nIt can manage my calendar, obsidian, it can use browser now. It send me reminders, plans my itirenary. Contributes to my GitHub repositories.\n\nThis bot is my bitch now.",
+    "quote": "OpenClaw is fully operational.\n\nIt can manage my calendar, obsidian, it can use browser now. It send me reminders, plans my itirenary. Contributes to my GitHub repositories.\n\nThis bot is my bitch now.",
     "category": "productivity",
     "likes": 11
   },
   {
     "id": "2012265108697923809",
     "author": "andytorres_a",
-    "quote": ".@moltbot on NAS x PC x Mac Studio is undefeated.\n\nNever had a better second brain!\n\nLatest productivity app we made is a daily agenda that auto refreshes based on actions per project.",
+    "quote": ".@openclaw on NAS x PC x Mac Studio is undefeated.\n\nNever had a better second brain!\n\nLatest productivity app we made is a daily agenda that auto refreshes based on actions per project.",
     "category": "productivity",
     "likes": 10,
     "images": [
@@ -323,21 +323,21 @@
   {
     "id": "2010148656687767803",
     "author": "aus_bytes",
-    "quote": "Feels like we are living in the future. Working primarily with Moltbot to research and build documents, syncing to Notion. Linking calendars and setting up Claude to manage my diary automatically. Building coding projects remotely from my phone. All done via WhatsApp.",
+    "quote": "Feels like we are living in the future. Working primarily with OpenClaw to research and build documents, syncing to Notion. Linking calendars and setting up Claude to manage my diary automatically. Building coding projects remotely from my phone. All done via WhatsApp.",
     "category": "productivity",
     "likes": 16
   },
   {
     "id": "2007656142105661693",
     "author": "buddyhadry",
-    "quote": "Having too much fun building new CLIs / skills to work with @steipete's @moltbot.\n\nJust built an alexa cli to control your Alexa devices (including all Alexa-enabled smart home devices) with Clawdis / Claude Code / Codex / your agent of choice.\n\nSupports natural language text commands that can mimic anything you'd say to an Echo.",
+    "quote": "Having too much fun building new CLIs / skills to work with @steipete's @openclaw.\n\nJust built an alexa cli to control your Alexa devices (including all Alexa-enabled smart home devices) with Clawis / Claude Code / Codex / your agent of choice.\n\nSupports natural language text commands that can mimic anything you'd say to an Echo.",
     "category": "smart-home",
     "likes": 16
   },
   {
     "id": "2008309808164896878",
     "author": "kirjd",
-    "quote": "Built myself a nice dashboard with @moltbot",
+    "quote": "Built myself a nice dashboard with @openclaw",
     "category": "developer",
     "likes": 8,
     "images": [
@@ -347,28 +347,28 @@
   {
     "id": "2011077782688985233",
     "author": "LukaRadisic",
-    "quote": "Just built @Moltbot integration for ralph-tui!\n\nRemote TUI via Tailscale + tmux\n\nTelegram inline status updates\n\nScreenshots on completion",
+    "quote": "Just built @openclaw integration for ralph-tui!\n\nRemote TUI via Tailscale + tmux\n\nTelegram inline status updates\n\nScreenshots on completion",
     "category": "developer",
     "likes": 2
   },
   {
     "id": "2013066316467560521",
     "author": "avi_press",
-    "quote": "Today @moltbot filed an insurance claim for me and scheduled the repair appointment",
+    "quote": "Today @openclaw filed an insurance claim for me and scheduled the repair appointment",
     "category": "automation",
     "likes": 2
   },
   {
     "id": "2010655467400208746",
     "author": "theguti",
-    "quote": "Just used Moltbot to finally fix my iotawatt setup - took me forever to calibrate it two years ago and a corrupted sdcard + no backup resulted in my neglect for many months.\n\nAsked @moltbot to help set it up again and voilà! it works. The experience was rather amazing, it had access to the iotawatt box and I pasted screenshots and it guided me.\n\nThe gift that keeps on giving!",
+    "quote": "Just used OpenClaw to finally fix my iotawatt setup - took me forever to calibrate it two years ago and a corrupted sdcard + no backup resulted in my neglect for many months.\n\nAsked @openclaw to help set it up again and voilà! it works. The experience was rather amazing, it had access to the iotawatt box and I pasted screenshots and it guided me.\n\nThe gift that keeps on giving!",
     "category": "smart-home",
     "likes": 14
   },
   {
     "id": "2002334394993025243",
     "author": "jjpcodes",
-    "quote": "Building a language learning tool, driven by Moltbot and Pi agent.\n\nTeaches you Chinese, tailored \"magically\" to your level, with TTS and STT and pronunciation feedback, and progress tracking/spaced repetition.\n\nBuilt 100% by codex in 2 days or so.",
+    "quote": "Building a language learning tool, driven by OpenClaw and Pi agent.\n\nTeaches you Chinese, tailored \"magically\" to your level, with TTS and STT and pronunciation feedback, and progress tracking/spaced repetition.\n\nBuilt 100% by codex in 2 days or so.",
     "category": "developer",
     "likes": 13,
     "images": [
@@ -378,21 +378,21 @@
   {
     "id": "2013003345686868171",
     "author": "CopyKatCapital",
-    "quote": "Submitted my first ever app to Apple for review. Mostly done through @moltbot using telegram - amazing not having to be at my computer to iterate. Also quite fun it automated the entire TestFlight update process I had zero clue about.",
+    "quote": "Submitted my first ever app to Apple for review. Mostly done through @openclaw using telegram - amazing not having to be at my computer to iterate. Also quite fun it automated the entire TestFlight update process I had zero clue about.",
     "category": "developer",
     "likes": 11
   },
   {
     "id": "2008897333874893078",
     "author": "dantelex",
-    "quote": "Built an email (Himalaya - CLI to manage email) SKILL for @moltbot yesterday and it felt good to contribute to OSS.\n\nThis is just going to get more useful @steipete ❤️",
+    "quote": "Built an email (Himalaya - CLI to manage email) SKILL for @openclaw yesterday and it felt good to contribute to OSS.\n\nThis is just going to get more useful @steipete ❤️",
     "category": "developer",
     "likes": 1
   },
   {
     "id": "2011807680180957383",
     "author": "xz3dev",
-    "quote": "Moltbot is now doing a weekly fully automated SEO analysis for me.\n\nFuture is now kiddos",
+    "quote": "OpenClaw is now doing a weekly fully automated SEO analysis for me.\n\nFuture is now kiddos",
     "category": "automation",
     "likes": 1,
     "images": [
@@ -403,7 +403,7 @@
   {
     "id": "2012052022464577954",
     "author": "AndresReibel",
-    "quote": "You will never find another AI agent like me... 😂 my personal @moltbot-inspired agent.",
+    "quote": "You will never find another AI agent like me... 😂 my personal @openclaw-inspired agent.",
     "category": "developer",
     "likes": 1,
     "images": [
@@ -413,7 +413,7 @@
   {
     "id": "2012058702115709160",
     "author": "xMikeMickelson",
-    "quote": "yesterday @moltbot learned to strip sora 2 watermarks on its own\n\ntoday i told it to also make videos\n\nit generated a whole ugc influencer from scratch\nmessy hair, airpods, gray hoodie, manic energy\n\ni didn't give it a reference image\n\nwhat is happening here?!",
+    "quote": "yesterday @openclaw learned to strip sora 2 watermarks on its own\n\ntoday i told it to also make videos\n\nit generated a whole ugc influencer from scratch\nmessy hair, airpods, gray hoodie, manic energy\n\ni didn't give it a reference image\n\nwhat is happening here?!",
     "category": "developer",
     "likes": 7,
     "images": [
@@ -423,7 +423,7 @@
   {
     "id": "2010745968044732692",
     "author": "DhruvalGolakiya",
-    "quote": "Finally done - added supabase + gmail skills to @moltbot with a daily morning cron.\n\nIt now:\n• Reads my first 10 emails\n• Summarizes everything\n• Creates todos from important emails\n• Sends them to Slack\n• Stores all of it in Supabase\n\nAlso built a tiny macOS menu bar app so I can check my daily summary + tasks automatically.",
+    "quote": "Finally done - added supabase + gmail skills to @openclaw with a daily morning cron.\n\nIt now:\n• Reads my first 10 emails\n• Summarizes everything\n• Creates todos from important emails\n• Sends them to Slack\n• Stores all of it in Supabase\n\nAlso built a tiny macOS menu bar app so I can check my daily summary + tasks automatically.",
     "category": "automation",
     "likes": 6,
     "images": [
@@ -433,14 +433,14 @@
   {
     "id": "2010508094313263502",
     "author": "vallver",
-    "quote": "Moltbot built me a simple Stumbleupon for some of my favourite articles.\n\nFrom my phone, while putting my baby to sleep...\n\nLet me know if you want me to add any features or articles and I'll point @moltbot to this thread in the morning to do it 😂",
+    "quote": "OpenClaw built me a simple Stumbleupon for some of my favourite articles.\n\nFrom my phone, while putting my baby to sleep...\n\nLet me know if you want me to add any features or articles and I'll point @openclaw to this thread in the morning to do it 😂",
     "category": "developer",
     "likes": 5
   },
   {
     "id": "2010729667540787707",
     "author": "bangkokbuild",
-    "quote": "This is the setup now:\n\n• Claude Code running a Ralph loop, auto-building features\n• My Moltbot Ema monitoring progress and pinging me to urge me to sleep\n• Me, in bed, using this chance to ask for status updates via Telegram\n\n6 tasks done already",
+    "quote": "This is the setup now:\n\n• Claude Code running a Ralph loop, auto-building features\n• My OpenClaw Ema monitoring progress and pinging me to urge me to sleep\n• Me, in bed, using this chance to ask for status updates via Telegram\n\n6 tasks done already",
     "category": "developer",
     "likes": 4,
     "images": [
@@ -450,7 +450,7 @@
   {
     "id": "2010318448207995241",
     "author": "nathanclark_",
-    "quote": "Ok this fun.\n\nSetup @moltbot (mines 'Merlin') and put him in Slack since no need for another number + I'm in there all the time anyway.\n\nNow I can him trigger @droid exec to run the writing system I built.\n\nMagic! 🧙‍♂️ 🪄",
+    "quote": "Ok this fun.\n\nSetup @openclaw (mines 'Merlin') and put him in Slack since no need for another number + I'm in there all the time anyway.\n\nNow I can him trigger @droid exec to run the writing system I built.\n\nMagic! 🧙‍♂️ 🪄",
     "category": "integration",
     "likes": 3,
     "images": [
@@ -460,14 +460,14 @@
   {
     "id": "2011373120033095875",
     "author": "jandragsbaek",
-    "quote": "Last night I got @moltbot set up with a Telegram group and multiple topics, and there was a slight hitch with the default channel and permissions (I can see there's a PR to fix it)\n\nBut it sure does feel like black magic, now that it's set up. I am excited to see what it can do.",
+    "quote": "Last night I got @openclaw set up with a Telegram group and multiple topics, and there was a slight hitch with the default channel and permissions (I can see there's a PR to fix it)\n\nBut it sure does feel like black magic, now that it's set up. I am excited to see what it can do.",
     "category": "integration",
     "likes": 3
   },
   {
     "id": "2011656156318744971",
     "author": "scottw",
-    "quote": "The 10-year-old has been enjoying MadLibs. While we were out for the day and mostly disconnected (thanks to Verizon), our @moltbot built us a dynamic version with images, history, etc.\n\nIt also resolved a TailScale issue and is now ready for personal use.",
+    "quote": "The 10-year-old has been enjoying MadLibs. While we were out for the day and mostly disconnected (thanks to Verizon), our @openclaw built us a dynamic version with images, history, etc.\n\nIt also resolved a TailScale issue and is now ready for personal use.",
     "category": "family",
     "likes": 2,
     "images": [
@@ -477,21 +477,21 @@
   {
     "id": "2011629550875394517",
     "author": "arthurlee",
-    "quote": "341 agent sessions in the past 7 days using @Moltbot @OpenAICodexCli.\n\nShipped:\n- Client proposal tightened\n- Market research distilled\n- Calendar + Drive wired up\n- Prompt-injection scanner built\n\nWhat would you automate first?",
+    "quote": "341 agent sessions in the past 7 days using @openclaw @OpenAICodexCli.\n\nShipped:\n- Client proposal tightened\n- Market research distilled\n- Calendar + Drive wired up\n- Prompt-injection scanner built\n\nWhat would you automate first?",
     "category": "developer",
     "likes": 0
   },
   {
     "id": "2012458753786859872",
     "author": "quifago",
-    "quote": "This morning I built a small CLI for the Idealista API + a Skill you can plug into your favorite agent (mine: @moltbot).\n\nAsk things like:\n\"Find a flat in A Coruña under 200.000€ with 3 rooms\"\n\"What's my house worth?\"",
+    "quote": "This morning I built a small CLI for the Idealista API + a Skill you can plug into your favorite agent (mine: @openclaw).\n\nAsk things like:\n\"Find a flat in A Coruña under 200.000€ with 3 rooms\"\n\"What's my house worth?\"",
     "category": "developer",
     "likes": 0
   },
   {
     "id": "2012207314884075773",
     "author": "bffmike",
-    "quote": "My @moltbot drove my coding agents after i went to bed last night from 12:30–7ish am while i snoozed.\n\nMUCH better than a Ralph loop because you don't just give it a prompt about when to stop looping.\n\nInstead I've been delegating management of coding agents to it ALL DAY. It knows about the entire project history, all the headaches. it drives better than Ralph because it's been watching me all day.",
+    "quote": "My @openclaw drove my coding agents after i went to bed last night from 12:30–7ish am while i snoozed.\n\nMUCH better than a Ralph loop because you don't just give it a prompt about when to stop looping.\n\nInstead I've been delegating management of coding agents to it ALL DAY. It knows about the entire project history, all the headaches. it drives better than Ralph because it's been watching me all day.",
     "category": "developer",
     "likes": 1,
     "images": [
@@ -501,7 +501,7 @@
   {
     "id": "2012728470980420090",
     "author": "0xLCZ",
-    "quote": "Ok, @moltbot IS amazing 😍\n\n#BuildInPublic",
+    "quote": "Ok, @openclaw IS amazing 😍\n\n#BuildInPublic",
     "category": "developer",
     "likes": 5,
     "images": [
@@ -511,7 +511,7 @@
   {
     "id": "2013089675552968761",
     "author": "theaaron",
-    "quote": "chat based calendar management with @moltbot is one of the best uses of an LLM I've ever experienced\n\n-work, personal, and family calendar access\n-chat to change/add/check in\n-can be shared with a spouse or family\n\nbravo @steipete 🦞",
+    "quote": "chat based calendar management with @openclaw is one of the best uses of an LLM I've ever experienced\n\n-work, personal, and family calendar access\n-chat to change/add/check in\n-can be shared with a spouse or family\n\nbravo @steipete 🦞",
     "category": "productivity",
     "likes": 0,
     "images": [
@@ -521,21 +521,21 @@
   {
     "id": "2013089630317355014",
     "author": "LLMJunky",
-    "quote": "You should try to think of Clawd as an orchestration layer that can interface with not only your entire machine, but the rest of your coding agents as well.\n\nAnd what makes it supremely useful, in my opinion, is that inferface is now available to you on all of your devices at the same time - especially mobile!\n\nThis means that anything you can do on your local dev machine, you can now do with simple voice memos on your phone.\n\nWorking on a project? Think of some idea while walking to the train? No problem. Drop Clawd a message, tell it to goto your project directory, spin up an agent, and build that feature.",
+    "quote": "You should try to think of Claw as an orchestration layer that can interface with not only your entire machine, but the rest of your coding agents as well.\n\nAnd what makes it supremely useful, in my opinion, is that inferface is now available to you on all of your devices at the same time - especially mobile!\n\nThis means that anything you can do on your local dev machine, you can now do with simple voice memos on your phone.\n\nWorking on a project? Think of some idea while walking to the train? No problem. Drop Claw a message, tell it to goto your project directory, spin up an agent, and build that feature.",
     "category": "developer",
     "likes": 3
   },
   {
     "id": "2013099774937911694",
     "author": "advait3000",
-    "quote": "Moltbot is now my primary interface to the digital world. All of my notes, emails, projects, questions, plans, and specs flow through a central system with Discord as the interface. This eliminates tons of friction to go from idea to execution. I don't have to orchestrate a bunch of independent tools anymore. It's just a single interface.",
+    "quote": "OpenClaw is now my primary interface to the digital world. All of my notes, emails, projects, questions, plans, and specs flow through a central system with Discord as the interface. This eliminates tons of friction to go from idea to execution. I don't have to orchestrate a bunch of independent tools anymore. It's just a single interface.",
     "category": "productivity",
     "likes": 1
   },
   {
     "id": "2013158851194085388",
     "author": "bangkokbuild",
-    "quote": "@moltbot made a heat map with all my exercises after the data from Garmin was loaded.\n\n• Took 2 prompts\n• 2nd one was to get a better map and navigation, including a slider and clearer index cards\n• Signed up for a map API\n• Can zoom out and check all my runs around the world on the map",
+    "quote": "@openclaw made a heat map with all my exercises after the data from Garmin was loaded.\n\n• Took 2 prompts\n• 2nd one was to get a better map and navigation, including a slider and clearer index cards\n• Signed up for a map API\n• Can zoom out and check all my runs around the world on the map",
     "category": "personal",
     "likes": 0,
     "images": [
@@ -545,7 +545,7 @@
   {
     "id": "2013811099028557966",
     "author": "astuyve",
-    "quote": "It may not be AGI, but Moltbot is automatically negotiating with multiple dealers for my next car via browser, email, and imessage and it's amazing.",
+    "quote": "It may not be AGI, but OpenClaw is automatically negotiating with multiple dealers for my next car via browser, email, and imessage and it's amazing.",
     "category": "automation",
     "likes": 16,
     "images": [
@@ -555,7 +555,7 @@
   {
     "id": "2013645067441844697",
     "author": "dreetje",
-    "quote": "My @moltbot has managed to order things itself from @albertheijn (our supermarket) when our cleaning lady sent me a message.\n\nIt logged in using shared credentials in my @1Password, then waited for the old style text message MFA (read it through @beeper iMessage bridge using MCP). And placed the items in my basket!\n\nSo helpful.",
+    "quote": "My @openclaw has managed to order things itself from @albertheijn (our supermarket) when our cleaning lady sent me a message.\n\nIt logged in using shared credentials in my @1Password, then waited for the old style text message MFA (read it through @beeper iMessage bridge using MCP). And placed the items in my basket!\n\nSo helpful.",
     "category": "automation",
     "likes": 119
   },
@@ -574,7 +574,7 @@
   {
     "id": "2013549390615715905",
     "author": "nathanclark_",
-    "quote": "I've now got my @moltbot across the writing system so he can trigger @droid exec to execute the writing pipeline.\n\nIt's Sassy the Sasquatch, IYKYK. Very Aussie reference.",
+    "quote": "I've now got my @openclaw across the writing system so he can trigger @droid exec to execute the writing pipeline.\n\nIt's Sassy the Sasquatch, IYKYK. Very Aussie reference.",
     "category": "developer",
     "likes": 1,
     "images": [
@@ -584,7 +584,7 @@
   {
     "id": "2013499715892006998",
     "author": "_KevinTang",
-    "quote": "I have @moltbot setup to look at Hacker News trending and send me links to articles it thinks I'd be interested in!\n\nPersonal content curation.",
+    "quote": "I have @openclaw setup to look at Hacker News trending and send me links to articles it thinks I'd be interested in!\n\nPersonal content curation.",
     "category": "automation",
     "likes": 5,
     "images": [
@@ -595,7 +595,7 @@
   {
     "id": "2013388700479058068",
     "author": "danpeguine",
-    "quote": "Today I asked @moltbot to organize all my bloodworks lab results into a neat Notion database.",
+    "quote": "Today I asked @openclaw to organize all my bloodworks lab results into a neat Notion database.",
     "category": "automation",
     "likes": 50,
     "images": [
@@ -605,35 +605,35 @@
   {
     "id": "2013257743004545257",
     "author": "chrisrodz35",
-    "quote": "Kicking bad habits with @moltbot.\n\nI like watching youtube videos but it's time I could spend producing instead of consuming.\n\nSetup a daily cron that summarizes new videos with key takeaways and actionable insights. Now I can get the learnings without the time sink!",
+    "quote": "Kicking bad habits with @openclaw.\n\nI like watching youtube videos but it's time I could spend producing instead of consuming.\n\nSetup a daily cron that summarizes new videos with key takeaways and actionable insights. Now I can get the learnings without the time sink!",
     "category": "productivity",
     "likes": 25
   },
   {
     "id": "2013196232181637500",
     "author": "christinetyip",
-    "quote": "I connected mine to an external memory layer - check out the shared-memory skill in clawdhub.\n\nMoltbot helps me build my second brain and selectively shares context and state with my partner's moltbot.",
+    "quote": "I connected mine to an external memory layer - check out the shared-memory skill in clawhub.\n\nOpenClaw helps me build my second brain and selectively shares context and state with my partner's OpenClaw.",
     "category": "integration",
     "likes": 1
   },
   {
     "id": "2014337533178425499",
     "author": "theguti",
-    "quote": "The things moltbot can do are just never ending, it's crazy.",
+    "quote": "The things OpenClaw can do are just never ending, it's crazy.",
     "category": "general",
     "likes": 1
   },
   {
     "id": "2014339212271600067",
     "author": "dnouri",
-    "quote": "Is this legal? It feels illegal…\n\nHaving so much fun with @moltbot: Check out how after a bit of hacking I can ask it to send me the track of this song as an audio, extract some cool GIFs and finally send me a PDF with chords?\n\nMind: blown!",
+    "quote": "Is this legal? It feels illegal…\n\nHaving so much fun with @openclaw: Check out how after a bit of hacking I can ask it to send me the track of this song as an audio, extract some cool GIFs and finally send me a PDF with chords?\n\nMind: blown!",
     "category": "creative",
     "likes": 3
   },
   {
     "id": "2014481698369536402",
     "author": "danpeguine",
-    "quote": "Two different @moltbot can collaborate!!!\n\n@assafdagan and I put our bots in the same WhatsApp group and they are collaborating!!!",
+    "quote": "Two different @openclaw can collaborate!!!\n\n@assafdagan and I put our bots in the same WhatsApp group and they are collaborating!!!",
     "category": "integration",
     "likes": 83,
     "images": [
@@ -643,7 +643,7 @@
   {
     "id": "2014608153393168425",
     "author": "cedric_chee",
-    "quote": "@Moltbot is my media studio for the creator. I hooked it up to Codex 5.2 and Minimax-M2.1 (as fallback). Some Skills in action:\n- Kyutai Pocket TTS\n- Whisper audio transcribe\n- Browser use (web scraping, form filling)\n- Twitter ops\n\nI hacked this up in <5 days, all on my mobile while I was on the move.",
+    "quote": "@openclaw is my media studio for the creator. I hooked it up to Codex 5.2 and Minimax-M2.1 (as fallback). Some Skills in action:\n- Kyutai Pocket TTS\n- Whisper audio transcribe\n- Browser use (web scraping, form filling)\n- Twitter ops\n\nI hacked this up in <5 days, all on my mobile while I was on the move.",
     "category": "creative",
     "likes": 2,
     "images": [
@@ -654,7 +654,7 @@
   {
     "id": "2014590075972247640",
     "author": "Ysqander",
-    "quote": "I love @moltbot. I set up a Reddit fetch crawler and can pull Reddit posts from my Telegram.",
+    "quote": "I love @openclaw. I set up a Reddit fetch crawler and can pull Reddit posts from my Telegram.",
     "category": "automation",
     "likes": 1,
     "images": [
@@ -664,7 +664,7 @@
   {
     "id": "2014797672419340435",
     "author": "nateliason",
-    "quote": "My new favorite way to work with Moltbot:\n\n1. Tell it we're working on app improvements, it should just take notes\n2. Run through user flows, send screenshots with notes as I find issues\n3. It builds a list of work, adds its own hypotheses\n4. Writes up a full report on what to do\n5. I say \"Go\" and it kicks off Codex agents to attack the different pieces, opening separate PRs\n6. Claude reviews & improves the PRs on Github\n7. Clawd makes a doc of everything we did + what to test\n8. Next time I test, I start with that list to make sure everything worked",
+    "quote": "My new favorite way to work with OpenClaw:\n\n1. Tell it we're working on app improvements, it should just take notes\n2. Run through user flows, send screenshots with notes as I find issues\n3. It builds a list of work, adds its own hypotheses\n4. Writes up a full report on what to do\n5. I say \"Go\" and it kicks off Codex agents to attack the different pieces, opening separate PRs\n6. Claude reviews & improves the PRs on Github\n7. Claw makes a doc of everything we did + what to test\n8. Next time I test, I start with that list to make sure everything worked",
     "category": "developer",
     "likes": 239,
     "images": [
@@ -674,14 +674,14 @@
   {
     "id": "2013140793649734032",
     "author": "andrewjiang",
-    "quote": "Bought a $35 holo cube to give my @moltbot its own little display.\n\nBasically a tamagotchi now.",
+    "quote": "Bought a $35 holo cube to give my @openclaw its own little display.\n\nBasically a tamagotchi now.",
     "category": "hardware",
     "likes": 880
   },
   {
     "id": "2014147784098681217",
     "author": "astuyve",
-    "quote": "Moltbot just saved me $4,200 on a car.",
+    "quote": "OpenClaw just saved me $4,200 on a car.",
     "category": "automation",
     "likes": 255,
     "images": [
@@ -691,7 +691,7 @@
   {
     "id": "2014568799824212004",
     "author": "localghost",
-    "quote": "Got a mac mini for moltbot. Had a lot of fun setting this up today. Instead of access to my accounts, I gave it:\n\n✅ its own apple account for messages\n✅ its own gmail to sign up for stuff\n✅ its own github to push code",
+    "quote": "Got a mac mini for OpenClaw. Had a lot of fun setting this up today. Instead of access to my accounts, I gave it:\n\n✅ its own apple account for messages\n✅ its own gmail to sign up for stuff\n✅ its own github to push code",
     "category": "setup",
     "likes": 1978,
     "images": [
@@ -701,7 +701,7 @@
   {
     "id": "2014880905979167005",
     "author": "localghost",
-    "quote": "Since Moltbot has an email inbox I can just forward stuff for it to take care of.\n\nHere's Moltbot turning my email receipts into a parts list.",
+    "quote": "Since OpenClaw has an email inbox I can just forward stuff for it to take care of.\n\nHere's OpenClaw turning my email receipts into a parts list.",
     "category": "automation",
     "likes": 27,
     "images": [
@@ -711,7 +711,7 @@
   {
     "id": "2014765279650189578",
     "author": "thekitze",
-    "quote": "Just preordered the pebble ring 🤓\n\none tap → voice to @moltbot → @benjiDotSo",
+    "quote": "Just preordered the pebble ring 🤓\n\none tap → voice to @openclaw → @benjiDotSo",
     "category": "hardware",
     "likes": 30,
     "images": [
@@ -721,7 +721,7 @@
   {
     "id": "2014763987683225685",
     "author": "localghost",
-    "quote": "Moltbot found my HomePods on the network and built a skill to control them.",
+    "quote": "OpenClaw found my HomePods on the network and built a skill to control them.",
     "category": "smart-home",
     "likes": 104,
     "images": [
@@ -731,14 +731,14 @@
   {
     "id": "2013908013619319293",
     "author": "Diego_F_Aguirre",
-    "quote": "I'm literally debugging my fitness app mid-workout with Moltbot.\n\nBetween sets: 'here's the bug' → it patches → I keep moving.\n\nAbsolutely wild 🤯",
+    "quote": "I'm literally debugging my fitness app mid-workout with OpenClaw.\n\nBetween sets: 'here's the bug' → it patches → I keep moving.\n\nAbsolutely wild 🤯",
     "category": "developer",
     "likes": 6
   },
   {
     "id": "2013902632276914265",
     "author": "danpeguine",
-    "quote": "I used @moltbot to install this skill and then made a video showing how I used it to install the skill. All via WhatsApp. Insane!",
+    "quote": "I used @openclaw to install this skill and then made a video showing how I used it to install the skill. All via WhatsApp. Insane!",
     "category": "integration",
     "likes": 456
   }

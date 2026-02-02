@@ -67,7 +67,7 @@
   </g>
 
   <!-- Text -->
-  <text x="380" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#f0f4ff">Clawdbot</text>
+  <text x="380" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#f0f4ff">OpenClaw</text>
 
   <!-- Tagline -->
   <text x="380" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="500" fill="#ff4d4d" letter-spacing="0.15em">EXFOLIATE! EXFOLIATE!</text>
@@ -77,5 +77,5 @@
   <text x="380" y="440" font-family="system-ui, -apple-system, sans-serif" font-size="28" fill="#8892b0">running on your own devices.</text>
 
   <!-- URL -->
-  <text x="380" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#5a6480">clawd.bot</text>
+  <text x="380" y="520" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#5a6480">openclaw.ai</text>
 </svg>

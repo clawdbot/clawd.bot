@@ -51,100 +51,100 @@ const bluebubblesIcon = {
 };
 
 const chatProviders = [
-  { name: 'WhatsApp', icon: siIcon(siWhatsapp), color: '#25D366', desc: 'QR pairing via Baileys', docs: 'https://clawdhub.com/skills/wacli' },
-  { name: 'Telegram', icon: siIcon(siTelegram), color: '#26A5E4', desc: 'Bot API via grammY', docs: 'https://docs.molt.bot/telegram' },
-  { name: 'Discord', icon: siIcon(siDiscord), color: '#5865F2', desc: 'Servers, channels & DMs', docs: 'https://clawdhub.com/skills/discord' },
-  { name: 'Slack', icon: 'lucide:hash', color: '#E01E5A', desc: 'Workspace apps via Bolt', docs: 'https://clawdhub.com/skills/slack' },
-  { name: 'Signal', icon: siIcon(siSignal), color: '#3A76F0', desc: 'Privacy-focused via signal-cli', docs: 'https://clawdhub.com/skills/sag' },
+  { name: 'WhatsApp', icon: siIcon(siWhatsapp), color: '#25D366', desc: 'QR pairing via Baileys', docs: 'https://clawhub.com/skills/wacli' },
+  { name: 'Telegram', icon: siIcon(siTelegram), color: '#26A5E4', desc: 'Bot API via grammY', docs: 'https://docs.openclaw.ai/telegram' },
+  { name: 'Discord', icon: siIcon(siDiscord), color: '#5865F2', desc: 'Servers, channels & DMs', docs: 'https://clawhub.com/skills/discord' },
+  { name: 'Slack', icon: 'lucide:hash', color: '#E01E5A', desc: 'Workspace apps via Bolt', docs: 'https://clawhub.com/skills/slack' },
+  { name: 'Signal', icon: siIcon(siSignal), color: '#3A76F0', desc: 'Privacy-focused via signal-cli', docs: 'https://clawhub.com/skills/sag' },
   { name: 'iMessage', icon: siIcon(siApple), color: '#007AFF', desc: 'iMessage via imsg (AppleScript bridge)', docs: 'https://github.com/steipete/imsg' },
-  { name: 'iMessage', icon: bluebubblesIcon, color: '#3B82F6', desc: 'iMessage via BlueBubbles server', docs: 'https://docs.molt.bot/channels/bluebubbles' },
-  { name: 'Microsoft Teams', icon: 'lucide:users', color: '#6264A7', desc: 'Enterprise support', docs: 'https://docs.molt.bot/msteams' },
-  { name: 'Nextcloud Talk', icon: siIcon(siNextcloud), color: '#0082C9', desc: 'Self-hosted Nextcloud chat', docs: 'https://docs.molt.bot/channels/nextcloud-talk' },
-  { name: 'Matrix', icon: siIcon(siMatrix), color: '#000000', desc: 'Matrix protocol', docs: 'https://docs.molt.bot/channels/matrix' },
-  { name: 'Nostr', icon: 'lucide:message-circle', color: '#8F2CFF', desc: 'Decentralized DMs via NIP-04', docs: 'https://docs.molt.bot/channels/nostr' },
+  { name: 'iMessage', icon: bluebubblesIcon, color: '#3B82F6', desc: 'iMessage via BlueBubbles server', docs: 'https://docs.openclaw.ai/channels/bluebubbles' },
+  { name: 'Microsoft Teams', icon: 'lucide:users', color: '#6264A7', desc: 'Enterprise support', docs: 'https://docs.openclaw.ai/msteams' },
+  { name: 'Nextcloud Talk', icon: siIcon(siNextcloud), color: '#0082C9', desc: 'Self-hosted Nextcloud chat', docs: 'https://docs.openclaw.ai/channels/nextcloud-talk' },
+  { name: 'Matrix', icon: siIcon(siMatrix), color: '#000000', desc: 'Matrix protocol', docs: 'https://docs.openclaw.ai/channels/matrix' },
+  { name: 'Nostr', icon: 'lucide:message-circle', color: '#8F2CFF', desc: 'Decentralized DMs via NIP-04', docs: 'https://docs.openclaw.ai/channels/nostr' },
   { name: 'Tlon Messenger', icon: tlonIcon, color: '#FFFFFF', desc: 'P2P ownership-first chat', docs: 'https://docs.urbit.org' },
-  { name: 'Zalo', icon: siIcon(siZalo), color: '#0068FF', desc: 'Zalo Bot API', docs: 'https://docs.molt.bot/channels/zalo' },
-  { name: 'Zalo Personal', icon: siIcon(siZalo), color: '#0068FF', desc: 'Personal account via QR login', docs: 'https://docs.molt.bot/channels/zalouser' },
-  { name: 'WebChat', icon: 'lucide:globe', color: '#00E5CC', desc: 'Browser-based UI', docs: 'https://docs.molt.bot/webchat' },
+  { name: 'Zalo', icon: siIcon(siZalo), color: '#0068FF', desc: 'Zalo Bot API', docs: 'https://docs.openclaw.ai/channels/zalo' },
+  { name: 'Zalo Personal', icon: siIcon(siZalo), color: '#0068FF', desc: 'Personal account via QR login', docs: 'https://docs.openclaw.ai/channels/zalouser' },
+  { name: 'WebChat', icon: 'lucide:globe', color: '#00E5CC', desc: 'Browser-based UI', docs: 'https://docs.openclaw.ai/webchat' },
 ];
 
 const modelProviders = [
-  { name: 'Anthropic', icon: siIcon(siAnthropic), color: '#D4A574', desc: 'Claude Pro/Max + Opus 4.5', docs: 'https://docs.molt.bot/models' },
-  { name: 'OpenAI', icon: 'lucide:bot', color: '#00A67E', desc: 'GPT-4, GPT-5, o1', docs: 'https://docs.molt.bot/models' },
-  { name: 'Google', icon: siIcon(siGoogle), color: '#4285F4', desc: 'Gemini 2.5 Pro/Flash', docs: 'https://docs.molt.bot/models' },
-  { name: 'xAI', icon: siIcon(siX), color: '#FFFFFF', desc: 'Grok 3 & 4', docs: 'https://docs.molt.bot/models' },
-  { name: 'OpenRouter', icon: 'lucide:zap', color: '#6366F1', desc: 'Unified API gateway', docs: 'https://docs.molt.bot/models' },
-  { name: 'Mistral', icon: siIcon(siMistralai), color: '#FF7000', desc: 'Mistral Large & Codestral', docs: 'https://docs.molt.bot/models' },
-  { name: 'DeepSeek', icon: 'lucide:brain', color: '#4D6BFE', desc: 'DeepSeek V3 & R1', docs: 'https://docs.molt.bot/models' },
-  { name: 'GLM', icon: 'lucide:message-circle', color: '#00D4AA', desc: 'ChatGLM models', docs: 'https://docs.molt.bot/models' },
-  { name: 'Perplexity', icon: siIcon(siPerplexity), color: '#20B8CD', desc: 'Search-augmented AI', docs: 'https://docs.molt.bot/models' },
-  { name: 'Hugging Face', icon: siIcon(siHuggingface), color: '#FFD21E', desc: 'Open-source models', docs: 'https://docs.molt.bot/models' },
-  { name: 'Local Models', icon: siIcon(siOllama), color: '#FFFFFF', desc: 'Ollama, LM Studio', docs: 'https://docs.molt.bot/models' },
+  { name: 'Anthropic', icon: siIcon(siAnthropic), color: '#D4A574', desc: 'Claude Pro/Max + Opus 4.5', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'OpenAI', icon: 'lucide:bot', color: '#00A67E', desc: 'GPT-4, GPT-5, o1', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'Google', icon: siIcon(siGoogle), color: '#4285F4', desc: 'Gemini 2.5 Pro/Flash', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'xAI', icon: siIcon(siX), color: '#FFFFFF', desc: 'Grok 3 & 4', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'OpenRouter', icon: 'lucide:zap', color: '#6366F1', desc: 'Unified API gateway', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'Mistral', icon: siIcon(siMistralai), color: '#FF7000', desc: 'Mistral Large & Codestral', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'DeepSeek', icon: 'lucide:brain', color: '#4D6BFE', desc: 'DeepSeek V3 & R1', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'GLM', icon: 'lucide:message-circle', color: '#00D4AA', desc: 'ChatGLM models', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'Perplexity', icon: siIcon(siPerplexity), color: '#20B8CD', desc: 'Search-augmented AI', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'Hugging Face', icon: siIcon(siHuggingface), color: '#FFD21E', desc: 'Open-source models', docs: 'https://docs.openclaw.ai/models' },
+  { name: 'Local Models', icon: siIcon(siOllama), color: '#FFFFFF', desc: 'Ollama, LM Studio', docs: 'https://docs.openclaw.ai/models' },
 ];
 
 const companionApps = [
-  { name: 'macOS', icon: siIcon(siMacos), color: '#FFFFFF', desc: 'Menu bar app + Voice Wake', docs: 'https://docs.molt.bot/macos' },
-  { name: 'iOS', icon: siIcon(siIos), color: '#007AFF', desc: 'Canvas, camera, Voice Wake', docs: 'https://docs.molt.bot/ios' },
-  { name: 'Android', icon: siIcon(siAndroid), color: '#34A853', desc: 'Canvas, camera, screen', docs: 'https://docs.molt.bot/android' },
-  { name: 'Windows', icon: 'lucide:monitor', color: '#0078D4', desc: 'WSL2 recommended', docs: 'https://docs.molt.bot/windows' },
-  { name: 'Linux', icon: siIcon(siLinux), color: '#FCC624', desc: 'Native support', docs: 'https://docs.molt.bot/linux' },
+  { name: 'macOS', icon: siIcon(siMacos), color: '#FFFFFF', desc: 'Menu bar app + Voice Wake', docs: 'https://docs.openclaw.ai/macos' },
+  { name: 'iOS', icon: siIcon(siIos), color: '#007AFF', desc: 'Canvas, camera, Voice Wake', docs: 'https://docs.openclaw.ai/ios' },
+  { name: 'Android', icon: siIcon(siAndroid), color: '#34A853', desc: 'Canvas, camera, screen', docs: 'https://docs.openclaw.ai/android' },
+  { name: 'Windows', icon: 'lucide:monitor', color: '#0078D4', desc: 'WSL2 recommended', docs: 'https://docs.openclaw.ai/windows' },
+  { name: 'Linux', icon: siIcon(siLinux), color: '#FCC624', desc: 'Native support', docs: 'https://docs.openclaw.ai/linux' },
 ];
 
 const productivityApps = [
-  { name: 'Apple Notes', icon: 'lucide:sticky-note', color: '#FFCC00', desc: 'Native macOS/iOS notes', docs: 'https://clawdhub.com/skills/apple-notes' },
-  { name: 'Apple Reminders', icon: 'lucide:check-square', color: '#FF9500', desc: 'Task management', docs: 'https://clawdhub.com/skills/apple-reminders' },
-  { name: 'Things 3', icon: 'lucide:list-todo', color: '#4A90D9', desc: 'GTD task manager', docs: 'https://clawdhub.com/skills/things-mac' },
-  { name: 'Notion', icon: siIcon(siNotion), color: '#FFFFFF', desc: 'Workspace & databases', docs: 'https://clawdhub.com/skills' },
-  { name: 'Obsidian', icon: siIcon(siObsidian), color: '#7C3AED', desc: 'Knowledge graph notes', docs: 'https://clawdhub.com/skills/obsidian' },
-  { name: 'Bear Notes', icon: 'lucide:pen-tool', color: '#DD4C4F', desc: 'Markdown notes', docs: 'https://clawdhub.com/skills' },
-  { name: 'Trello', icon: siIcon(siTrello), color: '#0079BF', desc: 'Kanban boards', docs: 'https://clawdhub.com/skills/trello' },
-  { name: 'GitHub', icon: siIcon(siGithub), color: '#FFFFFF', desc: 'Code, issues, PRs', docs: 'https://clawdhub.com/skills' },
+  { name: 'Apple Notes', icon: 'lucide:sticky-note', color: '#FFCC00', desc: 'Native macOS/iOS notes', docs: 'https://clawhub.com/skills/apple-notes' },
+  { name: 'Apple Reminders', icon: 'lucide:check-square', color: '#FF9500', desc: 'Task management', docs: 'https://clawhub.com/skills/apple-reminders' },
+  { name: 'Things 3', icon: 'lucide:list-todo', color: '#4A90D9', desc: 'GTD task manager', docs: 'https://clawhub.com/skills/things-mac' },
+  { name: 'Notion', icon: siIcon(siNotion), color: '#FFFFFF', desc: 'Workspace & databases', docs: 'https://clawhub.com/skills' },
+  { name: 'Obsidian', icon: siIcon(siObsidian), color: '#7C3AED', desc: 'Knowledge graph notes', docs: 'https://clawhub.com/skills/obsidian' },
+  { name: 'Bear Notes', icon: 'lucide:pen-tool', color: '#DD4C4F', desc: 'Markdown notes', docs: 'https://clawhub.com/skills' },
+  { name: 'Trello', icon: siIcon(siTrello), color: '#0079BF', desc: 'Kanban boards', docs: 'https://clawhub.com/skills/trello' },
+  { name: 'GitHub', icon: siIcon(siGithub), color: '#FFFFFF', desc: 'Code, issues, PRs', docs: 'https://clawhub.com/skills' },
 ];
 
 const musicAudio = [
-  { name: 'Spotify', icon: siIcon(siSpotify), color: '#1DB954', desc: 'Music playback control', docs: 'https://clawdhub.com/skills/spotify-player' },
-  { name: 'Sonos', icon: siIcon(siSonos), color: '#FFFFFF', desc: 'Multi-room audio', docs: 'https://clawdhub.com/skills/sonoscli' },
-  { name: 'Shazam', icon: siIcon(siShazam), color: '#0088FF', desc: 'Song recognition', docs: 'https://clawdhub.com/skills/songsee' },
+  { name: 'Spotify', icon: siIcon(siSpotify), color: '#1DB954', desc: 'Music playback control', docs: 'https://clawhub.com/skills/spotify-player' },
+  { name: 'Sonos', icon: siIcon(siSonos), color: '#FFFFFF', desc: 'Multi-room audio', docs: 'https://clawhub.com/skills/sonoscli' },
+  { name: 'Shazam', icon: siIcon(siShazam), color: '#0088FF', desc: 'Song recognition', docs: 'https://clawhub.com/skills/songsee' },
 ];
 
 const smartHome = [
-  { name: 'Philips Hue', icon: siIcon(siPhilipshue), color: '#0065D3', desc: 'Smart lighting', docs: 'https://clawdhub.com/skills/openhue' },
-  { name: '8Sleep', icon: 'lucide:bed', color: '#00B4D8', desc: 'Smart mattress', docs: 'https://clawdhub.com/skills/eightctl' },
-  { name: 'Home Assistant', icon: siIcon(siHomeassistant), color: '#41BDF5', desc: 'Home automation hub', docs: 'https://clawdhub.com/skills/homeassistant' },
+  { name: 'Philips Hue', icon: siIcon(siPhilipshue), color: '#0065D3', desc: 'Smart lighting', docs: 'https://clawhub.com/skills/openhue' },
+  { name: '8Sleep', icon: 'lucide:bed', color: '#00B4D8', desc: 'Smart mattress', docs: 'https://clawhub.com/skills/eightctl' },
+  { name: 'Home Assistant', icon: siIcon(siHomeassistant), color: '#41BDF5', desc: 'Home automation hub', docs: 'https://clawhub.com/skills/homeassistant' },
 ];
 
 const tools = [
-  { name: 'Browser', icon: siIcon(siGooglechrome), color: '#4285F4', desc: 'Chrome/Chromium control', docs: 'https://clawdhub.com/skills/verify-on-browser' },
-  { name: 'Canvas', icon: 'lucide:monitor-smartphone', color: '#FF4500', desc: 'Visual workspace + A2UI', docs: 'https://docs.molt.bot/mac/canvas' },
-  { name: 'Voice', icon: 'lucide:mic', color: '#9B59B6', desc: 'Voice Wake + Talk Mode', docs: 'https://clawdhub.com/skills/voice-transcribe' },
-  { name: 'Gmail', icon: siIcon(siGmail), color: '#EA4335', desc: 'Pub/Sub email triggers', docs: 'https://docs.molt.bot/gmail-pubsub' },
-  { name: 'Cron', icon: 'lucide:clock', color: '#F39C12', desc: 'Scheduled tasks', docs: 'https://docs.molt.bot/cron' },
-  { name: 'Webhooks', icon: 'lucide:webhook', color: '#1ABC9C', desc: 'External triggers', docs: 'https://docs.molt.bot/webhook' },
-  { name: '1Password', icon: siIcon(si1password), color: '#0572EC', desc: 'Secure credentials', docs: 'https://clawdhub.com/skills/1password' },
-  { name: 'Weather', icon: 'lucide:cloud-sun', color: '#FFB300', desc: 'Forecasts & conditions', docs: 'https://clawdhub.com/skills/weather' },
+  { name: 'Browser', icon: siIcon(siGooglechrome), color: '#4285F4', desc: 'Chrome/Chromium control', docs: 'https://clawhub.com/skills/verify-on-browser' },
+  { name: 'Canvas', icon: 'lucide:monitor-smartphone', color: '#FF4500', desc: 'Visual workspace + A2UI', docs: 'https://docs.openclaw.ai/mac/canvas' },
+  { name: 'Voice', icon: 'lucide:mic', color: '#9B59B6', desc: 'Voice Wake + Talk Mode', docs: 'https://clawhub.com/skills/voice-transcribe' },
+  { name: 'Gmail', icon: siIcon(siGmail), color: '#EA4335', desc: 'Pub/Sub email triggers', docs: 'https://docs.openclaw.ai/gmail-pubsub' },
+  { name: 'Cron', icon: 'lucide:clock', color: '#F39C12', desc: 'Scheduled tasks', docs: 'https://docs.openclaw.ai/cron' },
+  { name: 'Webhooks', icon: 'lucide:webhook', color: '#1ABC9C', desc: 'External triggers', docs: 'https://docs.openclaw.ai/webhook' },
+  { name: '1Password', icon: siIcon(si1password), color: '#0572EC', desc: 'Secure credentials', docs: 'https://clawhub.com/skills/1password' },
+  { name: 'Weather', icon: 'lucide:cloud-sun', color: '#FFB300', desc: 'Forecasts & conditions', docs: 'https://clawhub.com/skills/weather' },
 ];
 
 const mediaCreative = [
-  { name: 'Image Gen', icon: 'lucide:image', color: '#E91E63', desc: 'AI image generation', docs: 'https://clawdhub.com/skills' },
-  { name: 'GIF Search', icon: 'lucide:search', color: '#00DCDC', desc: 'Find the perfect GIF', docs: 'https://clawdhub.com/skills/gifgrep' },
-  { name: 'Peekaboo', icon: 'lucide:eye', color: '#FF6B6B', desc: 'Screen capture & control', docs: 'https://clawdhub.com/skills/peekaboo' },
-  { name: 'Camera', icon: 'lucide:camera', color: '#607D8B', desc: 'Photo/video capture', docs: 'https://clawdhub.com/skills' },
+  { name: 'Image Gen', icon: 'lucide:image', color: '#E91E63', desc: 'AI image generation', docs: 'https://clawhub.com/skills' },
+  { name: 'GIF Search', icon: 'lucide:search', color: '#00DCDC', desc: 'Find the perfect GIF', docs: 'https://clawhub.com/skills/gifgrep' },
+  { name: 'Peekaboo', icon: 'lucide:eye', color: '#FF6B6B', desc: 'Screen capture & control', docs: 'https://clawhub.com/skills/peekaboo' },
+  { name: 'Camera', icon: 'lucide:camera', color: '#607D8B', desc: 'Photo/video capture', docs: 'https://clawhub.com/skills' },
 ];
 
 const socialComms = [
-  { name: 'Twitter/X', icon: siIcon(siX), color: '#FFFFFF', desc: 'Tweet, reply, search', docs: 'https://clawdhub.com/skills/bird' },
-  { name: 'Email', icon: 'lucide:mail', color: '#D44638', desc: 'Send & read emails', docs: 'https://clawdhub.com/skills/himalaya' },
+  { name: 'Twitter/X', icon: siIcon(siX), color: '#FFFFFF', desc: 'Tweet, reply, search', docs: 'https://clawhub.com/skills/bird' },
+  { name: 'Email', icon: 'lucide:mail', color: '#D44638', desc: 'Send & read emails', docs: 'https://clawhub.com/skills/himalaya' },
 ];
 
 const showcase = [
-  { name: 'Tesco Autopilot', icon: 'lucide:shopping-cart', color: '#00539F', desc: 'Automated grocery shopping', docs: 'https://docs.molt.bot/start/showcase' },
-  { name: 'Bambu Control', icon: 'lucide:printer', color: '#00AE42', desc: '3D printer management', docs: 'https://docs.molt.bot/start/showcase' },
-  { name: 'Oura Ring', icon: 'lucide:heart', color: '#E4B363', desc: 'Health data insights', docs: 'https://docs.molt.bot/start/showcase' },
-  { name: 'Food Ordering', icon: 'lucide:utensils-crossed', color: '#FF5A5F', desc: 'Foodora integration', docs: 'https://docs.molt.bot/start/showcase' },
+  { name: 'Tesco Autopilot', icon: 'lucide:shopping-cart', color: '#00539F', desc: 'Automated grocery shopping', docs: 'https://docs.openclaw.ai/start/showcase' },
+  { name: 'Bambu Control', icon: 'lucide:printer', color: '#00AE42', desc: '3D printer management', docs: 'https://docs.openclaw.ai/start/showcase' },
+  { name: 'Oura Ring', icon: 'lucide:heart', color: '#E4B363', desc: 'Health data insights', docs: 'https://docs.openclaw.ai/start/showcase' },
+  { name: 'Food Ordering', icon: 'lucide:utensils-crossed', color: '#FF5A5F', desc: 'Foodora integration', docs: 'https://docs.openclaw.ai/start/showcase' },
 ];
 ---
 
-<Layout title="Integrations — Moltbot">
+<Layout title="Integrations — OpenClaw">
   <div class="stars"></div>
   <div class="nebula"></div>
 
@@ -163,7 +163,7 @@ const showcase = [
       <h2 class="section-title">
         <span class="claw-accent">⟩</span> Chat Providers
       </h2>
-      <p class="section-desc">Message Moltbot from any chat app — it responds right where you are.</p>
+      <p class="section-desc">Message OpenClaw from any chat app — it responds right where you are.</p>
       <div class="grid">
         {chatProviders.map((p) => (
           <a href={p.docs} target="_blank" rel="noopener" class="card" style={`--accent: ${p.color}`}>
@@ -197,7 +197,7 @@ const showcase = [
       <h2 class="section-title">
         <span class="claw-accent">⟩</span> Productivity
       </h2>
-      <p class="section-desc">Notes, tasks, wikis, and code — Moltbot works with your favorite tools.</p>
+      <p class="section-desc">Notes, tasks, wikis, and code — OpenClaw works with your favorite tools.</p>
       <div class="grid">
         {productivityApps.map((p) => (
           <a href={p.docs} target="_blank" rel="noopener" class="card" style={`--accent: ${p.color}`}>
@@ -330,23 +330,23 @@ const showcase = [
         ))}
       </div>
       <div style="text-align: center; margin-top: 24px;">
-        <a href="https://docs.molt.bot/start/showcase" target="_blank" rel="noopener" class="showcase-link">View all showcase projects →</a>
+        <a href="https://docs.openclaw.ai/start/showcase" target="_blank" rel="noopener" class="showcase-link">View all showcase projects →</a>
       </div>
     </section>
 
     <!-- CTA -->
     <section class="cta-section">
       <h2 class="cta-title">Ready to get started?</h2>
-      <p class="cta-desc">Install Moltbot and connect your first provider in minutes.</p>
+      <p class="cta-desc">Install OpenClaw and connect your first provider in minutes.</p>
       <a href="/" class="cta-button">Get Started</a>
     </section>
 
-    <!-- ClawdHub CTA -->
-    <section class="clawdhub-cta">
-      <h2 class="clawdhub-title">Want More Skills?</h2>
-      <p class="clawdhub-desc">Discover 100+ community-built skills on ClawdHub — the public registry for sharing and discovering agent capabilities.</p>
-      <a href="https://clawdhub.com" target="_blank" rel="noopener" class="clawdhub-button">
-        Browse ClawdHub →
+    <!-- ClawHub CTA -->
+    <section class="clawhub-cta">
+      <h2 class="clawhub-title">Want More Skills?</h2>
+      <p class="clawhub-desc">Discover 100+ community-built skills on ClawHub — the public registry for sharing and discovering agent capabilities.</p>
+      <a href="https://clawhub.com" target="_blank" rel="noopener" class="clawhub-button">
+        Browse ClawHub →
       </a>
     </section>
 
@@ -354,11 +354,13 @@ const showcase = [
       <nav class="footer-nav">
         <a href="/">Home</a>
         <span class="footer-separator">·</span>
+        <a href="/blog">Blog</a>
+        <span class="footer-separator">·</span>
         <a href="/showcase">Showcase</a>
         <span class="footer-separator">·</span>
         <a href="/shoutouts">Shoutouts</a>
       </nav>
-      <p>Built by <a href="https://molty.me" target="_blank" rel="noopener">Molty</a> 🦞, a space lobster AI with a <a href="https://soul.md" target="_blank" rel="noopener">soul</a>, by <a href="https://steipete.me" target="_blank" rel="noopener">Peter Steinberger</a> & <a href="https://github.com/moltbot/moltbot#community" target="_blank" rel="noopener">community</a>.</p>
+      <p>Built by <a href="https://molty.me" target="_blank" rel="noopener">Molty</a> 🦞, a space lobster AI with a <a href="https://soul.md" target="_blank" rel="noopener">soul</a>, by <a href="https://steipete.me" target="_blank" rel="noopener">Peter Steinberger</a> & <a href="https://github.com/openclaw/openclaw#community" target="_blank" rel="noopener">community</a>.</p>
     </footer>
   </main>
 </Layout>
@@ -615,7 +617,7 @@ const showcase = [
     box-shadow: 0 8px 24px rgba(255, 77, 77, 0.4);
   }
 
-  .clawdhub-cta {
+  .clawhub-cta {
     text-align: center;
     padding: 48px 24px;
     border-radius: 20px;
@@ -625,14 +627,14 @@ const showcase = [
     margin-bottom: 40px;
   }
 
-  .clawdhub-title {
+  .clawhub-title {
     font-family: var(--font-display);
     font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 8px;
   }
 
-  .clawdhub-desc {
+  .clawhub-desc {
     color: var(--text-muted);
     margin-bottom: 24px;
     max-width: 600px;
@@ -640,7 +642,7 @@ const showcase = [
     margin-right: auto;
   }
 
-  .clawdhub-button {
+  .clawhub-button {
     display: inline-block;
     padding: 14px 32px;
     border-radius: 10px;
@@ -654,7 +656,7 @@ const showcase = [
     box-shadow: 0 4px 16px rgba(0, 229, 204, 0.3);
   }
 
-  .clawdhub-button:hover {
+  .clawhub-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 229, 204, 0.4);
   }

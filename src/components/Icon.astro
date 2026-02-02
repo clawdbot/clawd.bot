@@ -10,9 +10,27 @@ type IconPath = {
   strokeDasharray?: string;
 };
 
+type GradientStop = {
+  offset: string;
+  color: string;
+  opacity?: number;
+};
+
+type LinearGradient = {
+  id: string;
+  x1?: string;
+  y1?: string;
+  x2?: string;
+  y2?: string;
+  stops: GradientStop[];
+};
+
 type CustomIcon = {
   viewBox: string;
   paths: IconPath[];
+  defs?: {
+    linearGradients?: LinearGradient[];
+  };
 };
 
 interface Props {
@@ -27,7 +45,7 @@ import {
   StickyNote, CheckSquare, ListTodo, PenTool, Bed, ShoppingCart, Printer,
   Heart, UtensilsCrossed, MonitorSmartphone, Eye, Monitor, Bot, Users, Hash,
   Home, MessageCircle, Brain, Terminal, Puzzle, Zap
-} from 'lucide-astro';
+} from '@lucide/astro';
 
 const { icon, color = 'currentColor', size = 24, class: className = '' } = Astro.props;
 
@@ -82,6 +100,17 @@ const customIcon = !isStringIcon ? icon : null;
     style={`color: ${color}`}
     xmlns="http://www.w3.org/2000/svg"
   >
+    {customIcon.defs?.linearGradients && (
+      <defs>
+        {customIcon.defs.linearGradients.map((grad) => (
+          <linearGradient id={grad.id} x1={grad.x1 ?? "0%"} y1={grad.y1 ?? "0%"} x2={grad.x2 ?? "100%"} y2={grad.y2 ?? "0%"}>
+            {grad.stops.map((stop) => (
+              <stop offset={stop.offset} stop-color={stop.color} stop-opacity={stop.opacity ?? 1} />
+            ))}
+          </linearGradient>
+        ))}
+      </defs>
+    )}
     {customIcon.paths.map((path) => (
       <path
         d={path.d}

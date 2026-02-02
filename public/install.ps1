@@ -1,6 +1,6 @@
-# Moltbot Installer for Windows
-# Usage: iwr -useb https://molt.bot/install.ps1 | iex
-#        & ([scriptblock]::Create((iwr -useb https://molt.bot/install.ps1))) -Tag beta -NoOnboard -DryRun
+# OpenClaw Installer for Windows
+# Usage: iwr -useb https://openclaw.ai/install.ps1 | iex
+#        & ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -Tag beta -NoOnboard -DryRun
 
 param(
     [string]$Tag = "latest",
@@ -15,7 +15,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 Write-Host ""
-Write-Host "  Moltbot Installer" -ForegroundColor Cyan
+Write-Host "  OpenClaw Installer" -ForegroundColor Cyan
 Write-Host ""
 
 # Check if running in PowerShell
@@ -27,34 +27,34 @@ if ($PSVersionTable.PSVersion.Major -lt 5) {
 Write-Host "[OK] Windows detected" -ForegroundColor Green
 
 if (-not $PSBoundParameters.ContainsKey("InstallMethod")) {
-    if (-not [string]::IsNullOrWhiteSpace($env:CLAWDBOT_INSTALL_METHOD)) {
-        $InstallMethod = $env:CLAWDBOT_INSTALL_METHOD
+    if (-not [string]::IsNullOrWhiteSpace($env:OPENCLAW_INSTALL_METHOD)) {
+        $InstallMethod = $env:OPENCLAW_INSTALL_METHOD
     }
 }
 if (-not $PSBoundParameters.ContainsKey("GitDir")) {
-    if (-not [string]::IsNullOrWhiteSpace($env:CLAWDBOT_GIT_DIR)) {
-        $GitDir = $env:CLAWDBOT_GIT_DIR
+    if (-not [string]::IsNullOrWhiteSpace($env:OPENCLAW_GIT_DIR)) {
+        $GitDir = $env:OPENCLAW_GIT_DIR
     }
 }
 if (-not $PSBoundParameters.ContainsKey("NoOnboard")) {
-    if ($env:CLAWDBOT_NO_ONBOARD -eq "1") {
+    if ($env:OPENCLAW_NO_ONBOARD -eq "1") {
         $NoOnboard = $true
     }
 }
 if (-not $PSBoundParameters.ContainsKey("NoGitUpdate")) {
-    if ($env:CLAWDBOT_GIT_UPDATE -eq "0") {
+    if ($env:OPENCLAW_GIT_UPDATE -eq "0") {
         $NoGitUpdate = $true
     }
 }
 if (-not $PSBoundParameters.ContainsKey("DryRun")) {
-    if ($env:CLAWDBOT_DRY_RUN -eq "1") {
+    if ($env:OPENCLAW_DRY_RUN -eq "1") {
         $DryRun = $true
     }
 }
 
 if ([string]::IsNullOrWhiteSpace($GitDir)) {
     $userHome = [Environment]::GetFolderPath("UserProfile")
-    $GitDir = (Join-Path $userHome "clawdbot")
+    $GitDir = (Join-Path $userHome "openclaw")
 }
 
 # Check for Node.js
@@ -123,11 +123,11 @@ function Install-Node {
     exit 1
 }
 
-# Check for existing Moltbot installation
-function Check-ExistingMoltbot {
+# Check for existing OpenClaw installation
+function Check-ExistingOpenClaw {
     try {
-        $null = Get-Command clawdbot -ErrorAction Stop
-    Write-Host "[*] Existing Moltbot installation detected" -ForegroundColor Yellow
+        $null = Get-Command openclaw -ErrorAction Stop
+    Write-Host "[*] Existing OpenClaw installation detected" -ForegroundColor Yellow
     return $true
     } catch {
         return $false
@@ -153,8 +153,8 @@ function Require-Git {
     exit 1
 }
 
-function Ensure-MoltbotOnPath {
-    if (Get-Command clawdbot -ErrorAction SilentlyContinue) {
+function Ensure-OpenClawOnPath {
+    if (Get-Command openclaw -ErrorAction SilentlyContinue) {
         return $true
     }
 
@@ -173,12 +173,12 @@ function Ensure-MoltbotOnPath {
             $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
             Write-Host "[!] Added $npmBin to user PATH (restart terminal if command not found)" -ForegroundColor Yellow
         }
-        if (Test-Path (Join-Path $npmBin "clawdbot.cmd")) {
+        if (Test-Path (Join-Path $npmBin "openclaw.cmd")) {
             return $true
         }
     }
 
-    Write-Host "[!] clawdbot is not on PATH yet." -ForegroundColor Yellow
+    Write-Host "[!] openclaw is not on PATH yet." -ForegroundColor Yellow
     Write-Host "Restart PowerShell or add the npm global bin folder to PATH." -ForegroundColor Yellow
     if ($npmPrefix) {
         Write-Host "Expected path: $npmPrefix\\bin" -ForegroundColor Cyan
@@ -209,12 +209,17 @@ function Ensure-Pnpm {
     Write-Host "[OK] pnpm installed" -ForegroundColor Green
 }
 
-# Install Moltbot
-function Install-Moltbot {
+# Install OpenClaw
+function Install-OpenClaw {
     if ([string]::IsNullOrWhiteSpace($Tag)) {
         $Tag = "latest"
     }
-    Write-Host "[*] Installing Moltbot@$Tag..." -ForegroundColor Yellow
+    # Use openclaw package for beta, openclaw for stable
+    $packageName = "openclaw"
+    if ($Tag -eq "beta" -or $Tag -match "^beta\.") {
+        $packageName = "openclaw"
+    }
+    Write-Host "[*] Installing OpenClaw ($packageName@$Tag)..." -ForegroundColor Yellow
     $prevLogLevel = $env:NPM_CONFIG_LOGLEVEL
     $prevUpdateNotifier = $env:NPM_CONFIG_UPDATE_NOTIFIER
     $prevFund = $env:NPM_CONFIG_FUND
@@ -224,7 +229,7 @@ function Install-Moltbot {
     $env:NPM_CONFIG_FUND = "false"
     $env:NPM_CONFIG_AUDIT = "false"
     try {
-        $npmOutput = npm install -g "clawdbot@$Tag" 2>&1
+        $npmOutput = npm install -g "$packageName@$Tag" 2>&1
         if ($LASTEXITCODE -ne 0) {
             Write-Host "[!] npm install failed" -ForegroundColor Red
             if ($npmOutput -match "spawn git" -or $npmOutput -match "ENOENT.*git") {
@@ -233,7 +238,7 @@ function Install-Moltbot {
                 Write-Host "  https://git-scm.com/download/win" -ForegroundColor Cyan
             } else {
                 Write-Host "Re-run with verbose output to see the full error:" -ForegroundColor Yellow
-                Write-Host "  iwr -useb https://molt.bot/install.ps1 | iex" -ForegroundColor Cyan
+                Write-Host "  iwr -useb https://openclaw.ai/install.ps1 | iex" -ForegroundColor Cyan
             }
             $npmOutput | ForEach-Object { Write-Host $_ }
             exit 1
@@ -244,11 +249,11 @@ function Install-Moltbot {
         $env:NPM_CONFIG_FUND = $prevFund
         $env:NPM_CONFIG_AUDIT = $prevAudit
     }
-    Write-Host "[OK] Moltbot installed" -ForegroundColor Green
+    Write-Host "[OK] OpenClaw installed" -ForegroundColor Green
 }
 
-# Install Moltbot from GitHub
-function Install-MoltbotFromGit {
+# Install OpenClaw from GitHub
+function Install-OpenClawFromGit {
     param(
         [string]$RepoDir,
         [switch]$SkipUpdate
@@ -256,8 +261,8 @@ function Install-MoltbotFromGit {
     Require-Git
     Ensure-Pnpm
 
-    $repoUrl = "https://github.com/clawdbot/clawdbot.git"
-    Write-Host "[*] Installing Moltbot from GitHub ($repoUrl)..." -ForegroundColor Yellow
+    $repoUrl = "https://github.com/openclaw/openclaw.git"
+    Write-Host "[*] Installing OpenClaw from GitHub ($repoUrl)..." -ForegroundColor Yellow
 
     if (-not (Test-Path $RepoDir)) {
         git clone $repoUrl $RepoDir
@@ -285,7 +290,7 @@ function Install-MoltbotFromGit {
     if (-not (Test-Path $binDir)) {
         New-Item -ItemType Directory -Force -Path $binDir | Out-Null
     }
-    $cmdPath = Join-Path $binDir "clawdbot.cmd"
+    $cmdPath = Join-Path $binDir "openclaw.cmd"
     $cmdContents = "@echo off`r`nnode ""$RepoDir\\dist\\entry.js"" %*`r`n"
     Set-Content -Path $cmdPath -Value $cmdContents -NoNewline
 
@@ -296,7 +301,7 @@ function Install-MoltbotFromGit {
         Write-Host "[!] Added $binDir to user PATH (restart terminal if command not found)" -ForegroundColor Yellow
     }
 
-    Write-Host "[OK] Moltbot wrapper installed to $cmdPath" -ForegroundColor Green
+    Write-Host "[OK] OpenClaw wrapper installed to $cmdPath" -ForegroundColor Green
     Write-Host "[i] This checkout uses pnpm. For deps, run: pnpm install (avoid npm install in the repo)." -ForegroundColor Gray
 }
 
@@ -304,7 +309,7 @@ function Install-MoltbotFromGit {
 function Run-Doctor {
     Write-Host "[*] Running doctor to migrate settings..." -ForegroundColor Yellow
     try {
-        clawdbot doctor --non-interactive
+        openclaw doctor --non-interactive
     } catch {
         # Ignore errors from doctor
     }
@@ -312,11 +317,11 @@ function Run-Doctor {
 }
 
 function Get-LegacyRepoDir {
-    if (-not [string]::IsNullOrWhiteSpace($env:CLAWDBOT_GIT_DIR)) {
-        return $env:CLAWDBOT_GIT_DIR
+    if (-not [string]::IsNullOrWhiteSpace($env:OPENCLAW_GIT_DIR)) {
+        return $env:OPENCLAW_GIT_DIR
     }
     $userHome = [Environment]::GetFolderPath("UserProfile")
-    return (Join-Path $userHome "clawdbot")
+    return (Join-Path $userHome "openclaw")
 }
 
 function Remove-LegacySubmodule {
@@ -360,7 +365,7 @@ function Main {
     Remove-LegacySubmodule -RepoDir $RepoDir
 
     # Check for existing installation
-    $isUpgrade = Check-ExistingMoltbot
+    $isUpgrade = Check-ExistingOpenClaw
 
     # Step 1: Node.js
     if (-not (Check-Node)) {
@@ -377,17 +382,17 @@ function Main {
 
     $finalGitDir = $null
 
-    # Step 2: Moltbot
+    # Step 2: OpenClaw
     if ($InstallMethod -eq "git") {
         $finalGitDir = $GitDir
-        Install-MoltbotFromGit -RepoDir $GitDir -SkipUpdate:$NoGitUpdate
+        Install-OpenClawFromGit -RepoDir $GitDir -SkipUpdate:$NoGitUpdate
     } else {
-        Install-Moltbot
+        Install-OpenClaw
     }
 
-    if (-not (Ensure-MoltbotOnPath)) {
-        Write-Host "Install completed, but Moltbot is not on PATH yet." -ForegroundColor Yellow
-        Write-Host "Open a new terminal, then run: clawdbot doctor" -ForegroundColor Cyan
+    if (-not (Ensure-OpenClawOnPath)) {
+        Write-Host "Install completed, but OpenClaw is not on PATH yet." -ForegroundColor Yellow
+        Write-Host "Open a new terminal, then run: openclaw doctor" -ForegroundColor Cyan
         return
     }
 
@@ -398,15 +403,15 @@ function Main {
 
     $installedVersion = $null
     try {
-        $installedVersion = (clawdbot --version 2>$null).Trim()
+        $installedVersion = (openclaw --version 2>$null).Trim()
     } catch {
         $installedVersion = $null
     }
     if (-not $installedVersion) {
         try {
             $npmList = npm list -g --depth 0 --json 2>$null | ConvertFrom-Json
-            if ($npmList -and $npmList.dependencies -and $npmList.dependencies.clawdbot -and $npmList.dependencies.clawdbot.version) {
-                $installedVersion = $npmList.dependencies.clawdbot.version
+            if ($npmList -and $npmList.dependencies -and $npmList.dependencies.openclaw -and $npmList.dependencies.openclaw.version) {
+                $installedVersion = $npmList.dependencies.openclaw.version
             }
         } catch {
             $installedVersion = $null
@@ -415,9 +420,9 @@ function Main {
 
     Write-Host ""
     if ($installedVersion) {
-        Write-Host "Moltbot installed successfully ($installedVersion)!" -ForegroundColor Green
+        Write-Host "OpenClaw installed successfully ($installedVersion)!" -ForegroundColor Green
     } else {
-        Write-Host "Moltbot installed successfully!" -ForegroundColor Green
+        Write-Host "OpenClaw installed successfully!" -ForegroundColor Green
     }
     Write-Host ""
     if ($isUpgrade) {
@@ -464,23 +469,23 @@ function Main {
 
     if ($InstallMethod -eq "git") {
         Write-Host "Source checkout: $finalGitDir" -ForegroundColor Cyan
-        Write-Host "Wrapper: $env:USERPROFILE\\.local\\bin\\clawdbot.cmd" -ForegroundColor Cyan
+        Write-Host "Wrapper: $env:USERPROFILE\\.local\\bin\\openclaw.cmd" -ForegroundColor Cyan
         Write-Host ""
     }
 
     if ($isUpgrade) {
         Write-Host "Upgrade complete. Run " -NoNewline
-        Write-Host "clawdbot doctor" -ForegroundColor Cyan -NoNewline
+        Write-Host "openclaw doctor" -ForegroundColor Cyan -NoNewline
         Write-Host " to check for additional migrations."
     } else {
         if ($NoOnboard) {
             Write-Host "Skipping onboard (requested). Run " -NoNewline
-            Write-Host "clawdbot onboard" -ForegroundColor Cyan -NoNewline
+            Write-Host "openclaw onboard" -ForegroundColor Cyan -NoNewline
             Write-Host " later."
         } else {
             Write-Host "Starting setup..." -ForegroundColor Cyan
             Write-Host ""
-            clawdbot onboard
+            openclaw onboard
         }
     }
 }

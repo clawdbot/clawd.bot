@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import testimonials from '../data/testimonials.json';
+import { getCollection } from 'astro:content';
+
+// Get latest blog post
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPost = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
 import {
   siWhatsapp, siTelegram, siDiscord, siSignal, siApple,
   siAnthropic, siSpotify, siObsidian, siGithub, siGooglechrome, siGmail,
@@ -46,7 +51,7 @@ const duration1 = (row1.length / 2 * pixelsPerItem) / pixelsPerSecond;
 const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
 ---
 
-<Layout title="Moltbot — Personal AI Assistant">
+<Layout title="OpenClaw — Personal AI Assistant">
   <div class="stars"></div>
   <div class="nebula"></div>
 
@@ -79,7 +84,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
       </div>
 
       <h1 class="title">
-        <span class="title-main">Moltbot</span>
+        <span class="title-main">OpenClaw</span>
       </h1>
 
       <p class="tagline" id="tagline">The AI that actually does things.</p>
@@ -89,6 +94,17 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         All from WhatsApp, Telegram, or any chat app you already use.
       </p>
     </header>
+
+    <!-- Latest Blog Post -->
+    {latestPost && (
+      <section class="latest-post">
+        <a href={`/blog/${latestPost.slug}`} class="latest-post-card">
+          <span class="latest-post-badge">New</span>
+          <span class="latest-post-title">{latestPost.data.title}</span>
+          <span class="latest-post-link">→</span>
+        </a>
+      </section>
+    )}
 
     <!-- Testimonials (moved up for social proof) -->
     <section class="testimonials">
@@ -186,7 +202,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
           <div class="code-line comment" id="oneliner-comment"># Works everywhere. Installs everything. You're welcome. 🦞</div>
           <div class="code-line cmd">
             <span class="code-prompt">$</span>
-            <span class="os-cmd">curl -fsSL https://molt.bot/install.sh | bash</span>
+            <span class="os-cmd">curl -fsSL https://openclaw.ai/install.sh | bash</span>
             <button class="copy-line-btn" data-cmd="oneliner" title="Copy">
               <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
@@ -194,10 +210,10 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
           </div>
         </div>
         <div id="code-quick" class="code-content" style="display: none;">
-          <div class="code-line comment" id="quick-comment-install"># Install Moltbot</div>
+          <div class="code-line comment" id="quick-comment-install"># Install OpenClaw</div>
           <div class="code-line cmd">
             <span class="code-prompt">$</span>
-            <span class="pm-install">npm i -g clawdbot</span>
+            <span class="pm-install">npm i -g openclaw</span>
             <button class="copy-line-btn" data-cmd="install" title="Copy">
               <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
@@ -206,7 +222,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
           <div class="code-line comment" id="quick-comment-onboard"># Meet your lobster</div>
           <div class="code-line cmd">
             <span class="code-prompt">$</span>
-            <span>clawdbot onboard</span>
+            <span>openclaw onboard</span>
             <button class="copy-line-btn" data-cmd="onboard" title="Copy">
               <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
@@ -218,7 +234,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
             <div class="code-line comment"># For those who read source code for fun</div>
             <div class="code-line cmd">
               <span class="code-prompt">$</span>
-              <span class="os-cmd-hackable">curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git</span>
+              <span class="os-cmd-hackable">curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git</span>
               <button class="copy-line-btn" data-cmd="hackable-installer" title="Copy">
                 <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
@@ -229,7 +245,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
             <div class="code-line comment"># You clearly know what you're doing</div>
             <div class="code-line cmd">
               <span class="code-prompt">$</span>
-              <span>git clone https://github.com/moltbot/moltbot.git</span>
+              <span>git clone https://github.com/openclaw/openclaw.git</span>
               <button class="copy-line-btn" data-cmd="clone" title="Copy">
                 <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
@@ -237,7 +253,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
             </div>
             <div class="code-line cmd">
               <span class="code-prompt">$</span>
-              <span>cd moltbot && pnpm install && pnpm run build</span>
+              <span>cd openclaw && pnpm install && pnpm run build</span>
               <button class="copy-line-btn" data-cmd="build" title="Copy">
                 <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
@@ -246,7 +262,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
             <div class="code-line comment"># You built it, now meet it</div>
             <div class="code-line cmd">
               <span class="code-prompt">$</span>
-              <span>pnpm run clawdbot onboard</span>
+              <span>pnpm run openclaw onboard</span>
               <button class="copy-line-btn" data-cmd="hackable-onboard" title="Copy">
                 <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><polyline points="20 6 9 17 4 12"/></svg>
@@ -260,7 +276,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
               <span class="macos-tagline">Companion App (Beta)</span>
               <span class="macos-subtitle">Menubar access to your lobster. Works great alongside the CLI.</span>
             </div>
-            <a href="https://github.com/moltbot/moltbot/releases/latest" class="macos-download-btn" target="_blank" rel="noopener">
+            <a href="https://github.com/openclaw/openclaw/releases/latest" class="macos-download-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
@@ -279,16 +295,16 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
 
     <script>
       const installCmds = {
-        npm: 'npm i -g clawdbot',
-        pnpm: 'pnpm add -g clawdbot'
+        npm: 'npm i -g openclaw',
+        pnpm: 'pnpm add -g openclaw'
       };
 
-      const windowsPsCmd = 'iwr -useb https://molt.bot/install.ps1 | iex';
-      const windowsPsBetaCmd = '& ([scriptblock]::Create((iwr -useb https://molt.bot/install.ps1))) -Tag beta';
-      const windowsCmdCmd = 'curl -fsSL https://molt.bot/install.cmd -o install.cmd && install.cmd && del install.cmd';
-      const windowsCmdBetaCmd = 'curl -fsSL https://molt.bot/install.cmd -o install.cmd && install.cmd --tag beta && del install.cmd';
+      const windowsPsCmd = 'iwr -useb https://openclaw.ai/install.ps1 | iex';
+      const windowsPsBetaCmd = '& ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -Tag beta';
+      const windowsCmdCmd = 'curl -fsSL https://openclaw.ai/install.cmd -o install.cmd && install.cmd && del install.cmd';
+      const windowsCmdBetaCmd = 'curl -fsSL https://openclaw.ai/install.cmd -o install.cmd && install.cmd --tag beta && del install.cmd';
       const osCmds = {
-        unix: "curl -fsSL https://molt.bot/install.sh | bash",
+        unix: "curl -fsSL https://openclaw.ai/install.sh | bash",
         windows: windowsPsCmd
       };
 
@@ -340,8 +356,8 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
           beta: "# Living on the edge. Bugs are features you found first. 🦞"
         },
         quickInstall: {
-          stable: "# Install Moltbot",
-          beta: "# Install Moltbot (beta) — Fresh from the lab 🧪"
+          stable: "# Install OpenClaw",
+          beta: "# Install OpenClaw (beta) — Fresh from the lab 🧪"
         },
         quickOnboard: {
           stable: "# Meet your lobster",
@@ -355,15 +371,15 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         // Update quick mode install command (with beta support)
         const betaSuffix = currentBeta ? '@beta' : '';
         const installCmd = currentPm === 'npm'
-          ? `npm i -g clawdbot${betaSuffix}`
-          : `pnpm add -g clawdbot${betaSuffix}`;
+          ? `npm i -g openclaw${betaSuffix}`
+          : `pnpm add -g openclaw${betaSuffix}`;
         document.querySelectorAll('.pm-install').forEach(cmd => cmd.textContent = installCmd);
         // Update one-liner OS command (with beta and shell support)
         let onelinerCmd;
         if (currentOs === 'unix') {
           onelinerCmd = currentBeta
-            ? "curl -fsSL https://molt.bot/install.sh | bash -s -- --beta"
-            : "curl -fsSL https://molt.bot/install.sh | bash";
+            ? "curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta"
+            : "curl -fsSL https://openclaw.ai/install.sh | bash";
         } else if (currentWinShell === 'cmd') {
           onelinerCmd = currentBeta ? windowsCmdBetaCmd : windowsCmdCmd;
         } else {
@@ -371,7 +387,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         }
         document.querySelectorAll('.os-cmd').forEach(cmd => cmd.textContent = onelinerCmd);
         // Update hackable OS command for installer mode
-        const hackableOsCmd = "curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git";
+        const hackableOsCmd = "curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git";
         document.querySelectorAll('.os-cmd-hackable').forEach(cmd => cmd.textContent = hackableOsCmd);
         // Update OS indicator text
         osDetected.textContent = osLabels[currentOs];
@@ -486,8 +502,8 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         'oneliner': () => {
           if (currentOs === 'unix') {
             return currentBeta
-              ? "curl -fsSL https://molt.bot/install.sh | bash -s -- --beta"
-              : "curl -fsSL https://molt.bot/install.sh | bash";
+              ? "curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta"
+              : "curl -fsSL https://openclaw.ai/install.sh | bash";
           } else if (currentWinShell === 'cmd') {
             return currentBeta ? windowsCmdBetaCmd : windowsCmdCmd;
           } else {
@@ -496,13 +512,13 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         },
         'install': () => {
           const betaSuffix = currentBeta ? '@beta' : '';
-          return currentPm === 'npm' ? `npm i -g clawdbot${betaSuffix}` : `pnpm add -g clawdbot${betaSuffix}`;
+          return currentPm === 'npm' ? `npm i -g openclaw${betaSuffix}` : `pnpm add -g openclaw${betaSuffix}`;
         },
-        'onboard': () => 'clawdbot onboard',
-        'hackable-installer': () => "curl -fsSL https://molt.bot/install.sh | bash -s -- --install-method git",
-        'clone': () => 'git clone https://github.com/moltbot/moltbot.git',
-        'build': () => 'cd moltbot && pnpm install && pnpm run build',
-        'hackable-onboard': () => 'pnpm run clawdbot onboard',
+        'onboard': () => 'openclaw onboard',
+        'hackable-installer': () => "curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git",
+        'clone': () => 'git clone https://github.com/openclaw/openclaw.git',
+        'build': () => 'cd openclaw && pnpm install && pnpm run build',
+        'hackable-onboard': () => 'pnpm run openclaw onboard',
       };
 
       document.querySelectorAll('.copy-line-btn').forEach(btn => {
@@ -567,7 +583,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         <span class="claw-accent">⟩</span> What It Does
       </h2>
       <div class="features-grid">
-        <a href="https://docs.molt.bot/getting-started" target="_blank" rel="noopener" class="feature-card">
+        <a href="https://docs.openclaw.ai/getting-started" target="_blank" rel="noopener" class="feature-card">
           <div class="feature-icon"><Icon icon="lucide:home" color="var(--coral-bright)" size={28} /></div>
           <h3 class="feature-title">Runs on Your Machine</h3>
           <p class="feature-desc">Mac, Windows, or Linux. Anthropic, OpenAI, or local models. Private by default—your data stays yours.</p>
@@ -577,22 +593,22 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
           <h3 class="feature-title">Any Chat App</h3>
           <p class="feature-desc">Talk to it on WhatsApp, Telegram, Discord, Slack, Signal, or iMessage. Works in DMs and group chats.</p>
         </a>
-        <a href="https://docs.molt.bot/session" target="_blank" rel="noopener" class="feature-card">
+        <a href="https://docs.openclaw.ai/session" target="_blank" rel="noopener" class="feature-card">
           <div class="feature-icon"><Icon icon="lucide:brain" color="var(--coral-bright)" size={28} /></div>
           <h3 class="feature-title">Persistent Memory</h3>
           <p class="feature-desc">Remembers you and becomes uniquely yours. Your preferences, your context, your AI.</p>
         </a>
-        <a href="https://docs.molt.bot/browser" target="_blank" rel="noopener" class="feature-card">
+        <a href="https://docs.openclaw.ai/browser" target="_blank" rel="noopener" class="feature-card">
           <div class="feature-icon"><Icon icon="lucide:globe" color="var(--coral-bright)" size={28} /></div>
           <h3 class="feature-title">Browser Control</h3>
           <p class="feature-desc">It can browse the web, fill forms, and extract data from any site.</p>
         </a>
-        <a href="https://docs.molt.bot/bash" target="_blank" rel="noopener" class="feature-card">
+        <a href="https://docs.openclaw.ai/bash" target="_blank" rel="noopener" class="feature-card">
           <div class="feature-icon"><Icon icon="lucide:terminal" color="var(--coral-bright)" size={28} /></div>
           <h3 class="feature-title">Full System Access</h3>
           <p class="feature-desc">Read and write files, run shell commands, execute scripts. Full access or sandboxed—your choice.</p>
         </a>
-        <a href="https://docs.molt.bot/skills" target="_blank" rel="noopener" class="feature-card">
+        <a href="https://docs.openclaw.ai/skills" target="_blank" rel="noopener" class="feature-card">
           <div class="feature-icon"><Icon icon="lucide:puzzle" color="var(--coral-bright)" size={28} /></div>
           <h3 class="feature-title">Skills & Plugins</h3>
           <p class="feature-desc">Extend with community skills or build your own. It can even write its own.</p>
@@ -634,7 +650,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
             <span class="press-name">MacStories</span>
           </div>
           <blockquote class="press-quote">
-            "Moltbot Showed Me What the Future of Personal AI Assistants Looks Like"
+            "OpenClaw Showed Me What the Future of Personal AI Assistants Looks Like"
           </blockquote>
           <span class="press-author">Federico Viticci</span>
         </a>
@@ -663,7 +679,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         <span class="cta-sub">Join the community</span>
       </a>
 
-      <a href="https://docs.molt.bot/getting-started" class="cta cta-docs" target="_blank" rel="noopener">
+      <a href="https://docs.openclaw.ai/getting-started" class="cta cta-docs" target="_blank" rel="noopener">
         <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
@@ -674,7 +690,7 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         <span class="cta-sub">Learn the ropes</span>
       </a>
 
-      <a href="https://github.com/moltbot/moltbot" class="cta cta-github" target="_blank" rel="noopener">
+      <a href="https://github.com/openclaw/openclaw" class="cta cta-github" target="_blank" rel="noopener">
         <svg class="cta-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
         </svg>
@@ -682,11 +698,11 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
         <span class="cta-sub">View the source</span>
       </a>
 
-      <a href="https://clawdhub.com" class="cta cta-skills" target="_blank" rel="noopener">
+      <a href="https://clawhub.com" class="cta cta-skills" target="_blank" rel="noopener">
         <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
         </svg>
-        <span class="cta-label">ClawdHub</span>
+        <span class="cta-label">ClawHub</span>
         <span class="cta-sub">Download skills</span>
       </a>
     </nav>
@@ -721,8 +737,17 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
 
     <!-- Footer -->
     <footer class="footer">
-      <p>Built by <a href="https://molty.me" target="_blank" rel="noopener">Molty</a> 🦞, a space lobster AI with a <a href="https://soul.md" target="_blank" rel="noopener">soul</a>, by <a href="https://steipete.me" target="_blank" rel="noopener">Peter Steinberger</a> & <a href="https://github.com/moltbot/moltbot#community" target="_blank" rel="noopener">community</a>.</p>
-      <p class="disclaimer">Moltbot was formerly known as Clawdbot. Independent project, not affiliated with Anthropic.</p>
+      <nav class="footer-nav">
+        <a href="/blog">Blog</a>
+        <span class="footer-separator">·</span>
+        <a href="/showcase">Showcase</a>
+        <span class="footer-separator">·</span>
+        <a href="/shoutouts">Shoutouts</a>
+        <span class="footer-separator">·</span>
+        <a href="/integrations">Integrations</a>
+      </nav>
+      <p>Built by <a href="https://molty.me" target="_blank" rel="noopener">Molty</a> 🦞, a space lobster AI with a <a href="https://soul.md" target="_blank" rel="noopener">soul</a>, by <a href="https://steipete.me" target="_blank" rel="noopener">Peter Steinberger</a> & <a href="https://github.com/openclaw/openclaw#community" target="_blank" rel="noopener">community</a>.</p>
+      <p class="disclaimer">Formerly known as Clawdbot and Moltbot. Independent project, not affiliated with Anthropic.</p>
     </footer>
   </main>
 </Layout>
@@ -1728,6 +1753,55 @@ const duration2 = (row2.length / 2 * pixelsPerItem) / pixelsPerSecond;
     font-size: 0.8rem;
     color: var(--text-muted);
     opacity: 0.7;
+  }
+
+  /* Latest Blog Post */
+  .latest-post {
+    margin-bottom: 40px;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+    text-align: center;
+  }
+
+  .latest-post-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: rgba(10, 15, 26, 0.8);
+    border: 1px solid var(--border-subtle);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .latest-post-card:hover {
+    border-color: var(--coral-bright);
+    box-shadow: 0 4px 20px rgba(255, 77, 77, 0.2);
+  }
+
+  .latest-post-badge {
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: var(--coral-bright);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .latest-post-title {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+
+  .latest-post-link {
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .latest-post-card:hover .latest-post-link {
+    color: var(--coral-bright);
   }
 
   /* Testimonials */

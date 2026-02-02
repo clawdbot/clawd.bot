@@ -1,0 +1,26 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://openclaw.ai/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "clawd.bot"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://openclaw.ai/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.clawd.bot"
+        }
+      ]
+    }
+  ]
+}

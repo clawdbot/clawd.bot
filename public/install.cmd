@@ -1,9 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM Moltbot Windows CMD installer
+REM OpenClaw Windows CMD installer
 REM Usage:
-REM   curl -fsSL https://molt.bot/install.cmd -o install.cmd && install.cmd --no-onboard && del install.cmd
+REM   curl -fsSL https://openclaw.ai/install.cmd -o install.cmd && install.cmd --no-onboard && del install.cmd
 
 set "TAG=latest"
 set "INSTALL_METHOD=npm"
@@ -60,10 +60,10 @@ if %ERRORLEVEL% neq 0 (
   exit /b 1
 )
 
-set "TMP=%TEMP%\clawdbot-install.ps1"
+set "TMP=%TEMP%\openclaw-install.ps1"
 REM TMP may include spaces; always quote "%TMP%" when used.
-if not "%CLAWDBOT_INSTALL_PS1_URL%"=="" set "INSTALL_PS1_URL=%CLAWDBOT_INSTALL_PS1_URL%"
-if "%INSTALL_PS1_URL%"=="" set "INSTALL_PS1_URL=https://molt.bot/install.ps1"
+if not "%OPENCLAW_INSTALL_PS1_URL%"=="" set "INSTALL_PS1_URL=%OPENCLAW_INSTALL_PS1_URL%"
+if "%INSTALL_PS1_URL%"=="" set "INSTALL_PS1_URL=https://openclaw.ai/install.ps1"
 
 if exist "%INSTALL_PS1_URL%" (
   copy /Y "%INSTALL_PS1_URL%" "%TMP%" >nul

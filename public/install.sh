@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-# Moltbot Installer for macOS and Linux
-# Usage: curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash
+# OpenClaw Installer for macOS and Linux
+# Usage: curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash
 
 BOLD='\033[1m'
 ACCENT='\033[38;2;255;90;45m'
@@ -16,7 +16,7 @@ ERROR='\033[38;2;226;61;45m'
 MUTED='\033[38;2;139;127;119m'
 NC='\033[0m' # No Color
 
-DEFAULT_TAGLINE="All your chats, one Moltbot."
+DEFAULT_TAGLINE="All your chats, one OpenClaw."
 
 ORIGINAL_PATH="${PATH:-}"
 
@@ -80,16 +80,16 @@ cleanup_legacy_submodules() {
     fi
 }
 
-cleanup_npm_clawdbot_paths() {
+cleanup_npm_openclaw_paths() {
     local npm_root=""
     npm_root="$(npm root -g 2>/dev/null || true)"
     if [[ -z "$npm_root" || "$npm_root" != *node_modules* ]]; then
         return 1
     fi
-    rm -rf "$npm_root"/.clawdbot-* "$npm_root"/clawdbot 2>/dev/null || true
+    rm -rf "$npm_root"/.openclaw-* "$npm_root"/openclaw 2>/dev/null || true
 }
 
-extract_clawdbot_conflict_path() {
+extract_openclaw_conflict_path() {
     local log="$1"
     local path=""
     path="$(sed -n 's/.*File exists: //p' "$log" | head -n1)"
@@ -103,16 +103,16 @@ extract_clawdbot_conflict_path() {
     return 1
 }
 
-cleanup_clawdbot_bin_conflict() {
+cleanup_openclaw_bin_conflict() {
     local bin_path="$1"
     if [[ -z "$bin_path" || ( ! -e "$bin_path" && ! -L "$bin_path" ) ]]; then
         return 1
     fi
     local npm_bin=""
     npm_bin="$(npm_global_bin_dir 2>/dev/null || true)"
-    if [[ -n "$npm_bin" && "$bin_path" != "$npm_bin/clawdbot" ]]; then
+    if [[ -n "$npm_bin" && "$bin_path" != "$npm_bin/openclaw" ]]; then
         case "$bin_path" in
-            "/opt/homebrew/bin/clawdbot"|"/usr/local/bin/clawdbot")
+            "/opt/homebrew/bin/openclaw"|"/usr/local/bin/openclaw")
                 ;;
             *)
                 return 1
@@ -122,9 +122,9 @@ cleanup_clawdbot_bin_conflict() {
     if [[ -L "$bin_path" ]]; then
         local target=""
         target="$(readlink "$bin_path" 2>/dev/null || true)"
-        if [[ "$target" == *"/node_modules/clawdbot/"* || "$target" == *"/node_modules/moltbot/"* ]]; then
+        if [[ "$target" == *"/node_modules/openclaw/"* ]]; then
             rm -f "$bin_path"
-            echo -e "${WARN}→${NC} Removed stale clawdbot symlink at ${INFO}${bin_path}${NC}"
+            echo -e "${WARN}→${NC} Removed stale openclaw symlink at ${INFO}${bin_path}${NC}"
             return 0
         fi
         return 1
@@ -132,31 +132,31 @@ cleanup_clawdbot_bin_conflict() {
     local backup=""
     backup="${bin_path}.bak-$(date +%Y%m%d-%H%M%S)"
     if mv "$bin_path" "$backup"; then
-        echo -e "${WARN}→${NC} Moved existing clawdbot binary to ${INFO}${backup}${NC}"
+        echo -e "${WARN}→${NC} Moved existing openclaw binary to ${INFO}${backup}${NC}"
         return 0
     fi
     return 1
 }
 
-install_clawdbot_npm() {
+install_openclaw_npm() {
     local spec="$1"
     local log
     log="$(mktempfile)"
     if ! SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm --loglevel "$NPM_LOGLEVEL" ${NPM_SILENT_FLAG:+$NPM_SILENT_FLAG} --no-fund --no-audit install -g "$spec" 2>&1 | tee "$log"; then
-        if grep -q "ENOTEMPTY: directory not empty, rename .*clawdbot" "$log"; then
-            echo -e "${WARN}→${NC} npm left a stale clawdbot directory; cleaning and retrying..."
-            cleanup_npm_clawdbot_paths
+        if grep -q "ENOTEMPTY: directory not empty, rename .*openclaw" "$log"; then
+            echo -e "${WARN}→${NC} npm left a stale openclaw directory; cleaning and retrying..."
+            cleanup_npm_openclaw_paths
             SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm --loglevel "$NPM_LOGLEVEL" ${NPM_SILENT_FLAG:+$NPM_SILENT_FLAG} --no-fund --no-audit install -g "$spec"
             return $?
         fi
         if grep -q "EEXIST" "$log"; then
             local conflict=""
-            conflict="$(extract_clawdbot_conflict_path "$log" || true)"
-            if [[ -n "$conflict" ]] && cleanup_clawdbot_bin_conflict "$conflict"; then
+            conflict="$(extract_openclaw_conflict_path "$log" || true)"
+            if [[ -n "$conflict" ]] && cleanup_openclaw_bin_conflict "$conflict"; then
                 SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" npm --loglevel "$NPM_LOGLEVEL" ${NPM_SILENT_FLAG:+$NPM_SILENT_FLAG} --no-fund --no-audit install -g "$spec"
                 return $?
             fi
-            echo -e "${ERROR}npm failed because a clawdbot binary already exists.${NC}"
+            echo -e "${ERROR}npm failed because an openclaw binary already exists.${NC}"
             if [[ -n "$conflict" ]]; then
                 echo -e "${INFO}i${NC} Remove or move ${INFO}${conflict}${NC}, then retry."
             fi
@@ -268,6 +268,28 @@ append_holiday_taglines() {
     esac
 }
 
+map_legacy_env() {
+    local key="$1"
+    local legacy="$2"
+    if [[ -z "${!key:-}" && -n "${!legacy:-}" ]]; then
+        printf -v "$key" '%s' "${!legacy}"
+    fi
+}
+
+map_legacy_env "OPENCLAW_TAGLINE_INDEX" "CLAWDBOT_TAGLINE_INDEX"
+map_legacy_env "OPENCLAW_NO_ONBOARD" "CLAWDBOT_NO_ONBOARD"
+map_legacy_env "OPENCLAW_NO_PROMPT" "CLAWDBOT_NO_PROMPT"
+map_legacy_env "OPENCLAW_DRY_RUN" "CLAWDBOT_DRY_RUN"
+map_legacy_env "OPENCLAW_INSTALL_METHOD" "CLAWDBOT_INSTALL_METHOD"
+map_legacy_env "OPENCLAW_VERSION" "CLAWDBOT_VERSION"
+map_legacy_env "OPENCLAW_BETA" "CLAWDBOT_BETA"
+map_legacy_env "OPENCLAW_GIT_DIR" "CLAWDBOT_GIT_DIR"
+map_legacy_env "OPENCLAW_GIT_UPDATE" "CLAWDBOT_GIT_UPDATE"
+map_legacy_env "OPENCLAW_NPM_LOGLEVEL" "CLAWDBOT_NPM_LOGLEVEL"
+map_legacy_env "OPENCLAW_VERBOSE" "CLAWDBOT_VERBOSE"
+map_legacy_env "OPENCLAW_PROFILE" "CLAWDBOT_PROFILE"
+map_legacy_env "OPENCLAW_INSTALL_SH_NO_RUN" "CLAWDBOT_INSTALL_SH_NO_RUN"
+
 pick_tagline() {
     append_holiday_taglines
     local count=${#TAGLINES[@]}
@@ -275,9 +297,9 @@ pick_tagline() {
         echo "$DEFAULT_TAGLINE"
         return
     fi
-    if [[ -n "${CLAWDBOT_TAGLINE_INDEX:-}" ]]; then
-        if [[ "${CLAWDBOT_TAGLINE_INDEX}" =~ ^[0-9]+$ ]]; then
-            local idx=$((CLAWDBOT_TAGLINE_INDEX % count))
+    if [[ -n "${OPENCLAW_TAGLINE_INDEX:-}" ]]; then
+        if [[ "${OPENCLAW_TAGLINE_INDEX}" =~ ^[0-9]+$ ]]; then
+            local idx=$((OPENCLAW_TAGLINE_INDEX % count))
             echo "${TAGLINES[$idx]}"
             return
         fi
@@ -288,28 +310,28 @@ pick_tagline() {
 
 TAGLINE=$(pick_tagline)
 
-NO_ONBOARD=${CLAWDBOT_NO_ONBOARD:-0}
-NO_PROMPT=${CLAWDBOT_NO_PROMPT:-0}
-DRY_RUN=${CLAWDBOT_DRY_RUN:-0}
-INSTALL_METHOD=${CLAWDBOT_INSTALL_METHOD:-}
-CLAWDBOT_VERSION=${CLAWDBOT_VERSION:-latest}
-USE_BETA=${CLAWDBOT_BETA:-0}
-GIT_DIR_DEFAULT="${HOME}/moltbot"
-GIT_DIR=${CLAWDBOT_GIT_DIR:-$GIT_DIR_DEFAULT}
-GIT_UPDATE=${CLAWDBOT_GIT_UPDATE:-1}
+NO_ONBOARD=${OPENCLAW_NO_ONBOARD:-0}
+NO_PROMPT=${OPENCLAW_NO_PROMPT:-0}
+DRY_RUN=${OPENCLAW_DRY_RUN:-0}
+INSTALL_METHOD=${OPENCLAW_INSTALL_METHOD:-}
+OPENCLAW_VERSION=${OPENCLAW_VERSION:-latest}
+USE_BETA=${OPENCLAW_BETA:-0}
+GIT_DIR_DEFAULT="${HOME}/openclaw"
+GIT_DIR=${OPENCLAW_GIT_DIR:-$GIT_DIR_DEFAULT}
+GIT_UPDATE=${OPENCLAW_GIT_UPDATE:-1}
 SHARP_IGNORE_GLOBAL_LIBVIPS="${SHARP_IGNORE_GLOBAL_LIBVIPS:-1}"
-NPM_LOGLEVEL="${CLAWDBOT_NPM_LOGLEVEL:-error}"
+NPM_LOGLEVEL="${OPENCLAW_NPM_LOGLEVEL:-error}"
 NPM_SILENT_FLAG="--silent"
-VERBOSE="${CLAWDBOT_VERBOSE:-0}"
-CLAWDBOT_BIN=""
+VERBOSE="${OPENCLAW_VERBOSE:-0}"
+OPENCLAW_BIN=""
 HELP=0
 
 print_usage() {
     cat <<EOF
-Moltbot installer (macOS + Linux)
+OpenClaw installer (macOS + Linux)
 
 Usage:
-  curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash -s -- [options]
+  curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- [options]
 
 Options:
   --install-method, --method npm|git   Install via npm (default) or from a git checkout
@@ -317,7 +339,7 @@ Options:
   --git, --github                     Shortcut for --install-method git
   --version <version|dist-tag>         npm install: version (default: latest)
   --beta                               Use beta if available, else latest
-  --git-dir, --dir <path>             Checkout directory (default: ~/moltbot)
+  --git-dir, --dir <path>             Checkout directory (default: ~/openclaw)
   --no-git-update                      Skip git pull for existing checkout
   --no-onboard                          Skip onboarding (non-interactive)
   --no-prompt                           Disable prompts (required in CI/automation)
@@ -326,22 +348,22 @@ Options:
   --help, -h                            Show this help
 
 Environment variables:
-  CLAWDBOT_INSTALL_METHOD=git|npm
-  CLAWDBOT_VERSION=latest|next|<semver>
-  CLAWDBOT_BETA=0|1
-  CLAWDBOT_GIT_DIR=...
-  CLAWDBOT_GIT_UPDATE=0|1
-  CLAWDBOT_NO_PROMPT=1
-  CLAWDBOT_DRY_RUN=1
-  CLAWDBOT_NO_ONBOARD=1
-  CLAWDBOT_VERBOSE=1
-  CLAWDBOT_NPM_LOGLEVEL=error|warn|notice  Default: error (hide npm deprecation noise)
+  OPENCLAW_INSTALL_METHOD=git|npm
+  OPENCLAW_VERSION=latest|next|<semver>
+  OPENCLAW_BETA=0|1
+  OPENCLAW_GIT_DIR=...
+  OPENCLAW_GIT_UPDATE=0|1
+  OPENCLAW_NO_PROMPT=1
+  OPENCLAW_DRY_RUN=1
+  OPENCLAW_NO_ONBOARD=1
+  OPENCLAW_VERBOSE=1
+  OPENCLAW_NPM_LOGLEVEL=error|warn|notice  Default: error (hide npm deprecation noise)
   SHARP_IGNORE_GLOBAL_LIBVIPS=0|1    Default: 1 (avoid sharp building against global libvips)
 
 Examples:
-  curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash
-  curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash -s -- --no-onboard
-  curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash -s -- --install-method git --no-onboard
+  curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash
+  curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --no-onboard
+  curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --install-method git --no-onboard
 EOF
 }
 
@@ -377,7 +399,7 @@ parse_args() {
                 shift 2
                 ;;
             --version)
-                CLAWDBOT_VERSION="$2"
+                OPENCLAW_VERSION="$2"
                 shift 2
                 ;;
             --beta)
@@ -439,7 +461,7 @@ prompt_choice() {
     echo "$answer"
 }
 
-detect_clawdbot_checkout() {
+detect_openclaw_checkout() {
     local dir="$1"
     if [[ ! -f "$dir/package.json" ]]; then
         return 1
@@ -447,7 +469,7 @@ detect_clawdbot_checkout() {
     if [[ ! -f "$dir/pnpm-workspace.yaml" ]]; then
         return 1
     fi
-    if ! grep -q '"name"[[:space:]]*:[[:space:]]*"clawdbot"' "$dir/package.json" 2>/dev/null; then
+    if ! grep -q '"name"[[:space:]]*:[[:space:]]*"openclaw"' "$dir/package.json" 2>/dev/null; then
         return 1
     fi
     echo "$dir"
@@ -455,7 +477,7 @@ detect_clawdbot_checkout() {
 }
 
 echo -e "${ACCENT}${BOLD}"
-echo "  🦞 Moltbot Installer"
+echo "  🦞 OpenClaw Installer"
 echo -e "${NC}${ACCENT_DIM}  ${TAGLINE}${NC}"
 echo ""
 
@@ -470,7 +492,7 @@ fi
 if [[ "$OS" == "unknown" ]]; then
     echo -e "${ERROR}Error: Unsupported operating system${NC}"
     echo "This installer supports macOS and Linux (including WSL)."
-    echo "For Windows, use: iwr -useb https://molt.bot/install.ps1 | iex"
+    echo "For Windows, use: iwr -useb https://openclaw.ai/install.ps1 | iex"
     exit 1
 fi
 
@@ -527,20 +549,20 @@ install_node() {
 	            local tmp
 	            tmp="$(mktempfile)"
 	            download_file "https://deb.nodesource.com/setup_22.x" "$tmp"
-	            sudo -E bash "$tmp"
-	            sudo apt-get install -y nodejs
+	            maybe_sudo -E bash "$tmp"
+	            maybe_sudo apt-get install -y nodejs
 	        elif command -v dnf &> /dev/null; then
 	            local tmp
 	            tmp="$(mktempfile)"
 	            download_file "https://rpm.nodesource.com/setup_22.x" "$tmp"
-	            sudo bash "$tmp"
-	            sudo dnf install -y nodejs
+	            maybe_sudo bash "$tmp"
+	            maybe_sudo dnf install -y nodejs
 	        elif command -v yum &> /dev/null; then
 	            local tmp
 	            tmp="$(mktempfile)"
 	            download_file "https://rpm.nodesource.com/setup_22.x" "$tmp"
-	            sudo bash "$tmp"
-	            sudo yum install -y nodejs
+	            maybe_sudo bash "$tmp"
+	            maybe_sudo yum install -y nodejs
 	        else
 	            echo -e "${ERROR}Error: Could not detect package manager${NC}"
 	            echo "Please install Node.js 22+ manually: https://nodejs.org"
@@ -562,6 +584,19 @@ check_git() {
 
 is_root() {
     [[ "$(id -u)" -eq 0 ]]
+}
+
+# Run a command with sudo only if not already root
+maybe_sudo() {
+    if is_root; then
+        # Skip -E flag when root (env is already preserved)
+        if [[ "${1:-}" == "-E" ]]; then
+            shift
+        fi
+        "$@"
+    else
+        sudo "$@"
+    fi
 }
 
 require_sudo() {
@@ -586,12 +621,12 @@ install_git() {
     elif [[ "$OS" == "linux" ]]; then
         require_sudo
         if command -v apt-get &> /dev/null; then
-            sudo apt-get update -y
-            sudo apt-get install -y git
+            maybe_sudo apt-get update -y
+            maybe_sudo apt-get install -y git
         elif command -v dnf &> /dev/null; then
-            sudo dnf install -y git
+            maybe_sudo dnf install -y git
         elif command -v yum &> /dev/null; then
-            sudo yum install -y git
+            maybe_sudo yum install -y git
         else
             echo -e "${ERROR}Error: Could not detect package manager for Git${NC}"
             exit 1
@@ -632,24 +667,24 @@ fix_npm_permissions() {
     echo -e "${SUCCESS}✓${NC} npm configured for user installs"
 }
 
-resolve_clawdbot_bin() {
-    if command -v clawdbot &> /dev/null; then
-        command -v clawdbot
+resolve_openclaw_bin() {
+    if command -v openclaw &> /dev/null; then
+        command -v openclaw
         return 0
     fi
     local npm_bin=""
     npm_bin="$(npm_global_bin_dir || true)"
-    if [[ -n "$npm_bin" && -x "${npm_bin}/clawdbot" ]]; then
-        echo "${npm_bin}/clawdbot"
+    if [[ -n "$npm_bin" && -x "${npm_bin}/openclaw" ]]; then
+        echo "${npm_bin}/openclaw"
         return 0
     fi
     return 1
 }
 
-ensure_clawdbot_bin_link() {
+ensure_openclaw_bin_link() {
     local npm_root=""
     npm_root="$(npm root -g 2>/dev/null || true)"
-    if [[ -z "$npm_root" || ! -d "$npm_root/clawdbot" ]]; then
+    if [[ -z "$npm_root" || ! -d "$npm_root/openclaw" ]]; then
         return 1
     fi
     local npm_bin=""
@@ -658,17 +693,17 @@ ensure_clawdbot_bin_link() {
         return 1
     fi
     mkdir -p "$npm_bin"
-    if [[ ! -x "${npm_bin}/clawdbot" ]]; then
-        ln -sf "$npm_root/clawdbot/dist/entry.js" "${npm_bin}/clawdbot"
-        echo -e "${WARN}→${NC} Installed clawdbot bin link at ${INFO}${npm_bin}/clawdbot${NC}"
+    if [[ ! -x "${npm_bin}/openclaw" ]]; then
+        ln -sf "$npm_root/openclaw/dist/entry.js" "${npm_bin}/openclaw"
+        echo -e "${WARN}→${NC} Installed openclaw bin link at ${INFO}${npm_bin}/openclaw${NC}"
     fi
     return 0
 }
 
-# Check for existing Moltbot installation
-check_existing_clawdbot() {
-    if [[ -n "$(type -P clawdbot 2>/dev/null || true)" ]]; then
-        echo -e "${WARN}→${NC} Existing Moltbot installation detected"
+# Check for existing OpenClaw installation
+check_existing_openclaw() {
+    if [[ -n "$(type -P openclaw 2>/dev/null || true)" ]]; then
+        echo -e "${WARN}→${NC} Existing OpenClaw installation detected"
         return 0
     fi
     return 1
@@ -759,10 +794,10 @@ warn_shell_path_missing_dir() {
 
     echo ""
     echo -e "${WARN}→${NC} PATH warning: missing ${label}: ${INFO}${dir}${NC}"
-    echo -e "This can make ${INFO}clawdbot${NC} show as \"command not found\" in new terminals."
+    echo -e "This can make ${INFO}openclaw${NC} show as \"command not found\" in new terminals."
     echo -e "Fix (zsh: ~/.zshrc, bash: ~/.bashrc):"
     echo -e "  export PATH=\"${dir}:\\$PATH\""
-    echo -e "Docs: ${INFO}https://docs.molt.bot/install#nodejs--npm-path-sanity${NC}"
+    echo -e "Docs: ${INFO}https://docs.openclaw.ai/install#nodejs--npm-path-sanity${NC}"
 }
 
 ensure_npm_global_bin_on_path() {
@@ -779,14 +814,14 @@ maybe_nodenv_rehash() {
     fi
 }
 
-warn_clawdbot_not_found() {
-    echo -e "${WARN}→${NC} Installed, but ${INFO}clawdbot${NC} is not discoverable on PATH in this shell."
+warn_openclaw_not_found() {
+    echo -e "${WARN}→${NC} Installed, but ${INFO}openclaw${NC} is not discoverable on PATH in this shell."
     echo -e "Try: ${INFO}hash -r${NC} (bash) or ${INFO}rehash${NC} (zsh), then retry."
-    echo -e "Docs: ${INFO}https://docs.molt.bot/install#nodejs--npm-path-sanity${NC}"
+    echo -e "Docs: ${INFO}https://docs.openclaw.ai/install#nodejs--npm-path-sanity${NC}"
     local t=""
-    t="$(type -t clawdbot 2>/dev/null || true)"
+    t="$(type -t openclaw 2>/dev/null || true)"
     if [[ "$t" == "alias" || "$t" == "function" ]]; then
-        echo -e "${WARN}→${NC} Found a shell ${INFO}${t}${NC} named ${INFO}clawdbot${NC}; it may shadow the real binary."
+        echo -e "${WARN}→${NC} Found a shell ${INFO}${t}${NC} named ${INFO}openclaw${NC}; it may shadow the real binary."
     fi
     if command -v nodenv &> /dev/null; then
         echo -e "Using nodenv? Run: ${INFO}nodenv rehash${NC}"
@@ -805,10 +840,10 @@ warn_clawdbot_not_found() {
     fi
 }
 
-resolve_clawdbot_bin() {
+resolve_openclaw_bin() {
     refresh_shell_command_cache
     local resolved=""
-    resolved="$(type -P clawdbot 2>/dev/null || true)"
+    resolved="$(type -P openclaw 2>/dev/null || true)"
     if [[ -n "$resolved" && -x "$resolved" ]]; then
         echo "$resolved"
         return 0
@@ -816,7 +851,7 @@ resolve_clawdbot_bin() {
 
     ensure_npm_global_bin_on_path
     refresh_shell_command_cache
-    resolved="$(type -P clawdbot 2>/dev/null || true)"
+    resolved="$(type -P openclaw 2>/dev/null || true)"
     if [[ -n "$resolved" && -x "$resolved" ]]; then
         echo "$resolved"
         return 0
@@ -824,21 +859,21 @@ resolve_clawdbot_bin() {
 
     local npm_bin=""
     npm_bin="$(npm_global_bin_dir || true)"
-    if [[ -n "$npm_bin" && -x "${npm_bin}/clawdbot" ]]; then
-        echo "${npm_bin}/clawdbot"
+    if [[ -n "$npm_bin" && -x "${npm_bin}/openclaw" ]]; then
+        echo "${npm_bin}/openclaw"
         return 0
     fi
 
     maybe_nodenv_rehash
     refresh_shell_command_cache
-    resolved="$(type -P clawdbot 2>/dev/null || true)"
+    resolved="$(type -P openclaw 2>/dev/null || true)"
     if [[ -n "$resolved" && -x "$resolved" ]]; then
         echo "$resolved"
         return 0
     fi
 
-    if [[ -n "$npm_bin" && -x "${npm_bin}/clawdbot" ]]; then
-        echo "${npm_bin}/clawdbot"
+    if [[ -n "$npm_bin" && -x "${npm_bin}/openclaw" ]]; then
+        echo "${npm_bin}/openclaw"
         return 0
     fi
 
@@ -846,14 +881,14 @@ resolve_clawdbot_bin() {
     return 1
 }
 
-install_clawdbot_from_git() {
+install_openclaw_from_git() {
     local repo_dir="$1"
-    local repo_url="https://github.com/moltbot/moltbot.git"
+    local repo_url="https://github.com/openclaw/openclaw.git"
 
     if [[ -d "$repo_dir/.git" ]]; then
-        echo -e "${WARN}→${NC} Installing Moltbot from git checkout: ${INFO}${repo_dir}${NC}"
+        echo -e "${WARN}→${NC} Installing OpenClaw from git checkout: ${INFO}${repo_dir}${NC}"
     else
-        echo -e "${WARN}→${NC} Installing Moltbot from GitHub (${repo_url})..."
+        echo -e "${WARN}→${NC} Installing OpenClaw from GitHub (${repo_url})..."
     fi
 
     if ! check_git; then
@@ -885,105 +920,124 @@ install_clawdbot_from_git() {
 
     ensure_user_local_bin_on_path
 
-    cat > "$HOME/.local/bin/clawdbot" <<EOF
+    cat > "$HOME/.local/bin/openclaw" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
 exec node "${repo_dir}/dist/entry.js" "\$@"
 EOF
-    chmod +x "$HOME/.local/bin/clawdbot"
-    echo -e "${SUCCESS}✓${NC} Moltbot wrapper installed to \$HOME/.local/bin/clawdbot"
+    chmod +x "$HOME/.local/bin/openclaw"
+    echo -e "${SUCCESS}✓${NC} OpenClaw wrapper installed to \$HOME/.local/bin/openclaw"
     echo -e "${INFO}i${NC} This checkout uses pnpm. For deps, run: ${INFO}pnpm install${NC} (avoid npm install in the repo)."
 }
 
-# Install Moltbot
+# Install OpenClaw
 resolve_beta_version() {
     local beta=""
-    beta="$(npm view moltbot dist-tags.beta 2>/dev/null || true)"
+    beta="$(npm view openclaw dist-tags.beta 2>/dev/null || true)"
     if [[ -z "$beta" || "$beta" == "undefined" || "$beta" == "null" ]]; then
         return 1
     fi
     echo "$beta"
 }
 
-install_clawdbot() {
-    local package_name="clawdbot"
+install_openclaw() {
+    local package_name="openclaw"
     if [[ "$USE_BETA" == "1" ]]; then
         local beta_version=""
         beta_version="$(resolve_beta_version || true)"
         if [[ -n "$beta_version" ]]; then
-            CLAWDBOT_VERSION="$beta_version"
+            OPENCLAW_VERSION="$beta_version"
             echo -e "${INFO}i${NC} Beta tag detected (${beta_version}); installing beta."
-            package_name="moltbot"
+            package_name="openclaw"
         else
-            CLAWDBOT_VERSION="latest"
+            OPENCLAW_VERSION="latest"
             echo -e "${INFO}i${NC} No beta tag found; installing latest."
         fi
     fi
 
-    if [[ -z "${CLAWDBOT_VERSION}" ]]; then
-        CLAWDBOT_VERSION="latest"
+    if [[ -z "${OPENCLAW_VERSION}" ]]; then
+        OPENCLAW_VERSION="latest"
     fi
 
     local resolved_version=""
-    resolved_version="$(npm view "${package_name}@${CLAWDBOT_VERSION}" version 2>/dev/null || true)"
+    resolved_version="$(npm view "${package_name}@${OPENCLAW_VERSION}" version 2>/dev/null || true)"
     if [[ -n "$resolved_version" ]]; then
-        echo -e "${WARN}→${NC} Installing Moltbot ${INFO}${resolved_version}${NC}..."
+        echo -e "${WARN}→${NC} Installing OpenClaw ${INFO}${resolved_version}${NC}..."
     else
-        echo -e "${WARN}→${NC} Installing Moltbot (${INFO}${CLAWDBOT_VERSION}${NC})..."
+        echo -e "${WARN}→${NC} Installing OpenClaw (${INFO}${OPENCLAW_VERSION}${NC})..."
     fi
     local install_spec=""
-    if [[ "${CLAWDBOT_VERSION}" == "latest" ]]; then
+    if [[ "${OPENCLAW_VERSION}" == "latest" ]]; then
         install_spec="${package_name}@latest"
     else
-        install_spec="${package_name}@${CLAWDBOT_VERSION}"
+        install_spec="${package_name}@${OPENCLAW_VERSION}"
     fi
 
-    if ! install_clawdbot_npm "${install_spec}"; then
+    if ! install_openclaw_npm "${install_spec}"; then
         echo -e "${WARN}→${NC} npm install failed; cleaning up and retrying..."
-        cleanup_npm_clawdbot_paths
-        install_clawdbot_npm "${install_spec}"
+        cleanup_npm_openclaw_paths
+        install_openclaw_npm "${install_spec}"
     fi
 
-    if [[ "${CLAWDBOT_VERSION}" == "latest" && "${package_name}" == "clawdbot" ]]; then
-        if ! resolve_clawdbot_bin &> /dev/null; then
-            echo -e "${WARN}→${NC} npm install clawdbot@latest failed; retrying clawdbot@next"
-            cleanup_npm_clawdbot_paths
-            install_clawdbot_npm "clawdbot@next"
+    if [[ "${OPENCLAW_VERSION}" == "latest" && "${package_name}" == "openclaw" ]]; then
+        if ! resolve_openclaw_bin &> /dev/null; then
+            echo -e "${WARN}→${NC} npm install openclaw@latest failed; retrying openclaw@next"
+            cleanup_npm_openclaw_paths
+            install_openclaw_npm "openclaw@next"
         fi
     fi
 
-    ensure_clawdbot_bin_link || true
+    ensure_openclaw_bin_link || true
 
-    echo -e "${SUCCESS}✓${NC} Moltbot installed"
+    echo -e "${SUCCESS}✓${NC} OpenClaw installed"
 }
 
 # Run doctor for migrations (safe, non-interactive)
 run_doctor() {
     echo -e "${WARN}→${NC} Running doctor to migrate settings..."
-    local claw="${CLAWDBOT_BIN:-}"
+    local claw="${OPENCLAW_BIN:-}"
     if [[ -z "$claw" ]]; then
-        claw="$(resolve_clawdbot_bin || true)"
+        claw="$(resolve_openclaw_bin || true)"
     fi
     if [[ -z "$claw" ]]; then
-        echo -e "${WARN}→${NC} Skipping doctor: ${INFO}clawdbot${NC} not on PATH yet."
-        warn_clawdbot_not_found
+        echo -e "${WARN}→${NC} Skipping doctor: ${INFO}openclaw${NC} not on PATH yet."
+        warn_openclaw_not_found
         return 0
     fi
     "$claw" doctor --non-interactive || true
     echo -e "${SUCCESS}✓${NC} Migration complete"
 }
 
+maybe_open_dashboard() {
+    local claw="${OPENCLAW_BIN:-}"
+    if [[ -z "$claw" ]]; then
+        claw="$(resolve_openclaw_bin || true)"
+    fi
+    if [[ -z "$claw" ]]; then
+        return 0
+    fi
+    if ! "$claw" dashboard --help >/dev/null 2>&1; then
+        return 0
+    fi
+    "$claw" dashboard || true
+}
+
 resolve_workspace_dir() {
-    local profile="${CLAWDBOT_PROFILE:-default}"
+    local profile="${OPENCLAW_PROFILE:-default}"
     if [[ "${profile}" != "default" ]]; then
-        echo "${HOME}/clawd-${profile}"
+        echo "${HOME}/.openclaw/workspace-${profile}"
     else
-        echo "${HOME}/clawd"
+        echo "${HOME}/.openclaw/workspace"
     fi
 }
 
 run_bootstrap_onboarding_if_needed() {
     if [[ "${NO_ONBOARD}" == "1" ]]; then
+        return
+    fi
+
+    local config_path="${OPENCLAW_CONFIG_PATH:-$HOME/.openclaw/openclaw.json}"
+    if [[ -f "${config_path}" || -f "$HOME/.clawdbot/clawdbot.json" || -f "$HOME/.moltbot/moltbot.json" || -f "$HOME/.moldbot/moldbot.json" ]]; then
         return
     fi
 
@@ -997,32 +1051,32 @@ run_bootstrap_onboarding_if_needed() {
 
     if [[ ! -r /dev/tty || ! -w /dev/tty ]]; then
         echo -e "${WARN}→${NC} BOOTSTRAP.md found at ${INFO}${bootstrap}${NC}; no TTY, skipping onboarding."
-        echo -e "Run ${INFO}clawdbot onboard${NC} later to finish setup."
+        echo -e "Run ${INFO}openclaw onboard${NC} later to finish setup."
         return
     fi
 
     echo -e "${WARN}→${NC} BOOTSTRAP.md found at ${INFO}${bootstrap}${NC}; starting onboarding..."
-    local claw="${CLAWDBOT_BIN:-}"
+    local claw="${OPENCLAW_BIN:-}"
     if [[ -z "$claw" ]]; then
-        claw="$(resolve_clawdbot_bin || true)"
+        claw="$(resolve_openclaw_bin || true)"
     fi
     if [[ -z "$claw" ]]; then
-        echo -e "${WARN}→${NC} BOOTSTRAP.md found, but ${INFO}clawdbot${NC} not on PATH yet; skipping onboarding."
-        warn_clawdbot_not_found
+        echo -e "${WARN}→${NC} BOOTSTRAP.md found, but ${INFO}openclaw${NC} not on PATH yet; skipping onboarding."
+        warn_openclaw_not_found
         return
     fi
 
     "$claw" onboard || {
-        echo -e "${ERROR}Onboarding failed; BOOTSTRAP.md still present. Re-run ${INFO}clawdbot onboard${ERROR}.${NC}"
+        echo -e "${ERROR}Onboarding failed; BOOTSTRAP.md still present. Re-run ${INFO}openclaw onboard${ERROR}.${NC}"
         return
     }
 }
 
-resolve_clawdbot_version() {
+resolve_openclaw_version() {
     local version=""
-    local claw="${CLAWDBOT_BIN:-}"
-    if [[ -z "$claw" ]] && command -v clawdbot &> /dev/null; then
-        claw="$(command -v clawdbot)"
+    local claw="${OPENCLAW_BIN:-}"
+    if [[ -z "$claw" ]] && command -v openclaw &> /dev/null; then
+        claw="$(command -v openclaw)"
     fi
     if [[ -n "$claw" ]]; then
         version=$("$claw" --version 2>/dev/null | head -n 1 | tr -d '\r')
@@ -1030,8 +1084,8 @@ resolve_clawdbot_version() {
     if [[ -z "$version" ]]; then
         local npm_root=""
         npm_root=$(npm root -g 2>/dev/null || true)
-        if [[ -n "$npm_root" && -f "$npm_root/clawdbot/package.json" ]]; then
-            version=$(node -e "console.log(require('${npm_root}/clawdbot/package.json').version)" 2>/dev/null || true)
+        if [[ -n "$npm_root" && -f "$npm_root/openclaw/package.json" ]]; then
+            version=$(node -e "console.log(require('${npm_root}/openclaw/package.json').version)" 2>/dev/null || true)
         fi
     fi
     echo "$version"
@@ -1070,16 +1124,16 @@ main() {
     fi
 
     local detected_checkout=""
-    detected_checkout="$(detect_clawdbot_checkout "$PWD" || true)"
+    detected_checkout="$(detect_openclaw_checkout "$PWD" || true)"
 
     if [[ -z "$INSTALL_METHOD" && -n "$detected_checkout" ]]; then
         if ! is_promptable; then
-            echo -e "${WARN}→${NC} Found a Moltbot checkout, but no TTY; defaulting to npm install."
+            echo -e "${WARN}→${NC} Found a OpenClaw checkout, but no TTY; defaulting to npm install."
             INSTALL_METHOD="npm"
         else
             local choice=""
             choice="$(prompt_choice "$(cat <<EOF
-${WARN}→${NC} Detected a Moltbot source checkout in: ${INFO}${detected_checkout}${NC}
+${WARN}→${NC} Detected a OpenClaw source checkout in: ${INFO}${detected_checkout}${NC}
 Choose install method:
   1) Update this checkout (git) and use it
   2) Install global via npm (migrate away from git)
@@ -1092,7 +1146,7 @@ EOF
                 2) INSTALL_METHOD="npm" ;;
                 *)
                     echo -e "${ERROR}Error: no install method selected.${NC}"
-                    echo "Re-run with: --install-method git|npm (or set CLAWDBOT_INSTALL_METHOD)."
+                    echo "Re-run with: --install-method git|npm (or set OPENCLAW_INSTALL_METHOD)."
                     exit 2
                     ;;
             esac
@@ -1125,9 +1179,11 @@ EOF
 
     # Check for existing installation
     local is_upgrade=false
-    if check_existing_clawdbot; then
+    if check_existing_openclaw; then
         is_upgrade=true
     fi
+    local should_open_dashboard=false
+    local skip_onboard=false
 
     # Step 1: Homebrew (macOS only)
     install_homebrew
@@ -1140,9 +1196,9 @@ EOF
     local final_git_dir=""
     if [[ "$INSTALL_METHOD" == "git" ]]; then
         # Clean up npm global install if switching to git
-        if npm list -g clawdbot &>/dev/null; then
+        if npm list -g openclaw &>/dev/null; then
             echo -e "${WARN}→${NC} Removing npm global install (switching to git)..."
-            npm uninstall -g clawdbot 2>/dev/null || true
+            npm uninstall -g openclaw 2>/dev/null || true
             echo -e "${SUCCESS}✓${NC} npm global install removed"
         fi
 
@@ -1151,12 +1207,12 @@ EOF
             repo_dir="$detected_checkout"
         fi
         final_git_dir="$repo_dir"
-        install_clawdbot_from_git "$repo_dir"
+        install_openclaw_from_git "$repo_dir"
     else
         # Clean up git wrapper if switching to npm
-        if [[ -x "$HOME/.local/bin/clawdbot" ]]; then
+        if [[ -x "$HOME/.local/bin/openclaw" ]]; then
             echo -e "${WARN}→${NC} Removing git wrapper (switching to npm)..."
-            rm -f "$HOME/.local/bin/clawdbot"
+            rm -f "$HOME/.local/bin/openclaw"
             echo -e "${SUCCESS}✓${NC} git wrapper removed"
         fi
 
@@ -1168,11 +1224,11 @@ EOF
         # Step 4: npm permissions (Linux)
         fix_npm_permissions
 
-        # Step 5: Moltbot
-        install_clawdbot
+        # Step 5: OpenClaw
+        install_openclaw
     fi
 
-    CLAWDBOT_BIN="$(resolve_clawdbot_bin || true)"
+    OPENCLAW_BIN="$(resolve_openclaw_bin || true)"
 
     # PATH warning: installs can succeed while the user's login shell still lacks npm's global bin dir.
     local npm_bin=""
@@ -1181,7 +1237,7 @@ EOF
         warn_shell_path_missing_dir "$npm_bin" "npm global bin dir"
     fi
     if [[ "$INSTALL_METHOD" == "git" ]]; then
-        if [[ -x "$HOME/.local/bin/clawdbot" ]]; then
+        if [[ -x "$HOME/.local/bin/openclaw" ]]; then
             warn_shell_path_missing_dir "$HOME/.local/bin" "user-local bin dir (~/.local/bin)"
         fi
     fi
@@ -1193,19 +1249,20 @@ EOF
     fi
     if [[ "$run_doctor_after" == "true" ]]; then
         run_doctor
+        should_open_dashboard=true
     fi
 
     # Step 7: If BOOTSTRAP.md is still present in the workspace, resume onboarding
     run_bootstrap_onboarding_if_needed
 
     local installed_version
-    installed_version=$(resolve_clawdbot_version)
+    installed_version=$(resolve_openclaw_version)
 
     echo ""
     if [[ -n "$installed_version" ]]; then
-        echo -e "${SUCCESS}${BOLD}🦞 Moltbot installed successfully (${installed_version})!${NC}"
+        echo -e "${SUCCESS}${BOLD}🦞 OpenClaw installed successfully (${installed_version})!${NC}"
     else
-        echo -e "${SUCCESS}${BOLD}🦞 Moltbot installed successfully!${NC}"
+        echo -e "${SUCCESS}${BOLD}🦞 OpenClaw installed successfully!${NC}"
     fi
     if [[ "$is_upgrade" == "true" ]]; then
         local update_messages=(
@@ -1254,19 +1311,19 @@ EOF
 
     if [[ "$INSTALL_METHOD" == "git" && -n "$final_git_dir" ]]; then
         echo -e "Source checkout: ${INFO}${final_git_dir}${NC}"
-        echo -e "Wrapper: ${INFO}\$HOME/.local/bin/clawdbot${NC}"
-        echo -e "Installed from source. To update later, run: ${INFO}clawdbot update --restart${NC}"
-        echo -e "Switch to global install later: ${INFO}curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install.sh | bash -s -- --install-method npm${NC}"
+        echo -e "Wrapper: ${INFO}\$HOME/.local/bin/openclaw${NC}"
+        echo -e "Installed from source. To update later, run: ${INFO}openclaw update --restart${NC}"
+        echo -e "Switch to global install later: ${INFO}curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --install-method npm${NC}"
     elif [[ "$is_upgrade" == "true" ]]; then
         echo -e "Upgrade complete."
         if [[ -r /dev/tty && -w /dev/tty ]]; then
-            local claw="${CLAWDBOT_BIN:-}"
+            local claw="${OPENCLAW_BIN:-}"
             if [[ -z "$claw" ]]; then
-                claw="$(resolve_clawdbot_bin || true)"
+                claw="$(resolve_openclaw_bin || true)"
             fi
             if [[ -z "$claw" ]]; then
-                echo -e "${WARN}→${NC} Skipping doctor: ${INFO}clawdbot${NC} not on PATH yet."
-                warn_clawdbot_not_found
+                echo -e "${WARN}→${NC} Skipping doctor: ${INFO}openclaw${NC} not on PATH yet."
+                warn_openclaw_not_found
                 return 0
             fi
             local -a doctor_args=()
@@ -1275,63 +1332,84 @@ EOF
                     doctor_args+=("--non-interactive")
                 fi
             fi
-            echo -e "Running ${INFO}clawdbot doctor${NC}..."
+            echo -e "Running ${INFO}openclaw doctor${NC}..."
             local doctor_ok=0
             if (( ${#doctor_args[@]} )); then
-                CLAWDBOT_UPDATE_IN_PROGRESS=1 "$claw" doctor "${doctor_args[@]}" </dev/tty && doctor_ok=1
+                OPENCLAW_UPDATE_IN_PROGRESS=1 "$claw" doctor "${doctor_args[@]}" </dev/tty && doctor_ok=1
             else
-                CLAWDBOT_UPDATE_IN_PROGRESS=1 "$claw" doctor </dev/tty && doctor_ok=1
+                OPENCLAW_UPDATE_IN_PROGRESS=1 "$claw" doctor </dev/tty && doctor_ok=1
             fi
             if (( doctor_ok )); then
-                echo -e "Updating plugins (${INFO}clawdbot plugins update --all${NC})..."
-                CLAWDBOT_UPDATE_IN_PROGRESS=1 "$claw" plugins update --all || true
+                echo -e "Updating plugins (${INFO}openclaw plugins update --all${NC})..."
+                OPENCLAW_UPDATE_IN_PROGRESS=1 "$claw" plugins update --all || true
             else
                 echo -e "${WARN}→${NC} Doctor failed; skipping plugin updates."
             fi
         else
             echo -e "${WARN}→${NC} No TTY available; skipping doctor."
-            echo -e "Run ${INFO}clawdbot doctor${NC}, then ${INFO}clawdbot plugins update --all${NC}."
+            echo -e "Run ${INFO}openclaw doctor${NC}, then ${INFO}openclaw plugins update --all${NC}."
         fi
     else
-        if [[ "$NO_ONBOARD" == "1" ]]; then
-            echo -e "Skipping onboard (requested). Run ${INFO}clawdbot onboard${NC} later."
+        if [[ "$NO_ONBOARD" == "1" || "$skip_onboard" == "true" ]]; then
+            echo -e "Skipping onboard (requested). Run ${INFO}openclaw onboard${NC} later."
         else
+            local config_path="${OPENCLAW_CONFIG_PATH:-$HOME/.openclaw/openclaw.json}"
+            if [[ -f "${config_path}" || -f "$HOME/.clawdbot/clawdbot.json" || -f "$HOME/.moltbot/moltbot.json" || -f "$HOME/.moldbot/moldbot.json" ]]; then
+                echo -e "Config already present; running doctor..."
+                run_doctor
+                should_open_dashboard=true
+                echo -e "Config already present; skipping onboarding."
+                skip_onboard=true
+            fi
             echo -e "Starting setup..."
             echo ""
             if [[ -r /dev/tty && -w /dev/tty ]]; then
-                local claw="${CLAWDBOT_BIN:-}"
+                local claw="${OPENCLAW_BIN:-}"
                 if [[ -z "$claw" ]]; then
-                    claw="$(resolve_clawdbot_bin || true)"
+                    claw="$(resolve_openclaw_bin || true)"
                 fi
                 if [[ -z "$claw" ]]; then
-                    echo -e "${WARN}→${NC} Skipping onboarding: ${INFO}clawdbot${NC} not on PATH yet."
-                    warn_clawdbot_not_found
+                    echo -e "${WARN}→${NC} Skipping onboarding: ${INFO}openclaw${NC} not on PATH yet."
+                    warn_openclaw_not_found
                     return 0
                 fi
                 exec </dev/tty
                 exec "$claw" onboard
             fi
             echo -e "${WARN}→${NC} No TTY available; skipping onboarding."
-            echo -e "Run ${INFO}clawdbot onboard${NC} later."
+            echo -e "Run ${INFO}openclaw onboard${NC} later."
             return 0
         fi
     fi
 
-    if command -v clawdbot &> /dev/null; then
-        local claw="${CLAWDBOT_BIN:-}"
+    if command -v openclaw &> /dev/null; then
+        local claw="${OPENCLAW_BIN:-}"
         if [[ -z "$claw" ]]; then
-            claw="$(resolve_clawdbot_bin || true)"
+            claw="$(resolve_openclaw_bin || true)"
         fi
         if [[ -n "$claw" ]] && is_gateway_daemon_loaded "$claw"; then
-            echo -e "${INFO}i${NC} Gateway daemon detected; restart with: ${INFO}clawdbot daemon restart${NC}"
+            if [[ "$DRY_RUN" == "1" ]]; then
+                echo -e "${INFO}i${NC} Gateway daemon detected; would restart (${INFO}openclaw daemon restart${NC})."
+            else
+                echo -e "${INFO}i${NC} Gateway daemon detected; restarting..."
+                if OPENCLAW_UPDATE_IN_PROGRESS=1 "$claw" daemon restart >/dev/null 2>&1; then
+                    echo -e "${SUCCESS}✓${NC} Gateway restarted."
+                else
+                    echo -e "${WARN}→${NC} Gateway restart failed; try: ${INFO}openclaw daemon restart${NC}"
+                fi
+            fi
         fi
     fi
 
+    if [[ "$should_open_dashboard" == "true" ]]; then
+        maybe_open_dashboard
+    fi
+
     echo ""
-    echo -e "FAQ: ${INFO}https://docs.molt.bot/start/faq${NC}"
+    echo -e "FAQ: ${INFO}https://docs.openclaw.ai/start/faq${NC}"
 }
 
-if [[ "${CLAWDBOT_INSTALL_SH_NO_RUN:-0}" != "1" ]]; then
+if [[ "${OPENCLAW_INSTALL_SH_NO_RUN:-0}" != "1" ]]; then
     parse_args "$@"
     configure_verbose
     main

@@ -45,9 +45,9 @@ The landing page hosts installer scripts:
 These scripts:
 1. Install Homebrew (macOS) or detect package managers (Windows)
 2. Install Node.js 22+ if needed
-3. Install clawdbot globally via npm
-4. Run `clawdbot doctor --non-interactive` for migrations (upgrades only)
-5. Prompt to run `clawdbot onboard` (new installs)
+3. Install openclaw globally via npm
+4. Run `openclaw doctor --non-interactive` for migrations (upgrades only)
+5. Prompt to run `openclaw onboard` (new installs)
 
 ## Related
 

@@ -1,51 +1,43 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Moltbot CLI installer (non-interactive, no onboarding)
-# Usage: curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install-cli.sh | bash -s -- [options]
+# OpenClaw CLI installer (non-interactive, no onboarding)
+# Usage: curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install-cli.sh | bash -s -- [--json] [--prefix <path>] [--version <ver>] [--node-version <ver>] [--onboard]
 
-PREFIX="${CLAWDBOT_PREFIX:-${HOME}/.clawdbot}"
-CLAWDBOT_VERSION="${CLAWDBOT_VERSION:-latest}"
-NODE_VERSION="${CLAWDBOT_NODE_VERSION:-22.22.0}"
+PREFIX="${OPENCLAW_PREFIX:-${HOME}/.openclaw}"
+OPENCLAW_VERSION="${OPENCLAW_VERSION:-latest}"
+NODE_VERSION="${OPENCLAW_NODE_VERSION:-22.22.0}"
 SHARP_IGNORE_GLOBAL_LIBVIPS="${SHARP_IGNORE_GLOBAL_LIBVIPS:-1}"
-NPM_LOGLEVEL="${CLAWDBOT_NPM_LOGLEVEL:-error}"
-INSTALL_METHOD="${CLAWDBOT_INSTALL_METHOD:-npm}"
-GIT_DIR="${CLAWDBOT_GIT_DIR:-${HOME}/moltbot}"
-GIT_UPDATE="${CLAWDBOT_GIT_UPDATE:-1}"
+NPM_LOGLEVEL="${OPENCLAW_NPM_LOGLEVEL:-error}"
+INSTALL_METHOD="${OPENCLAW_INSTALL_METHOD:-npm}"
+GIT_DIR="${OPENCLAW_GIT_DIR:-${HOME}/openclaw}"
+GIT_UPDATE="${OPENCLAW_GIT_UPDATE:-1}"
 JSON=0
 RUN_ONBOARD=0
 SET_NPM_PREFIX=0
 
 print_usage() {
   cat <<EOF
-Moltbot CLI installer (macOS + Linux)
-
-Usage:
-  curl -fsSL --proto '=https' --tlsv1.2 https://molt.bot/install-cli.sh | bash -s -- [options]
-
-Options:
+Usage: install-cli.sh [options]
   --json                              Emit NDJSON events (no human output)
-  --prefix <path>                      Install prefix (default: ~/.clawdbot)
-  --install-method, --method npm|git   Install via npm (default) or from a git checkout
+  --prefix <path>                     Install prefix (default: ~/.openclaw)
+  --install-method, --method npm|git  Install via npm (default) or from a git checkout
   --npm                               Shortcut for --install-method npm
-  --git, --github                      Shortcut for --install-method git
-  --version <version|dist-tag>         npm install: version (default: latest)
-  --git-dir, --dir <path>              Checkout directory (default: ~/moltbot)
-  --no-git-update                      Skip git pull for existing checkout
-  --node-version <ver>                 Node version (default: 22.22.0)
-  --onboard                            Run "clawdbot onboard" after install
-  --no-onboard                         Skip onboarding (default)
-  --set-npm-prefix                     Force npm prefix to ~/.npm-global if current prefix is not writable (Linux)
-  --help, -h                           Show this help
+  --git, --github                     Shortcut for --install-method git
+  --git-dir, --dir <path>             Checkout directory (default: ~/openclaw)
+  --version <ver>                     OpenClaw version (default: latest)
+  --node-version <ver>                Node version (default: 22.22.0)
+  --onboard                           Run "openclaw onboard" after install
+  --no-onboard                        Skip onboarding (default)
+  --set-npm-prefix                    Force npm prefix to ~/.npm-global if current prefix is not writable (Linux)
 
 Environment variables:
-  CLAWDBOT_INSTALL_METHOD=git|npm
-  CLAWDBOT_VERSION=latest|next|<semver>
-  CLAWDBOT_GIT_DIR=...
-  CLAWDBOT_GIT_UPDATE=0|1
-  CLAWDBOT_NPM_LOGLEVEL=error|warn|notice  Default: error (hide npm deprecation noise)
   SHARP_IGNORE_GLOBAL_LIBVIPS=0|1    Default: 1 (avoid sharp building against global libvips)
-
+  OPENCLAW_NPM_LOGLEVEL=error|warn|notice  Default: error (hide npm deprecation noise)
+  OPENCLAW_INSTALL_METHOD=git|npm
+  OPENCLAW_VERSION=latest|next|<semver>
+  OPENCLAW_GIT_DIR=...
+  OPENCLAW_GIT_UPDATE=0|1
 EOF
 }
 
@@ -82,7 +74,7 @@ download_file() {
 }
 
 cleanup_legacy_submodules() {
-  local repo_dir="${1:-${CLAWDBOT_GIT_DIR:-${HOME}/clawdbot}}"
+  local repo_dir="${OPENCLAW_GIT_DIR:-${HOME}/openclaw}"
   local legacy_dir="${repo_dir}/Peekaboo"
   if [[ -d "$legacy_dir" ]]; then
     emit_json "{\"event\":\"step\",\"name\":\"legacy-submodule\",\"status\":\"start\",\"path\":\"${legacy_dir//\"/\\\"}\"}"
@@ -206,7 +198,7 @@ parse_args() {
         shift 2
         ;;
       --version)
-        CLAWDBOT_VERSION="$2"
+        OPENCLAW_VERSION="$2"
         shift 2
         ;;
       --node-version)
@@ -402,49 +394,49 @@ fix_npm_prefix_if_needed() {
   log "Configured npm prefix to ${target}"
 }
 
-install_clawdbot() {
-  local requested="${CLAWDBOT_VERSION:-latest}"
+install_openclaw() {
+  local requested="${OPENCLAW_VERSION:-latest}"
   local npm_args=(
     --loglevel "$NPM_LOGLEVEL"
     --no-fund
     --no-audit
   )
-  emit_json "{\"event\":\"step\",\"name\":\"clawdbot\",\"status\":\"start\",\"version\":\"${requested}\"}"
-  log "Installing Moltbot (${requested})..."
+  emit_json "{\"event\":\"step\",\"name\":\"openclaw\",\"status\":\"start\",\"version\":\"${requested}\"}"
+  log "Installing OpenClaw (${requested})..."
   if [[ "$SET_NPM_PREFIX" -eq 1 ]]; then
     fix_npm_prefix_if_needed
   fi
 
   if [[ "${requested}" == "latest" ]]; then
-    if ! SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" "$(npm_bin)" install -g --prefix "$PREFIX" "${npm_args[@]}" "clawdbot@latest"; then
-      log "npm install clawdbot@latest failed; retrying clawdbot@next"
-      emit_json "{\"event\":\"step\",\"name\":\"clawdbot\",\"status\":\"retry\",\"version\":\"next\"}"
-      SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" "$(npm_bin)" install -g --prefix "$PREFIX" "${npm_args[@]}" "clawdbot@next"
+    if ! SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" "$(npm_bin)" install -g --prefix "$PREFIX" "${npm_args[@]}" "openclaw@latest"; then
+      log "npm install openclaw@latest failed; retrying openclaw@next"
+      emit_json "{\"event\":\"step\",\"name\":\"openclaw\",\"status\":\"retry\",\"version\":\"next\"}"
+      SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" "$(npm_bin)" install -g --prefix "$PREFIX" "${npm_args[@]}" "openclaw@next"
       requested="next"
     fi
   else
-    SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" "$(npm_bin)" install -g --prefix "$PREFIX" "${npm_args[@]}" "clawdbot@${requested}"
+    SHARP_IGNORE_GLOBAL_LIBVIPS="$SHARP_IGNORE_GLOBAL_LIBVIPS" "$(npm_bin)" install -g --prefix "$PREFIX" "${npm_args[@]}" "openclaw@${requested}"
   fi
 
-  rm -f "${PREFIX}/bin/clawdbot"
-  cat > "${PREFIX}/bin/clawdbot" <<EOF
+  rm -f "${PREFIX}/bin/openclaw"
+  cat > "${PREFIX}/bin/openclaw" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
-exec "${PREFIX}/tools/node/bin/node" "${PREFIX}/lib/node_modules/clawdbot/dist/entry.js" "\$@"
+exec "${PREFIX}/tools/node/bin/node" "${PREFIX}/lib/node_modules/openclaw/dist/entry.js" "\$@"
 EOF
-  chmod +x "${PREFIX}/bin/clawdbot"
-  emit_json "{\"event\":\"step\",\"name\":\"clawdbot\",\"status\":\"ok\",\"version\":\"${requested}\"}"
+  chmod +x "${PREFIX}/bin/openclaw"
+  emit_json "{\"event\":\"step\",\"name\":\"openclaw\",\"status\":\"ok\",\"version\":\"${requested}\"}"
 }
 
-install_clawdbot_from_git() {
+install_openclaw_from_git() {
   local repo_dir="$1"
-  local repo_url="https://github.com/moltbot/moltbot.git"
+  local repo_url="https://github.com/openclaw/openclaw.git"
 
-  emit_json "{\"event\":\"step\",\"name\":\"clawdbot\",\"status\":\"start\",\"method\":\"git\",\"repo\":\"${repo_url//\"/\\\"}\"}"
+  emit_json "{\"event\":\"step\",\"name\":\"openclaw\",\"status\":\"start\",\"method\":\"git\",\"repo\":\"${repo_url//\"/\\\"}\"}"
   if [[ -d "$repo_dir/.git" ]]; then
-    log "Installing Moltbot from git checkout: ${repo_dir}"
+    log "Installing Openclaw from git checkout: ${repo_dir}"
   else
-    log "Installing Moltbot from GitHub (${repo_url})..."
+    log "Installing Openclaw from GitHub (${repo_url})..."
   fi
 
   ensure_git
@@ -480,19 +472,19 @@ install_clawdbot_from_git() {
   pnpm -C "$repo_dir" build
 
   mkdir -p "${PREFIX}/bin"
-  cat > "${PREFIX}/bin/clawdbot" <<EOF
+  cat > "${PREFIX}/bin/openclaw" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
 exec "${PREFIX}/tools/node/bin/node" "${repo_dir}/dist/entry.js" "\$@"
 EOF
-  chmod +x "${PREFIX}/bin/clawdbot"
-  emit_json "{\"event\":\"step\",\"name\":\"clawdbot\",\"status\":\"ok\",\"method\":\"git\"}"
+  chmod +x "${PREFIX}/bin/openclaw"
+  emit_json "{\"event\":\"step\",\"name\":\"openclaw\",\"status\":\"ok\",\"method\":\"git\"}"
 }
 
-resolve_clawdbot_version() {
+resolve_openclaw_version() {
   local version=""
-  if [[ -x "${PREFIX}/bin/clawdbot" ]]; then
-    version="$("${PREFIX}/bin/clawdbot" --version 2>/dev/null | head -n 1 | tr -d '\r')"
+  if [[ -x "${PREFIX}/bin/openclaw" ]]; then
+    version="$("${PREFIX}/bin/openclaw" --version 2>/dev/null | head -n 1 | tr -d '\r')"
   fi
   echo "$version"
 }
@@ -500,7 +492,7 @@ resolve_clawdbot_version() {
 main() {
   parse_args "$@"
 
-  if [[ "${CLAWDBOT_NO_ONBOARD:-0}" == "1" ]]; then
+  if [[ "${OPENCLAW_NO_ONBOARD:-0}" == "1" ]]; then
     RUN_ONBOARD=0
   fi
 
@@ -511,29 +503,29 @@ main() {
 
   install_node
   if [[ "$INSTALL_METHOD" == "git" ]]; then
-    install_clawdbot_from_git "$GIT_DIR"
+    install_openclaw_from_git "$GIT_DIR"
   elif [[ "$INSTALL_METHOD" == "npm" ]]; then
     ensure_git
     if [[ "$SET_NPM_PREFIX" -eq 1 ]]; then
       fix_npm_prefix_if_needed
     fi
-    install_clawdbot
+    install_openclaw
   else
     fail "Unknown install method: ${INSTALL_METHOD} (use npm or git)"
   fi
 
   local installed_version
-  installed_version="$(resolve_clawdbot_version)"
+  installed_version="$(resolve_openclaw_version)"
   if [[ -n "$installed_version" ]]; then
     emit_json "{\"event\":\"done\",\"ok\":true,\"version\":\"${installed_version//\"/\\\"}\"}"
-    log "Moltbot installed (${installed_version})."
+    log "OpenClaw installed (${installed_version})."
   else
     emit_json "{\"event\":\"done\",\"ok\":true}"
-    log "Moltbot installed."
+    log "OpenClaw installed."
   fi
 
   if [[ "$RUN_ONBOARD" -eq 1 ]]; then
-    "${PREFIX}/bin/clawdbot" onboard
+    "${PREFIX}/bin/openclaw" onboard
   fi
 }
 
