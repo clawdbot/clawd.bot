@@ -1120,6 +1120,13 @@ install_node() {
         ui_info "Installing Node.js via NodeSource"
         require_sudo
 
+        ui_info "Installing Linux build tools (make/g++/cmake/python3)"
+        if install_build_tools_linux; then
+            ui_success "Build tools installed"
+        else
+            ui_warn "Continuing without auto-installing build tools"
+        fi
+
         if command -v apt-get &> /dev/null; then
             local tmp
             tmp="$(mktempfile)"
