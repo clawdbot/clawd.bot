@@ -13,6 +13,14 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+// Normalize authors - support both legacy single author and new multi-author format
+type Author = { name: string; handle: string };
+const authors: Author[] = post.data.authors
+  ? post.data.authors
+  : post.data.author && post.data.authorHandle
+    ? [{ name: post.data.author, handle: post.data.authorHandle }]
+    : [];
+
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -48,17 +56,21 @@ const postUrl = `https://openclaw.ai/blog/${post.slug}`;
         )}
 
         <div class="article-meta">
-          <div class="author-info">
-            <img
-              src={`https://unavatar.io/x/${post.data.authorHandle}`}
-              alt={post.data.author}
-              class="author-avatar"
-              loading="lazy"
-            />
-            <div class="author-details">
-              <span class="author-name">{post.data.author}</span>
-              <a href={`https://x.com/${post.data.authorHandle}`} class="author-handle" target="_blank" rel="noopener">@{post.data.authorHandle}</a>
-            </div>
+          <div class="authors-container">
+            {authors.map((author) => (
+              <div class="author-info">
+                <img
+                  src={`https://unavatar.io/x/${author.handle}`}
+                  alt={author.name}
+                  class="author-avatar"
+                  loading="lazy"
+                />
+                <div class="author-details">
+                  <span class="author-name">{author.name}</span>
+                  <a href={`https://x.com/${author.handle}`} class="author-handle" target="_blank" rel="noopener">@{author.handle}</a>
+                </div>
+              </div>
+            ))}
           </div>
           <div class="meta-right">
             <span class="post-date">{formatDate(post.data.date)}</span>
@@ -213,6 +225,12 @@ const postUrl = `https://openclaw.ai/blog/${post.slug}`;
     border-radius: 12px;
     background: rgba(10, 15, 26, 0.7);
     border: 1px solid var(--border-subtle);
+  }
+
+  .authors-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   .author-info {
