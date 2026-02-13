@@ -1,10 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedBlogPosts } from '../../lib/blog';
 
 // Get all blog posts, sorted by date (newest first)
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = await getPublishedBlogPosts();
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-US', {

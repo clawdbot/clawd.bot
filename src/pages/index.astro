@@ -2,11 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import testimonials from '../data/testimonials.json';
-import { getCollection } from 'astro:content';
+import { getPublishedBlogPosts } from '../lib/blog';
 
 // Get latest blog post
-const posts = await getCollection('blog', ({ data }) => !data.draft);
-const latestPost = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
+const [latestPost] = await getPublishedBlogPosts();
 import {
   siWhatsapp, siTelegram, siDiscord, siSignal, siApple,
   siAnthropic, siSpotify, siObsidian, siGithub, siGooglechrome, siGmail,
