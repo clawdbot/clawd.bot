@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC1091,SC2030,SC2031,SC2016
+# shellcheck disable=SC1091,SC2030,SC2031,SC2016,SC2329
 set -euo pipefail
 
 fail() {
@@ -343,7 +343,9 @@ echo "==> case: install_openclaw_from_git (deps step uses run_pnpm function)"
   : > "${repo}/dist/entry.js"
 
   export HOME="${home_dir}"
+  # shellcheck disable=SC2034
   GIT_UPDATE=0
+  # shellcheck disable=SC2034
   SHARP_IGNORE_GLOBAL_LIBVIPS=1
 
   deps_called=0

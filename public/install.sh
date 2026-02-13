@@ -8,7 +8,6 @@ BOLD='\033[1m'
 ACCENT='\033[38;2;255;77;77m'       # coral-bright  #ff4d4d
 # shellcheck disable=SC2034
 ACCENT_BRIGHT='\033[38;2;255;110;110m' # lighter coral
-ACCENT_DIM='\033[38;2;153;27;27m'   # coral-dark    #991b1b
 INFO='\033[38;2;136;146;176m'       # text-secondary #8892b0
 SUCCESS='\033[38;2;0;229;204m'      # cyan-bright   #00e5cc
 WARN='\033[38;2;255;176;32m'        # amber (no site equiv, keep warm)
@@ -1279,20 +1278,6 @@ fix_npm_permissions() {
 
     export PATH="$HOME/.npm-global/bin:$PATH"
     ui_success "npm configured for user installs"
-}
-
-resolve_openclaw_bin() {
-    if command -v openclaw &> /dev/null; then
-        command -v openclaw
-        return 0
-    fi
-    local npm_bin=""
-    npm_bin="$(npm_global_bin_dir || true)"
-    if [[ -n "$npm_bin" && -x "${npm_bin}/openclaw" ]]; then
-        echo "${npm_bin}/openclaw"
-        return 0
-    fi
-    return 1
 }
 
 ensure_openclaw_bin_link() {
