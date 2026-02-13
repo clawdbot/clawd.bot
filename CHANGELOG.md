@@ -4,7 +4,7 @@
 
 - Home page: keep testimonial links clickable while skipping keyboard focus (#18, thanks @wilfriedladenhauf).
 - Fonts: preconnect to Fontshare API/CDN for faster font loading (#16, thanks @wilfriedladenhauf).
-- CLI installer: support git-based installs with safer repo directory handling (#17, thanks @travisp).
+- CLI installer: support git-based installs with safer repo directory handling (#41, thanks @travisp).
 - Installer: skip sudo usage when running as root (#12, thanks @Glucksberg).
 - Integrations: update Microsoft Teams docs link to the channels page (#9, thanks @HesamKorki).
 - Integrations: fix Signal documentation link (#13, thanks @RayBB).

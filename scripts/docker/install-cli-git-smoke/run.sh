@@ -23,7 +23,9 @@ curl_cli_install | bash -s -- --help >/tmp/install-cli-help.txt
 grep -q -- "--install-method" /tmp/install-cli-help.txt
 
 echo "==> Clone Openclaw repo"
-REPO_DIR="/tmp/openclaw-src"
+REPO_ROOT="/tmp"
+REPO_DIR_NAME="openclaw-src"
+REPO_DIR="${REPO_ROOT}/${REPO_DIR_NAME}"
 rm -rf "$REPO_DIR"
 git clone --depth 1 https://github.com/openclaw/openclaw.git "$REPO_DIR"
 if [[ -n "${OPENCLAW_GIT_REF:-}" ]]; then
@@ -40,13 +42,14 @@ fi
 
 echo "==> Install from Git (install-cli)"
 INSTALL_PREFIX="/tmp/openclaw"
-curl_cli_install | bash -s -- --install-method git --git-dir "$REPO_DIR" --no-git-update --no-onboard --prefix "$INSTALL_PREFIX"
+(cd "$REPO_ROOT" && curl_cli_install | bash -s -- --install-method git --git-dir "$REPO_DIR_NAME" --no-git-update --no-onboard --prefix "$INSTALL_PREFIX")
 
 echo "==> Verify wrapper exists"
 test -x "${INSTALL_PREFIX}/bin/openclaw"
 
 echo "==> Verify openclaw runs"
 "${INSTALL_PREFIX}/bin/openclaw" --help >/dev/null
+(cd / && "${INSTALL_PREFIX}/bin/openclaw" --help >/dev/null)
 
 echo "==> Verify version matches checkout"
 EXPECTED_VERSION="$(node -e "console.log(JSON.parse(require('fs').readFileSync('${REPO_DIR}/package.json','utf8')).version)")"

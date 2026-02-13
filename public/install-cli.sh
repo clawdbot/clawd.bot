@@ -74,7 +74,7 @@ download_file() {
 }
 
 cleanup_legacy_submodules() {
-  local repo_dir="${OPENCLAW_GIT_DIR:-${HOME}/openclaw}"
+  local repo_dir="${1:-${OPENCLAW_GIT_DIR:-${HOME}/openclaw}}"
   local legacy_dir="${repo_dir}/Peekaboo"
   if [[ -d "$legacy_dir" ]]; then
     emit_json "{\"event\":\"step\",\"name\":\"legacy-submodule\",\"status\":\"start\",\"path\":\"${legacy_dir//\"/\\\"}\"}"
@@ -343,7 +343,12 @@ install_node() {
 
 ensure_pnpm() {
   if command -v pnpm >/dev/null 2>&1; then
-    return 0
+    local current_version
+    current_version="$(pnpm --version 2>/dev/null || true)"
+    if [[ "$current_version" =~ ^10\. ]]; then
+      return 0
+    fi
+    log "Found pnpm ${current_version:-unknown}; upgrading to pnpm@10..."
   fi
 
   if [[ -x "$(node_dir)/bin/corepack" ]]; then
@@ -351,8 +356,10 @@ ensure_pnpm() {
     log "Installing pnpm via Corepack..."
     "$(node_dir)/bin/corepack" enable >/dev/null 2>&1 || true
     "$(node_dir)/bin/corepack" prepare pnpm@10 --activate
-    emit_json "{\"event\":\"step\",\"name\":\"pnpm\",\"status\":\"ok\"}"
-    return 0
+    if command -v pnpm >/dev/null 2>&1 && [[ "$(pnpm --version 2>/dev/null || true)" =~ ^10\. ]]; then
+      emit_json "{\"event\":\"step\",\"name\":\"pnpm\",\"status\":\"ok\"}"
+      return 0
+    fi
   fi
 
   emit_json "{\"event\":\"step\",\"name\":\"pnpm\",\"status\":\"start\",\"method\":\"npm\"}"
@@ -431,6 +438,15 @@ EOF
 install_openclaw_from_git() {
   local repo_dir="$1"
   local repo_url="https://github.com/openclaw/openclaw.git"
+
+  if [[ -z "$repo_dir" ]]; then
+    fail "Git install dir cannot be empty"
+  fi
+  if [[ "$repo_dir" != /* ]]; then
+    repo_dir="$(pwd)/$repo_dir"
+  fi
+  mkdir -p "$(dirname "$repo_dir")"
+  repo_dir="$(cd "$(dirname "$repo_dir")" && pwd)/$(basename "$repo_dir")"
 
   emit_json "{\"event\":\"step\",\"name\":\"openclaw\",\"status\":\"start\",\"method\":\"git\",\"repo\":\"${repo_url//\"/\\\"}\"}"
   if [[ -d "$repo_dir/.git" ]]; then
