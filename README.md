@@ -58,4 +58,4 @@ These scripts:
 
 - [OpenClaw](https://github.com/openclaw/openclaw) — Main repository
 - [Docs](https://docs.openclaw.ai) — Documentation
-- [Discord](https://discord.gg/clawd) — Community
+- [Discord](https://discord.gg/openclaw) — Community
